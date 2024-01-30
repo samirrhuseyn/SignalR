@@ -4,3 +4,7 @@
 /UdemySiqnalRProject/SiqnalRWebUI/obj
 /UdemySiqnalRProject/SignalR.EntityLayer/obj
 /UdemySiqnalRProject/SignalR.EntityLayer/bin
+/UdemySiqnalRProject/SignalR.DataAccessLayer/obj
+/UdemySiqnalRProject/SignalR.DataAccessLayer/bin
+/UdemySiqnalRProject/SignalR.BusinessLayer/bin
+/UdemySiqnalRProject/SignalR.BusinessLayer/obj
