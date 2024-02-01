@@ -4,13 +4,14 @@ using System.Linq;
 using System.Text;
 using System.Threading.Tasks;
 
-namespace SignalR.DtoLayer.AboutDto
+namespace SignalR.DtoLayer.ProductDto
 {
-    public class ResultAboutDto
+    public class CreateProductDto
     {
-        public int AboutID { get; set; }
         public string ImageURL { get; set; }
-        public string Title { get; set; }
+        public string ProductName { get; set; }
         public string Description { get; set; }
+        public decimal Price { get; set; }
+        public bool ProductStatus { get; set; }
     }
 }
