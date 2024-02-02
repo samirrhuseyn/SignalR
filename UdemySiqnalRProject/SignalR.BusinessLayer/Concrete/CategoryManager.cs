@@ -1,4 +1,5 @@
-﻿using SignalR.DataAccessLayer.Abstarct;
+﻿using SignalR.BusinessLayer.Abstract;
+using SignalR.DataAccessLayer.Abstarct;
 using SiqnalR.EntityLayer.Entities;
 using System;
 using System.Collections.Generic;
@@ -8,7 +9,7 @@ using System.Threading.Tasks;
 
 namespace SignalR.BusinessLayer.Concrete
 {
-    public class CategoryManager : ICategoryDal
+    public class CategoryManager : ICategoryService
     {
         private readonly ICategoryDal _categoryDal;
 
@@ -17,27 +18,27 @@ namespace SignalR.BusinessLayer.Concrete
             _categoryDal = categoryDal;
         }
 
-        public void Add(Category entity)
+        public void TAdd(Category entity)
         {
             _categoryDal.Add(entity);
         }
 
-        public void Delete(Category entity)
+        public void TDelete(Category entity)
         {
             _categoryDal.Delete(entity);
         }
 
-        public Category GetByID(int id)
+        public Category TGetByID(int id)
         {
             return _categoryDal.GetByID(id);
         }
 
-        public List<Category> GetListAll()
+        public List<Category> TGetListAll()
         {
             return _categoryDal.GetListAll();
         }
 
-        public void Update(Category entity)
+        public void TUpdate(Category entity)
         {
             _categoryDal.Update(entity);
         }
