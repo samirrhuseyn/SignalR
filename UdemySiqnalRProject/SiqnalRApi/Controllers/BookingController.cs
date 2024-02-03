@@ -1,6 +1,8 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
+using SignalR.DtoLayer.AboutDto;
 using SignalR.DtoLayer.BookingDto;
 using SiqnalR.EntityLayer.Entities;
 
@@ -11,31 +13,33 @@ namespace SiqnalRApi.Controllers
     public class BookingController : ControllerBase
     {
         private readonly IBookingService _bookingService;
+        private readonly IMapper _mapper;
 
-        public BookingController(IBookingService bookingService)
+        public BookingController(IBookingService bookingService, IMapper mapper)
         {
             _bookingService = bookingService;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult BookingList()
         {
-            var value = _bookingService.TGetListAll();
+            var value = _mapper.Map<List<ResultBookingDto>>(_bookingService.TGetListAll());
             return Ok(value);
         }
 
         [HttpPost]
         public IActionResult CreateBooking(CreateBookingDto createBookingDto)
         {
-            Booking booking = new Booking()
+           
+            _bookingService.TAdd(new Booking
             {
                 Name = createBookingDto.Name,
                 Date = createBookingDto.Date,
                 Mail = createBookingDto.Mail,
                 PersonCount = createBookingDto.PersonCount,
-                Phone = createBookingDto.Phone,
-            };
-            _bookingService.TAdd(booking);
+                Phone = createBookingDto.Phone
+            });
             return Ok("Booking section added successfully!");
         }
 
@@ -50,16 +54,16 @@ namespace SiqnalRApi.Controllers
         [HttpPut]
         public IActionResult UpdateBooking(UpdateBookingDto updateBookingDto)
         {
-            Booking booking = new Booking()
+           
+            _bookingService.TUpdate(new Booking
             {
                 BookingID = updateBookingDto.BookingID,
                 Name = updateBookingDto.Name,
                 Date = updateBookingDto.Date,
                 Mail = updateBookingDto.Mail,
                 PersonCount = updateBookingDto.PersonCount,
-                Phone = updateBookingDto.Phone,
-            };
-            _bookingService.TUpdate(booking);
+                Phone = updateBookingDto.Phone
+            });
             return Ok("Booking section has been successfully updated!");
         }
 

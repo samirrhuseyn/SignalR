@@ -1,7 +1,9 @@
-﻿using Microsoft.AspNetCore.Http;
+﻿using AutoMapper;
+using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DtoLayer.AboutDto;
+using SignalR.DtoLayer.CategoryDto;
 using SiqnalR.EntityLayer.Entities;
 
 namespace SiqnalRApi.Controllers
@@ -11,29 +13,30 @@ namespace SiqnalRApi.Controllers
     public class AboutController : ControllerBase
     {
         private readonly IAboutService _aboutService;
+        private readonly IMapper _mapper;
 
-        public AboutController(IAboutService aboutService)
+        public AboutController(IAboutService aboutService, IMapper mapper)
         {
             _aboutService = aboutService;
+            _mapper = mapper;
         }
 
         [HttpGet]
         public IActionResult AboutList()
         {
-            var value = _aboutService.TGetListAll();
+            var value = _mapper.Map<List<ResultAboutDto>>(_aboutService.TGetListAll());
             return Ok(value);
         }
 
         [HttpPost]
         public IActionResult CreateAbout(CreateAboutDto createAboutDto)
         {
-            About about = new About()
+            _aboutService.TAdd(new About 
             {
                 Title = createAboutDto.Title,
                 Description = createAboutDto.Description,
                 ImageURL = createAboutDto.ImageURL
-            };
-            _aboutService.TAdd(about);
+            });
             return Ok("About me section added successfully!");
         }
 
@@ -48,14 +51,13 @@ namespace SiqnalRApi.Controllers
         [HttpPut]
         public IActionResult UpdateAbout(UpdateAboutDto updateAboutDto)
         {
-            About about = new About()
+            _aboutService.TUpdate(new About
             {
                 AboutID = updateAboutDto.AboutID,
                 Title = updateAboutDto.Title,
                 Description = updateAboutDto.Description,
                 ImageURL = updateAboutDto.ImageURL
-            };
-            _aboutService.TUpdate(about);
+            });
             return Ok("About me section has been successfully updated!");
         }
 
