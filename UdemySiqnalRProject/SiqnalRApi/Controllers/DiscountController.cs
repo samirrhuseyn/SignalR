@@ -72,5 +72,4 @@ namespace SiqnalRApi.Controllers
         }
     }
 }
-    }
-}
+    
