@@ -38,7 +38,7 @@ namespace SiqnalRApi.Controllers
             return Ok("Category section added successfully!");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteCategory(int id)
         {
             var value = _categoryService.TGetByID(id);
@@ -58,7 +58,7 @@ namespace SiqnalRApi.Controllers
             return Ok("Category section has been successfully updated!");
         }
 
-        [HttpGet("GetCategory")]
+        [HttpGet("{id}")]
         public IActionResult GetCategory(int id)
         {
             var value = _categoryService.TGetByID(id);

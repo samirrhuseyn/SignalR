@@ -1,4 +1,4 @@
-﻿
+﻿@model List<SiqnalRWebUI.Dtos.CategoryDtos.ResultCategoryDto>
 @{
     ViewData["Title"] = "Categories";
     Layout = "~/Views/AdminLayout/Index.cshtml";
@@ -14,32 +14,26 @@
 						<table class="table mt-3">
 							<thead>
 								<tr>
-									<th scope="col">#</th>
-									<th scope="col">First</th>
-									<th scope="col">Last</th>
-									<th scope="col">Handle</th>
+									<th scope="col">Category Name</th>
+									<th scope="col">Status</th>
+									<th scope="col">Delete</th>
+									<th scope="col">Update</th>
 								</tr>
 							</thead>
 							<tbody>
-								<tr>
-									<td>1</td>
-									<td>Mark</td>
-									<td>Otto</td>
-									<td>mdo</td>
-								</tr>
-								<tr>
-									<td>2</td>
-									<td>Jacob</td>
-									<td>Thornton</td>
-									<td>fat</td>
-								</tr>
-								<tr>
-									<td>3</td>
-									<td colspan="2">Larry the Bird</td>
-									<td>twitter</td>
-								</tr>
+								@foreach(var item in Model)
+								{
+									<tr>
+										<td>@item.CategoryName</td>
+										<td>@item.Status</td>
+										<td><a href="/Category/DeleteCategory/@item.CategoryID" class="btn btn-outline-danger">Delete</a></td>
+										<td><a href="/Category/UpdateCategory/@item.CategoryID" class="btn btn-outline-success">Update</a></td>
+									</tr>
+								}
+								
 							</tbody>
 						</table>
+						<a href="/Category/CreateCategory" class="btn btn-outline-primary">+ Add Category</a>
 					</div>
 				</div>
 			</div>
