@@ -1,0 +1,56 @@
+﻿@model SiqnalRWebUI.Dtos.ProductDtos.UpdateProductDto
+@{
+    ViewData["Title"] = "Update Product";
+    ViewData["ActiveProduct"] = "active";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Product Update Form</div>
+                        </div>
+                        <input asp-for="ProductId" hidden/>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="productname">Product Name</label>
+                                <input type="text" asp-for="ProductName" class="form-control" id="productname">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="price">Price</label>
+                                <input type="text" asp-for="Price" class="form-control" id="price">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="imageurl">Image</label>
+                                <input type="text" asp-for="ImageURL" class="form-control" id="imageurl">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="price">Category</label>
+                                <select asp-for="CategoryID" asp-items="@ViewBag.Values" class="form-control"></select>
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea type="text" asp-for="Description" class="form-control" id="description"></textarea>
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button type="submit" class="btn btn-success">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

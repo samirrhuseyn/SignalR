@@ -37,45 +37,39 @@
 		</div>
 		<ul class="nav">
 			<li class="nav-item">
-				<a href="index.html">
+				<a href="#">
 					<i class="la la-dashboard"></i>
 					<p>Dashboard</p>
-					<span class="badge badge-count">5</span>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a href="#">
 					<i class="lab la-buromobelexperte"></i>
 					<p>See Menu</p>
-					<span class="badge badge-count">14</span>
 				</a>
 			</li>
-			<li class="nav-item">
+			<li class="nav-item @ViewBag.ActiveCategory">
 				<a href="/Category/Index">
 					<i class="la la-icons"></i>
 					<p>Categories</p>
-					<span class="badge badge-count">50</span>
 				</a>
 			</li>
-			<li class="nav-item">
-				<a href="#">
+			<li class="nav-item @ViewBag.ActiveProduct">
+				<a href="/Product/Index">
 					<i class="las la-shapes"></i>
 					<p>Products</p>
-					<span class="badge badge-count">6</span>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a href="#">
 					<i class="lar la-calendar"></i>
 					<p>Bookings</p>
-					<span class="badge badge-success">3</span>
 				</a>
 			</li>
 			<li class="nav-item">
 				<a href="#">
 					<i class="las la-info"></i>
 					<p>About Us</p>
-					<span class="badge badge-danger">25</span>
 				</a>
 			</li>
 			<li class="nav-item">
@@ -124,6 +118,11 @@
 				<a href="#">
 					<i class="las la-sign-out-alt"></i>
 					<p>Logout</p>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="#">
+					
 				</a>
 			</li>
 		</ul>

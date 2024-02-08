@@ -53,16 +53,17 @@ namespace SiqnalRApi.Controllers
         {
             _productService.TAdd(new Product
             {
+                CategoryID = createProductDto.CategoryID,
                 ProductName = createProductDto.ProductName,
                 Description = createProductDto.Description,
                 ImageURL = createProductDto.ImageURL,
                 Price = createProductDto.Price,
-                ProductStatus = true
+                ProductStatus = createProductDto.ProductStatus
             });
             return Ok("Product section added successfully!");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteProduct(int id)
         {
             var value = _productService.TGetByID(id);
@@ -78,18 +79,20 @@ namespace SiqnalRApi.Controllers
                 ProductId = updateProductDto.ProductId,
                 ProductName = updateProductDto.ProductName,
                 Description = updateProductDto.Description,
-                ImageURL = updateProductDto.ImageURL,
                 Price = updateProductDto.Price,
-                ProductStatus = updateProductDto.ProductStatus
+                ImageURL = updateProductDto.ImageURL,
+                ProductStatus = updateProductDto.ProductStatus,
+                CategoryID = updateProductDto.CategoryID
             });
             return Ok("Product section has been successfully updated!");
         }
 
-        [HttpGet("GetProduct")]
+        [HttpGet("{id}")]
         public IActionResult GetProduct(int id)
         {
             var value = _productService.TGetByID(id);
             return Ok(value);
         }
+
     }
 }
