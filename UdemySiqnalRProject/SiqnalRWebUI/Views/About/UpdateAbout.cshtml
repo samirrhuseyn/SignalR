@@ -1,0 +1,44 @@
+﻿@model SiqnalRWebUI.Dtos.AboutDtos.UpdateAboutDto
+@{
+    ViewData["Title"] = "Update About";
+    ViewData["ActiveAbout"] = "active";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">About Update Form</div>
+                        </div>
+                        <input asp-for="AboutID" hidden />
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="abouttitle">Title</label>
+                                <input type="text" asp-for="Title" class="form-control" id="abouttitle">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="imageUrl">Image URL</label>
+                                <input type="text" asp-for="ImageURL" class="form-control" id="imageUrl">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="description">Description</label>
+                                <textarea rows="5" type="text" asp-for="Description" class="form-control" id="description"></textarea>
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button type="submit" class="btn btn-success">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

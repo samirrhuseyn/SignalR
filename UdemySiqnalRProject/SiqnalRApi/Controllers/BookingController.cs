@@ -43,7 +43,7 @@ namespace SiqnalRApi.Controllers
             return Ok("Booking section added successfully!");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteBooking(int id)
         {
             var value = _bookingService.TGetByID(id);
@@ -67,7 +67,7 @@ namespace SiqnalRApi.Controllers
             return Ok("Booking section has been successfully updated!");
         }
 
-        [HttpGet("GetBooking")]
+        [HttpGet("{id}")]
         public IActionResult GetBooking(int id)
         {
             var value = _bookingService.TGetByID(id);

@@ -111,22 +111,5 @@ namespace SiqnalRWebUI.Controllers
             }
             return View();
         }
-
-        private string UploadFile(IFormFile? file)
-        {
-            if (file == null || file.Length == 0)
-                return null;
-
-            var path = Path.Combine(
-                        Directory.GetCurrentDirectory(), "wwwroot/ImagesFiles/ProductImagesFiles/",
-                        file.FileName);
-
-            using (var stream = new FileStream(path, FileMode.Create))
-            {
-                file.CopyTo(stream);
-            }
-
-            return "/ImagesFiles/ProductImagesFiles/" + file.FileName;
-        }
     }
 }

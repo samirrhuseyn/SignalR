@@ -7,7 +7,7 @@
 			<div class="info">
 				<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
 					<span>
-						SignalR Admin Panel
+						Admin Panel
 						<span class="user-level">Admin</span>
 						<span class="caret"></span>
 					</span>
@@ -60,14 +60,14 @@
 					<p>Products</p>
 				</a>
 			</li>
-			<li class="nav-item">
-				<a href="#">
+			<li class="nav-item @ViewBag.ActiveBooking">
+				<a href="/Booking/Index">
 					<i class="lar la-calendar"></i>
 					<p>Bookings</p>
 				</a>
 			</li>
-			<li class="nav-item">
-				<a href="#">
+			<li class="nav-item @ViewBag.ActiveAbout">
+				<a href="/About/Index">
 					<i class="las la-info"></i>
 					<p>About Us</p>
 				</a>

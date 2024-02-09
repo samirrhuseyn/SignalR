@@ -40,7 +40,7 @@ namespace SiqnalRApi.Controllers
             return Ok("About me section added successfully!");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteAbout(int id) 
         {
             var value = _aboutService.TGetByID(id);
@@ -61,7 +61,7 @@ namespace SiqnalRApi.Controllers
             return Ok("About me section has been successfully updated!");
         }
 
-        [HttpGet("GetAbout")]
+        [HttpGet("{id}")]
         public IActionResult GetAbout(int id)
         {
             var value = _aboutService.TGetByID(id);
