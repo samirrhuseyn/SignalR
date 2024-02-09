@@ -44,7 +44,7 @@ namespace SiqnalRApi.Controllers
             return Ok("Feature section added successfully!");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteFeature(int id)
         {
             var value = _featureService.TGetByID(id);
@@ -68,7 +68,7 @@ namespace SiqnalRApi.Controllers
             return Ok("Feature section has been successfully updated!");
         }
 
-        [HttpGet("GetFeature")]
+        [HttpGet("{id}")]
         public IActionResult GetFeature(int id)
         {
             var value = _featureService.TGetByID(id);

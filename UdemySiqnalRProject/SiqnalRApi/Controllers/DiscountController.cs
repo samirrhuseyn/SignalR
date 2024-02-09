@@ -42,7 +42,7 @@ namespace SiqnalRApi.Controllers
             return Ok("Discount section added successfully!");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteDiscount(int id)
         {
             var value = _discountService.TGetByID(id);
@@ -64,7 +64,7 @@ namespace SiqnalRApi.Controllers
             return Ok("Discount section has been successfully updated!");
         }
 
-        [HttpGet("GetDiscount")]
+        [HttpGet("{id}")]
         public IActionResult GetDiscount(int id)
         {
             var value = _discountService.TGetByID(id);
