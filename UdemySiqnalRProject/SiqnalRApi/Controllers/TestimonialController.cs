@@ -42,7 +42,7 @@ namespace SiqnalRApi.Controllers
             return Ok("Testimonial section added successfully!");
         }
 
-        [HttpDelete]
+        [HttpDelete("{id}")]
         public IActionResult DeleteTestimonial(int id)
         {
             var value = _testimonialService.TGetByID(id);
@@ -65,7 +65,7 @@ namespace SiqnalRApi.Controllers
             return Ok("Contact section has been successfully updated!");
         }
 
-        [HttpGet("GetContact")]
+        [HttpGet("{id}")]
         public IActionResult GetContact(int id)
         {
             var value = _testimonialService.TGetByID(id);

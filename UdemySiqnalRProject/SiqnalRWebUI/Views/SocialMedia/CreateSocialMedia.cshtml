@@ -1,0 +1,43 @@
+﻿@model SiqnalRWebUI.Dtos.SocialMediaDtos.CreateSocialMediaDto
+@{
+    ViewData["Title"] = "Create Social Media";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Social Media Create Form</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="title">Title</label>
+                                <input type="text" asp-for="Title" class="form-control" id="title">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="Url">URL</label>
+                                <input type="text" asp-for="Url" class="form-control" id="Url">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="Icon">Icon</label>
+                                <input type="text" asp-for="Icon" class="form-control" id="Icon">
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button type="submit" class="btn btn-success">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>
+
