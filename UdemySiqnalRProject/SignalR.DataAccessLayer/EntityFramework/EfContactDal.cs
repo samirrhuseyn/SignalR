@@ -14,6 +14,7 @@ namespace SignalR.DataAccessLayer.EntityFramework
     {
         public EfContactDal(SignalRContext context) : base(context)
         {
+            
         }
     }
 }
