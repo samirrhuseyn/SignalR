@@ -50,6 +50,18 @@ builder.Services.AddScoped<ISocialMediaDal, EfSocialMediaDal>();
 builder.Services.AddScoped<ITestimonialService, TestimoialManager>();
 builder.Services.AddScoped<ITestimonialDal, EfTestimonialDal>();
 
+builder.Services.AddScoped<IOrderDetailService, OrderDetailManager>();
+builder.Services.AddScoped<IOrderDetailDal, EfOrderDetailDal>();
+
+builder.Services.AddScoped<IOrderDal, EfOrderDal>();
+builder.Services.AddScoped<IOrderService, OrderManager>();
+
+builder.Services.AddScoped<IMoneyCaseDal, EfMoneyCaseDal>();
+builder.Services.AddScoped<IMoneyCaseService, MoneyCaseManager>();
+
+builder.Services.AddScoped<IMenuTableDal, EfMenuTableDal>();
+builder.Services.AddScoped<IMenuTableService, MenuTableManager>();
+
 builder.Services.AddControllers();
 // Learn more about configuring Swagger/OpenAPI at https://aka.ms/aspnetcore/swashbuckle
 builder.Services.AddEndpointsApiExplorer();

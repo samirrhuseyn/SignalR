@@ -2,23 +2,88 @@
     ViewData["Title"] = "Dashboard";
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
 <div class="content">
     <div class="container-fluid">
+
+        <script type="text/javascript">
+            $(document).ready(() => {
+                var connection = new signalR.HubConnectionBuilder().withUrl("http://localhost:5056/SignalRHub").build();
+                $("#connstatus").text(connection.state);
+                connection.start().then(() => {
+                    $("#connstatus").text(connection.state);
+                    setInterval(() => {
+                        connection.invoke("SendStatistics");
+                    }, 1000);
+
+                }).catch((err) => { console.log(err) });
+
+                connection.on("ReceiveCategoryCount", (categoryvalue) => {
+                    $("#categorycount").text(categoryvalue);
+                });
+
+                connection.on("ReceiveProductCount", (productvalue) => {
+                    $("#productcount").text(productvalue);
+                });
+
+                connection.on("ReceiveActiveCategoryCount", (activecategoryvalue) => {
+                    $("#activecategorycount").text(activecategoryvalue);
+                });
+
+                connection.on("ReceivePassiveCategoryCount", (passivecategoryvalue) => {
+                    $("#passivecategorycount").text(passivecategoryvalue);
+                });
+
+                connection.on("ReceiveMostExpensiveProduct", (mostexpensiveproductvalue) => {
+                    $("#mostexpensiveproduct").text(mostexpensiveproductvalue);
+                });
+
+                connection.on("ReceiveCheapestProduct", (cheapestproductvalue) => {
+                    $("#cheapestproduct").text(cheapestproductvalue);
+                });
+
+                connection.on("ReceiveTotalOrder", (totalordercountvalue) => {
+                    $("#totalordercount").text(totalordercountvalue);
+                });
+
+                connection.on("ReceiveTotalActiveOrder", (totalactiveordercountvalue) => {
+                    $("#totalactiveordercount").text(totalactiveordercountvalue);
+                });
+
+                connection.on("ReceiveLastOrderPrice", (lastorderpricevalue) => {
+                    $("#lastorderprice").text(lastorderpricevalue);
+                });
+                
+                connection.on("ReceiveMoneyCaseAmount", (totalmoneycaseamountvalue) => {
+                    $("#totalmoneycaseamount").text(totalmoneycaseamountvalue);
+                });
+                
+                connection.on("ReceiveMenuTableCount", (menutablecountvalue) => {
+                    $("#menutablecount").text(menutablecountvalue);
+                });
+            });
+        </script>
+
         <h4 class="page-title">Dashboard</h4>
         <div class="row">
             <div class="col-md-3">
-                <div class="card card-stats card-warning">
+                <div class="card card-stats card-default">
                     <div class="card-body ">
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="la la-users"></i>
+                                    <i class="la la-icons"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Visitors</p>
-                                    <h4 class="card-title">1,294</h4>
+                                    <p class="card-category">Categories</p>
+                                    <h4 class="card-title" id="categorycount"></h4>
                                 </div>
                             </div>
                         </div>
@@ -26,18 +91,18 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card card-stats card-success">
+                <div class="card card-stats card-default">
                     <div class="card-body ">
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="la la-bar-chart"></i>
+                                    <i class="las la-shapes"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Sales</p>
-                                    <h4 class="card-title">$ 1,345</h4>
+                                    <p class="card-category">Products</p>
+                                    <h4 class="card-title" id="productcount"></h4>
                                 </div>
                             </div>
                         </div>
@@ -45,18 +110,18 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card card-stats card-danger">
+                <div class="card card-stats card-default">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="la la-newspaper-o"></i>
+                                    <i class="las la-check-circle"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Subscribers</p>
-                                    <h4 class="card-title">1303</h4>
+                                    <p class="card-category">Active Categories</p>
+                                    <h4 class="card-title" id="activecategorycount"></h4>
                                 </div>
                             </div>
                         </div>
@@ -64,18 +129,18 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card card-stats card-primary">
+                <div class="card card-stats card-default">
                     <div class="card-body ">
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="la la-check-circle"></i>
+                                    <i class="las la-times-circle"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Order</p>
-                                    <h4 class="card-title">576</h4>
+                                    <p class="card-category">Passive Categories</p>
+                                    <h4 class="card-title" id="passivecategorycount"></h4>
                                 </div>
                             </div>
                         </div>
@@ -86,18 +151,18 @@
 
         <div class="row">
             <div class="col-md-3">
-                <div class="card card-stats card-warning">
+                <div class="card card-stats card-default">
                     <div class="card-body ">
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="la la-users"></i>
+                                    <i class="las la-hand-holding-usd"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Visitors</p>
-                                    <h4 class="card-title">1,294</h4>
+                                    <p style="font-size:10px;" class="card-category">Most Expensive Product</p>
+                                    <h4 class="card-title" id="mostexpensiveproduct"></h4>
                                 </div>
                             </div>
                         </div>
@@ -105,18 +170,18 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card card-stats card-success">
+                <div class="card card-stats card-default">
                     <div class="card-body ">
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="la la-bar-chart"></i>
+                                    <i class="las la-hand-holding-usd"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Sales</p>
-                                    <h4 class="card-title">$ 1,345</h4>
+                                    <p class="card-category">Cheapest Product</p>
+                                    <h4 class="card-title" id="cheapestproduct"></h4>
                                 </div>
                             </div>
                         </div>
@@ -124,18 +189,18 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card card-stats card-danger">
+                <div class="card card-stats card-default">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="la la-newspaper-o"></i>
+                                    <i class="las la-shopping-basket"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Subscribers</p>
-                                    <h4 class="card-title">1303</h4>
+                                    <p class="card-category">Order Count</p>
+                                    <h4 class="card-title" id="totalordercount"></h4>
                                 </div>
                             </div>
                         </div>
@@ -143,18 +208,18 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card card-stats card-primary">
+                <div class="card card-stats card-default">
                     <div class="card-body ">
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="la la-check-circle"></i>
+                                    <i class="las la-hourglass-half"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Order</p>
-                                    <h4 class="card-title">576</h4>
+                                    <p class="card-category">Active Order</p>
+                                    <h4 class="card-title" id="totalactiveordercount"></h4>
                                 </div>
                             </div>
                         </div>
@@ -165,18 +230,18 @@
 
         <div class="row">
             <div class="col-md-3">
-                <div class="card card-stats card-warning">
+                <div class="card card-stats card-default">
                     <div class="card-body ">
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="la la-users"></i>
+                                    <i class="las la-bookmark"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Visitors</p>
-                                    <h4 class="card-title">1,294</h4>
+                                    <p class="card-category">Last Order Price</p>
+                                    <h4 class="card-title" id="lastorderprice"></h4>
                                 </div>
                             </div>
                         </div>
@@ -184,18 +249,18 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card card-stats card-success">
+                <div class="card card-stats card-default">
                     <div class="card-body ">
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="la la-bar-chart"></i>
+                                    <i class="las la-dollar-sign"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Sales</p>
-                                    <h4 class="card-title">$ 1,345</h4>
+                                    <p class="card-category">Cash</p>
+                                    <h4 class="card-title" id="totalmoneycaseamount"></h4>
                                 </div>
                             </div>
                         </div>
@@ -203,18 +268,18 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card card-stats card-danger">
+                <div class="card card-stats card-default">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="la la-newspaper-o"></i>
+                                    <i class="la la-calendar-day"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Subscribers</p>
-                                    <h4 class="card-title">1303</h4>
+                                    <p class="card-category">Today Earning</p>
+                                    <h4 class="card-title">0.00₼</h4>
                                 </div>
                             </div>
                         </div>
@@ -222,97 +287,18 @@
                 </div>
             </div>
             <div class="col-md-3">
-                <div class="card card-stats card-primary">
-                    <div class="card-body ">
-                        <div class="row">
-                            <div class="col-5">
-                                <div class="icon-big text-center">
-                                    <i class="la la-check-circle"></i>
-                                </div>
-                            </div>
-                            <div class="col-7 d-flex align-items-center">
-                                <div class="numbers">
-                                    <p class="card-category">Order</p>
-                                    <h4 class="card-title">576</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
-
-        <div class="row">
-            <div class="col-md-3">
-                <div class="card card-stats card-warning">
-                    <div class="card-body ">
-                        <div class="row">
-                            <div class="col-5">
-                                <div class="icon-big text-center">
-                                    <i class="la la-users"></i>
-                                </div>
-                            </div>
-                            <div class="col-7 d-flex align-items-center">
-                                <div class="numbers">
-                                    <p class="card-category">Visitors</p>
-                                    <h4 class="card-title">1,294</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card card-stats card-success">
-                    <div class="card-body ">
-                        <div class="row">
-                            <div class="col-5">
-                                <div class="icon-big text-center">
-                                    <i class="la la-bar-chart"></i>
-                                </div>
-                            </div>
-                            <div class="col-7 d-flex align-items-center">
-                                <div class="numbers">
-                                    <p class="card-category">Sales</p>
-                                    <h4 class="card-title">$ 1,345</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card card-stats card-danger">
+                <div class="card card-stats card-default">
                     <div class="card-body">
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="la la-newspaper-o"></i>
+                                    <i class="las la-border-none"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Subscribers</p>
-                                    <h4 class="card-title">1303</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
-                <div class="card card-stats card-primary">
-                    <div class="card-body ">
-                        <div class="row">
-                            <div class="col-5">
-                                <div class="icon-big text-center">
-                                    <i class="la la-check-circle"></i>
-                                </div>
-                            </div>
-                            <div class="col-7 d-flex align-items-center">
-                                <div class="numbers">
-                                    <p class="card-category">Order</p>
-                                    <h4 class="card-title">576</h4>
+                                    <p class="card-category">Tables</p>
+                                    <h4 class="card-title" id="menutablecount"></h4>
                                 </div>
                             </div>
                         </div>
