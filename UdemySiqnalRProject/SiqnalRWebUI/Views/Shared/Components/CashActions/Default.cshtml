@@ -1,0 +1,33 @@
+﻿@model List<SiqnalRWebUI.Dtos.MoneyCaseActionDtos.ResultMoneyCaseActionDto>
+<div class="modal fade" id="exampleModalLong" tabindex="-1" role="dialog" aria-labelledby="exampleModalLongTitle" aria-hidden="true">
+    <div class="modal-dialog" role="document">
+        <div class="modal-content">
+            <div class="modal-header">
+                <h5 class="modal-title" id="exampleModalLongTitle">Cash actions</h5>
+                <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                    <span aria-hidden="true">&times;</span>
+                </button>
+            </div>
+            <div class="modal-body">
+                <table class="table table-hover">
+                    @foreach (var item in Model)
+                    {
+                        <tr>
+                            <td>
+                                @if(item.ActionType is true)
+                                {
+                                    <p class="text-success">+ @item.ActionAmount₼</p>
+                                }
+                                else
+                                {
+                                    <p class="text-danger">- @item.ActionAmount₼ </p>
+                                }
+                            </td>
+                            <td>@item.DateTime.ToString("dd.MM.yyyy HH:mm")</td>
+                        </tr>
+                    }
+                </table>
+            </div>
+        </div>
+    </div>
+</div>

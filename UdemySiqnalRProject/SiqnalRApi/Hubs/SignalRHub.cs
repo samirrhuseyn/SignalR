@@ -51,7 +51,7 @@ namespace SiqnalRApi.Hubs
             await Clients.All.SendAsync("ReceiveLastOrderPrice", lastorderprice + "₼");
 
             var totalmoneycaseamount = _moneyCaseService.TTotalMoneyCaseAmount();
-            await Clients.All.SendAsync("ReceiveMoneyCaseAmount", totalmoneycaseamount + "₼");
+            await Clients.All.SendAsync("ReceiveMoneyCaseAmount", "₼ " + totalmoneycaseamount);
 
             var menutablecount = _menuTableService.MenuTableCount();
             await Clients.All.SendAsync("ReceiveMenuTableCount", menutablecount);

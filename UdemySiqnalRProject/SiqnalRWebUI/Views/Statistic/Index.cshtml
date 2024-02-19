@@ -1,5 +1,6 @@
 ﻿@{
     ViewData["Title"] = "Dashboard";
+    ViewData["ActiveDashboard"] = "active";
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
@@ -58,15 +59,17 @@
                 connection.on("ReceiveLastOrderPrice", (lastorderpricevalue) => {
                     $("#lastorderprice").text(lastorderpricevalue);
                 });
-                
+
                 connection.on("ReceiveMoneyCaseAmount", (totalmoneycaseamountvalue) => {
                     $("#totalmoneycaseamount").text(totalmoneycaseamountvalue);
                 });
-                
+
                 connection.on("ReceiveMenuTableCount", (menutablecountvalue) => {
                     $("#menutablecount").text(menutablecountvalue);
                 });
             });
+
+            
         </script>
 
         <h4 class="page-title">Dashboard</h4>
@@ -229,7 +232,7 @@
         </div>
 
         <div class="row">
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="card card-stats card-default">
                     <div class="card-body ">
                         <div class="row">
@@ -248,26 +251,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
-                <div class="card card-stats card-default">
-                    <div class="card-body ">
-                        <div class="row">
-                            <div class="col-5">
-                                <div class="icon-big text-center">
-                                    <i class="las la-dollar-sign"></i>
-                                </div>
-                            </div>
-                            <div class="col-7 d-flex align-items-center">
-                                <div class="numbers">
-                                    <p class="card-category">Cash</p>
-                                    <h4 class="card-title" id="totalmoneycaseamount"></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="card card-stats card-default">
                     <div class="card-body">
                         <div class="row">
@@ -286,7 +270,7 @@
                     </div>
                 </div>
             </div>
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="card card-stats card-default">
                     <div class="card-body">
                         <div class="row">
@@ -306,5 +290,23 @@
                 </div>
             </div>
         </div>
+
+        <div class="row row-card-no-pd">
+
+            <div class="col-md-4">
+                <div class="card">
+                    <div class="card-body">
+                        <p class="fw-bold mt-1">Cash Of Restaurant</p>
+                        <h4><b id="totalmoneycaseamount"></b></h4>
+                        <a style="-webkit-text-fill-color:white" role="button" data-toggle="modal" data-target="#exampleModalLong" class="btn btn-primary btn-full text-left mt-3 mb-3"><i class="las la-history"></i> Cash actions</a>
+                    </div>
+                </div>
+            </div>
+
+            @await Component.InvokeAsync("ProgressBars")
+        </div>
+
     </div>
 </div>
+@await Component.InvokeAsync("CashActions")
+
