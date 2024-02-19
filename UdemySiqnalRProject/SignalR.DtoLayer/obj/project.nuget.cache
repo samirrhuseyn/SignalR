@@ -1,8 +1,8 @@
 {
   "version": 2,
-  "dgSpecHash": "NUExvN4bfsLZoOD18OWJSOqf/3dQSfGvV6pc+YdtF9d7J5xYQwGfbFXQM0wC/ez+z7ZHeckjfSMXV/EucyosJQ==",
+  "dgSpecHash": "WzUP6KGd1cNO/fCGOPhcU7HhS9qnB8+/eQhBq7/cNWA7obB2D1nhV3M+wEVM46R1Q9hajc0846pTkk9ahzFU0w==",
   "success": true,
-  "projectFilePath": "D:\\Asp.Net Core Projects\\SiqnalR\\UdemySiqnalRProject\\SignalR.DtoLayer\\SignalR.DtoLayer.csproj",
+  "projectFilePath": "D:\\Asp.Net Core Projects\\SignalR\\UdemySiqnalRProject\\SignalR.DtoLayer\\SignalR.DtoLayer.csproj",
   "expectedPackageFiles": [],
   "logs": []
 }

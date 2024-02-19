@@ -1,17 +1,17 @@
 {
   "format": 1,
   "restore": {
-    "D:\\Asp.Net Core Projects\\SiqnalR\\UdemySiqnalRProject\\SignalR.DtoLayer\\SignalR.DtoLayer.csproj": {}
+    "D:\\Asp.Net Core Projects\\SignalR\\UdemySiqnalRProject\\SignalR.DtoLayer\\SignalR.DtoLayer.csproj": {}
   },
   "projects": {
-    "D:\\Asp.Net Core Projects\\SiqnalR\\UdemySiqnalRProject\\SignalR.DtoLayer\\SignalR.DtoLayer.csproj": {
+    "D:\\Asp.Net Core Projects\\SignalR\\UdemySiqnalRProject\\SignalR.DtoLayer\\SignalR.DtoLayer.csproj": {
       "version": "1.0.0",
       "restore": {
-        "projectUniqueName": "D:\\Asp.Net Core Projects\\SiqnalR\\UdemySiqnalRProject\\SignalR.DtoLayer\\SignalR.DtoLayer.csproj",
+        "projectUniqueName": "D:\\Asp.Net Core Projects\\SignalR\\UdemySiqnalRProject\\SignalR.DtoLayer\\SignalR.DtoLayer.csproj",
         "projectName": "SignalR.DtoLayer",
-        "projectPath": "D:\\Asp.Net Core Projects\\SiqnalR\\UdemySiqnalRProject\\SignalR.DtoLayer\\SignalR.DtoLayer.csproj",
+        "projectPath": "D:\\Asp.Net Core Projects\\SignalR\\UdemySiqnalRProject\\SignalR.DtoLayer\\SignalR.DtoLayer.csproj",
         "packagesPath": "C:\\Users\\samir\\.nuget\\packages\\",
-        "outputPath": "D:\\Asp.Net Core Projects\\SiqnalR\\UdemySiqnalRProject\\SignalR.DtoLayer\\obj\\",
+        "outputPath": "D:\\Asp.Net Core Projects\\SignalR\\UdemySiqnalRProject\\SignalR.DtoLayer\\obj\\",
         "projectStyle": "PackageReference",
         "fallbackFolders": [
           "C:\\Program Files (x86)\\Microsoft Visual Studio\\Shared\\NuGetPackages"
