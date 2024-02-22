@@ -44,11 +44,14 @@ namespace SiqnalRApi.Hubs
             var totalordercount = _orderService.TTotalOrderDal();
             await Clients.All.SendAsync("ReceiveTotalOrder", totalordercount);
 
+            //var todaytotalearning = _orderService.TTodayTotalEarning();
+            //await Clients.All.SendAsync("ReceiveTodayTotalEarning", todaytotalearning);
+
             var totalactiveordercount = _orderService.TActiveOrderCount();
             await Clients.All.SendAsync("ReceiveTotalActiveOrder", totalactiveordercount);
 
-            var lastorderprice = _orderService.TLastOrderPrice();
-            await Clients.All.SendAsync("ReceiveLastOrderPrice", lastorderprice + "₼");
+            //var lastorderprice = _orderService.TLastOrderPrice();
+            //await Clients.All.SendAsync("ReceiveLastOrderPrice", lastorderprice + "₼");
 
             var totalmoneycaseamount = _moneyCaseService.TTotalMoneyCaseAmount();
             await Clients.All.SendAsync("ReceiveMoneyCaseAmount", "₼ " + totalmoneycaseamount);

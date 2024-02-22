@@ -67,6 +67,10 @@
                 connection.on("ReceiveMenuTableCount", (menutablecountvalue) => {
                     $("#menutablecount").text(menutablecountvalue);
                 });
+
+                //connection.on("ReceiveTodayTotalEarning", (todaytotalearningvalue) => {
+                //    $("#todaytotalearning").text(todaytotalearningvalue);
+                //});
             });
 
             
@@ -216,13 +220,13 @@
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="las la-hourglass-half"></i>
+                                    <i class="las la-calendar-day"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
-                                    <p class="card-category">Active Order</p>
-                                    <h4 class="card-title" id="totalactiveordercount"></h4>
+                                    <p class="card-category">Today Earning</p>
+                                    <h4 class="card-title" id=""></h4>
                                 </div>
                             </div>
                         </div>
@@ -231,65 +235,6 @@
             </div>
         </div>
 
-        <div class="row">
-            <div class="col-md-4">
-                <div class="card card-stats card-default">
-                    <div class="card-body ">
-                        <div class="row">
-                            <div class="col-5">
-                                <div class="icon-big text-center">
-                                    <i class="las la-bookmark"></i>
-                                </div>
-                            </div>
-                            <div class="col-7 d-flex align-items-center">
-                                <div class="numbers">
-                                    <p class="card-category">Last Order Price</p>
-                                    <h4 class="card-title" id="lastorderprice"></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-stats card-default">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-5">
-                                <div class="icon-big text-center">
-                                    <i class="la la-calendar-day"></i>
-                                </div>
-                            </div>
-                            <div class="col-7 d-flex align-items-center">
-                                <div class="numbers">
-                                    <p class="card-category">Today Earning</p>
-                                    <h4 class="card-title">0.00₼</h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-            <div class="col-md-4">
-                <div class="card card-stats card-default">
-                    <div class="card-body">
-                        <div class="row">
-                            <div class="col-5">
-                                <div class="icon-big text-center">
-                                    <i class="las la-border-none"></i>
-                                </div>
-                            </div>
-                            <div class="col-7 d-flex align-items-center">
-                                <div class="numbers">
-                                    <p class="card-category">Tables</p>
-                                    <h4 class="card-title" id="menutablecount"></h4>
-                                </div>
-                            </div>
-                        </div>
-                    </div>
-                </div>
-            </div>
-        </div>
 
         <div class="row row-card-no-pd">
 
@@ -304,6 +249,41 @@
             </div>
 
             @await Component.InvokeAsync("ProgressBars")
+
+            <div class="col-md-3">
+                <div class="card card-stats">
+                    <div class="card-body">
+                        <p class="fw-bold mt-1">Statistic</p>
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center icon-warning">
+                                    <i class="las la-hourglass-half text-warning"></i>
+                                </div>
+                            </div>
+                            <div class="col-7 d-flex align-items-center">
+                                <div class="numbers">
+                                    <p class="card-category">Active Orders</p>
+                                    <h4 class="card-title" id="totalactiveordercount"></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center">
+                                    <i class="las la-bookmark text-primary"></i>
+                                </div>
+                            </div>
+                            <div class="col-7 d-flex align-items-center">
+                                <div class="numbers">
+                                    <p class="card-category">Tables</p>
+                                    <h4 class="card-title" id="menutablecount"></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
         </div>
 
     </div>

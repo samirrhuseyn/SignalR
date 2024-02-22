@@ -11,6 +11,7 @@ namespace SignalR.DtoLayer.MoneyCaseActionDto
         public int ActionID { get; set; }
         public decimal ActionAmount { get; set; }
         public DateTime DateTime { get; set; }
+        public string Description { get; set; }
         public bool ActionType { get; set; }
     }
 }

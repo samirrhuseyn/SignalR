@@ -104,6 +104,10 @@ namespace SignalR.DataAccessLayer.Migrations
                     b.Property<DateTime>("DateTime")
                         .HasColumnType("datetime2");
 
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
                     b.HasKey("ActionID");
 
                     b.ToTable("MoneyCaseActions");
