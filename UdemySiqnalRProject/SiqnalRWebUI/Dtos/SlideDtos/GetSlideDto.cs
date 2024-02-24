@@ -1,0 +1,16 @@
+﻿using System;
+using System.Collections.Generic;
+using System.Linq;
+using System.Text;
+using System.Threading.Tasks;
+
+namespace SiqnalRWebUI.Dtos.SlideDtos
+{
+    public class GetSlideDto
+    {
+        public int SliderID { get; set; }
+        public int DataValue { get; set; }
+        public string Title { get; set; }
+        public string Description { get; set; }
+    }
+}

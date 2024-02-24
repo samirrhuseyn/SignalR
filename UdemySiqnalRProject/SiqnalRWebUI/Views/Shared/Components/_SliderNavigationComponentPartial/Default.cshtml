@@ -1,0 +1,16 @@
+﻿@model List<SiqnalRWebUI.Dtos.SlideDtos.ResultSlideDto>
+<div class="container">
+    <ol class="carousel-indicators">
+        @foreach (var item in Model)
+        {
+            @if (item.DataValue == 0)
+            {
+                <li data-target="#customCarousel1" data-slide-to="@item.DataValue" class="active"></li>
+            }
+            else
+            {
+                <li data-target="#customCarousel1" data-slide-to="@item.DataValue"></li>
+            }
+        }
+    </ol>
+</div>

@@ -172,6 +172,30 @@ namespace SignalR.DataAccessLayer.Migrations
                     b.ToTable("OrderDetails");
                 });
 
+            modelBuilder.Entity("SignalR.EntityLayer.Entities.Slider", b =>
+                {
+                    b.Property<int>("SliderID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("SliderID"), 1L, 1);
+
+                    b.Property<int>("DataValue")
+                        .HasColumnType("int");
+
+                    b.Property<string>("Description")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.Property<string>("Title")
+                        .IsRequired()
+                        .HasColumnType("nvarchar(max)");
+
+                    b.HasKey("SliderID");
+
+                    b.ToTable("Sliders");
+                });
+
             modelBuilder.Entity("SignalR.EntityLayer.Entities.SocialMedia", b =>
                 {
                     b.Property<int>("SocialMediaID")
