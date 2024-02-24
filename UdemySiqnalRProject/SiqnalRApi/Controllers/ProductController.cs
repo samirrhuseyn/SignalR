@@ -48,6 +48,40 @@ namespace SiqnalRApi.Controllers
             return Ok(values.ToList());
         }
 
+        [HttpGet("ProductListWithCategoryTake")]
+        public IActionResult ProductListWithCategoryTake()
+        {
+            var context = new SignalRContext();
+            var values = context.Products.Include(x => x.Category).Select(y => new ResultProductWithCategory
+            {
+                Description = y.Description,
+                CategoryName = y.Category.CategoryName,
+                ImageURL = y.ImageURL,
+                Price = y.Price,
+                ProductId = y.ProductId,
+                ProductName = y.ProductName,
+                ProductStatus = y.ProductStatus
+            });
+            return Ok(values.Take(9).ToList());
+        }
+
+        [HttpGet("CategoryListWithProduct")]
+        public IActionResult CategoryListWithProduct()
+        {
+            var context = new SignalRContext();
+            var values = context.Products.Include(x => x.Category).Select(y => new ResultProductWithCategory
+            {
+                Description = y.Description,
+                CategoryName = y.Category.CategoryName,
+                ImageURL = y.ImageURL,
+                Price = y.Price,
+                ProductId = y.ProductId,
+                ProductName = y.ProductName,
+                ProductStatus = y.ProductStatus
+            });
+            return Ok(values.ToList().DistinctBy(x => x.CategoryName));
+        }
+
         [HttpGet("ProductCount")]
         public IActionResult ProductCount()
         {

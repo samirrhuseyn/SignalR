@@ -4,11 +4,11 @@ using SiqnalRWebUI.Dtos.ProductDtos;
 
 namespace SiqnalRWebUI.ViewComponents.HomePage
 {
-    public class _HomeOurMenuComponentPartial : ViewComponent
+    public class _CategoryListByProductComponentPartial : ViewComponent
     {
         private readonly IHttpClientFactory _httpClientFactory;
 
-        public _HomeOurMenuComponentPartial(IHttpClientFactory httpClientFactory)
+        public _CategoryListByProductComponentPartial(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
         }
@@ -16,7 +16,7 @@ namespace SiqnalRWebUI.ViewComponents.HomePage
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("http://localhost:5056/api/Product/ProductListWithCategoryTake");
+            var responseMessage = await client.GetAsync("http://localhost:5056/api/Product/CategoryListWithProduct");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
