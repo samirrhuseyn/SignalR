@@ -22,6 +22,35 @@ namespace SignalR.DataAccessLayer.Migrations
 
             SqlServerModelBuilderExtensions.UseIdentityColumns(modelBuilder, 1L, 1);
 
+            modelBuilder.Entity("SignalR.EntityLayer.Entities.Basket", b =>
+                {
+                    b.Property<int>("BasketID")
+                        .ValueGeneratedOnAdd()
+                        .HasColumnType("int");
+
+                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("BasketID"), 1L, 1);
+
+                    b.Property<decimal>("Count")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.Property<int>("MenuTableID")
+                        .HasColumnType("int");
+
+                    b.Property<int>("ProductID")
+                        .HasColumnType("int");
+
+                    b.Property<decimal>("TotalPrice")
+                        .HasColumnType("decimal(18,2)");
+
+                    b.HasKey("BasketID");
+
+                    b.HasIndex("MenuTableID");
+
+                    b.HasIndex("ProductID");
+
+                    b.ToTable("Baskets");
+                });
+
             modelBuilder.Entity("SignalR.EntityLayer.Entities.Contact", b =>
                 {
                     b.Property<int>("ContactID")
@@ -132,14 +161,15 @@ namespace SignalR.DataAccessLayer.Migrations
                         .IsRequired()
                         .HasColumnType("nvarchar(max)");
 
-                    b.Property<string>("TableNumber")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
+                    b.Property<int>("MenuTableID")
+                        .HasColumnType("int");
 
                     b.Property<decimal>("TotalPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("OrderID");
+
+                    b.HasIndex("MenuTableID");
 
                     b.ToTable("Orders");
                 });
@@ -162,9 +192,6 @@ namespace SignalR.DataAccessLayer.Migrations
                         .HasColumnType("int");
 
                     b.Property<decimal>("TotalPrice")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<decimal>("UnitPrice")
                         .HasColumnType("decimal(18,2)");
 
                     b.HasKey("OrderDetailID");
@@ -436,6 +463,36 @@ namespace SignalR.DataAccessLayer.Migrations
                     b.ToTable("Products");
                 });
 
+            modelBuilder.Entity("SignalR.EntityLayer.Entities.Basket", b =>
+                {
+                    b.HasOne("SignalR.EntityLayer.Entities.MenuTable", "MenuTables")
+                        .WithMany("Baskets")
+                        .HasForeignKey("MenuTableID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.HasOne("SiqnalR.EntityLayer.Entities.Product", "Product")
+                        .WithMany("Baskets")
+                        .HasForeignKey("ProductID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MenuTables");
+
+                    b.Navigation("Product");
+                });
+
+            modelBuilder.Entity("SignalR.EntityLayer.Entities.Order", b =>
+                {
+                    b.HasOne("SignalR.EntityLayer.Entities.MenuTable", "MenuTable")
+                        .WithMany("Orders")
+                        .HasForeignKey("MenuTableID")
+                        .OnDelete(DeleteBehavior.Cascade)
+                        .IsRequired();
+
+                    b.Navigation("MenuTable");
+                });
+
             modelBuilder.Entity("SignalR.EntityLayer.Entities.OrderDetail", b =>
                 {
                     b.HasOne("SignalR.EntityLayer.Entities.Order", "Order")
@@ -466,6 +523,13 @@ namespace SignalR.DataAccessLayer.Migrations
                     b.Navigation("Category");
                 });
 
+            modelBuilder.Entity("SignalR.EntityLayer.Entities.MenuTable", b =>
+                {
+                    b.Navigation("Baskets");
+
+                    b.Navigation("Orders");
+                });
+
             modelBuilder.Entity("SignalR.EntityLayer.Entities.Order", b =>
                 {
                     b.Navigation("OrderDetails");
@@ -478,6 +542,8 @@ namespace SignalR.DataAccessLayer.Migrations
 
             modelBuilder.Entity("SiqnalR.EntityLayer.Entities.Product", b =>
                 {
+                    b.Navigation("Baskets");
+
                     b.Navigation("OrderDetails");
                 });
 #pragma warning restore 612, 618
