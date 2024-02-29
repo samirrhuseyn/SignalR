@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SiqnalRWebUI.Dtos.CategoryDtos;
+using SiqnalRWebUI.Dtos.NotificationDtos;
 using System.Text;
 
 namespace SiqnalRWebUI.Controllers
@@ -26,6 +27,8 @@ namespace SiqnalRWebUI.Controllers
             }
             return View();
         }
+
+        
 
         [HttpGet]
         public IActionResult CreateCategory()
