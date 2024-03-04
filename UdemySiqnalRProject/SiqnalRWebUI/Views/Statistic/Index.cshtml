@@ -68,12 +68,16 @@
                     $("#menutablecount").text(menutablecountvalue);
                 });
 
-                //connection.on("ReceiveTodayTotalEarning", (todaytotalearningvalue) => {
-                //    $("#todaytotalearning").text(todaytotalearningvalue);
-                //});
+                connection.on("ReceiveWatch", (nowwatchvalue) => {
+                    $("#nowwatch").text(nowwatchvalue);
+                });
+
+                connection.on("ReceiveWeatherTemp", (weathertempvalue) => {
+                    $("#weathertemp").text(weathertempvalue);
+                });
             });
 
-            
+
         </script>
 
         <h4 class="page-title">Dashboard</h4>
@@ -84,7 +88,7 @@
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="la la-icons"></i>
+                                    <i class="fa-solid fa-shapes"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
@@ -103,7 +107,7 @@
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="las la-shapes"></i>
+                                    <i class="fa-solid fa-utensils"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
@@ -122,7 +126,7 @@
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="las la-check-circle"></i>
+                                    <i class="fa-solid fa-check"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
@@ -141,7 +145,7 @@
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="las la-times-circle"></i>
+                                    <i class="fa-solid fa-xmark"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
@@ -163,7 +167,7 @@
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="las la-hand-holding-usd"></i>
+                                    <i class="fa-solid fa-chart-simple"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
@@ -182,7 +186,7 @@
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="las la-hand-holding-usd"></i>
+                                    <i class="fa-solid fa-chart-simple"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
@@ -201,7 +205,7 @@
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="las la-shopping-basket"></i>
+                                    <i class="fa-solid fa-cart-shopping"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
@@ -220,7 +224,7 @@
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="las la-calendar-day"></i>
+                                    <i class="fa-solid fa-calendar-day"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
@@ -243,21 +247,58 @@
                     <div class="card-body">
                         <p class="fw-bold mt-1">Cash Of Restaurant</p>
                         <h4><b id="totalmoneycaseamount"></b></h4>
-                        <a style="-webkit-text-fill-color:white" role="button" data-toggle="modal" data-target="#exampleModalLong" class="btn btn-primary btn-full text-left mt-3 mb-3"><i class="las la-history"></i> Cash actions</a>
+                        <a style="-webkit-text-fill-color:white" role="button" data-toggle="modal" data-target="#exampleModalLong" class="btn btn-primary btn-full text-left mt-3 mb-3 mr-1"><i class="fa-solid fa-clock-rotate-left"></i> Cash actions</a>
+                        <div class="d-flex">
+                            <a style="-webkit-text-fill-color:white" class="btn btn-danger col-lg-6 btn-full text-left mt-1 mb-3" href="#"><i class="fa-solid fa-file-circle-plus mr-1"></i> Add Order</a>
+                            <a style="-webkit-text-fill-color:white" class="btn btn-danger ml-2 col-lg-6 btn-full text-left mt-1 mb-3" href="#"><i class="fa-solid fa-hand-holding-dollar mr-1"></i> Expenses</a>
+                        </div>
                     </div>
                 </div>
             </div>
 
-            @await Component.InvokeAsync("ProgressBars")
+            <div class="col-md-4">
+                <div class="card card-stats">
+                    <div class="card-body">
+                        <p class="fw-bold mt-1">Daily information</p>
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center icon-warning">
+                                    <i class="fa-solid fa-calendar-days"></i>
+                                </div>
+                            </div>
+                            <div class="col-7 d-flex align-items-center">
+                                <div class="numbers">
+                                    <p class="card-category">Date and time</p>
+                                    <h4 class="card-title" id="nowwatch"></h4>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <div class="row">
+                            <div class="col-5">
+                                <div class="icon-big text-center">
+                                    <i class="fa-solid fa-cloud"></i>
+                                </div>
+                            </div>
+                            <div class="col-7 d-flex align-items-center">
+                                <div class="numbers">
+                                    <p class="card-category">Weather</p>
+                                    <h4 class="card-title" id="weathertemp"></h4>
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
 
-            <div class="col-md-3">
+            <div class="col-md-4">
                 <div class="card card-stats">
                     <div class="card-body">
                         <p class="fw-bold mt-1">Statistic</p>
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center icon-warning">
-                                    <i class="las la-hourglass-half text-warning"></i>
+                                    <i class="fa-solid fa-hourglass-half text-warning"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">
@@ -271,7 +312,7 @@
                         <div class="row">
                             <div class="col-5">
                                 <div class="icon-big text-center">
-                                    <i class="las la-bookmark text-primary"></i>
+                                    <i class="fa-solid fa-bookmark text-primary"></i>
                                 </div>
                             </div>
                             <div class="col-7 d-flex align-items-center">

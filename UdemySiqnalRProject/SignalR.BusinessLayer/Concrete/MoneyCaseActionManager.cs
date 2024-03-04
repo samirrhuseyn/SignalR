@@ -35,7 +35,7 @@ namespace SignalR.BusinessLayer.Concrete
 
         public List<MoneyCaseAction> TGetListAll()
         {
-            return _moneyCaseActionDal.GetListAll();
+            return _moneyCaseActionDal.GetListByThisMonth();
         }
 
         public void TUpdate(MoneyCaseAction entity)

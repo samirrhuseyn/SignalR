@@ -18,6 +18,10 @@ namespace SignalR.BusinessLayer.Concrete
             _notificationDal = notificationDal;
         }
 
+        public List<Notification> GetAllNotifications()
+        {
+            return _notificationDal.GetNotificationAllList();
+        }
 
         public int NotificationCountByStatusFalse()
         {
@@ -41,7 +45,7 @@ namespace SignalR.BusinessLayer.Concrete
 
         public List<Notification> TGetListAll()
         {
-            return _notificationDal.GetAllNotificationsByFalse();
+            return _notificationDal.GetAllNotificationsByFalseWIthTake();
         }
 
         public void TUpdate(Notification entity)

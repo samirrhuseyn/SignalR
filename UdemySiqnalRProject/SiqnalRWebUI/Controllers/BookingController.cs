@@ -42,7 +42,9 @@ namespace SiqnalRWebUI.Controllers
             var responseMessage = await client.PostAsync("http://localhost:5056/api/Booking", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
+                
                 return RedirectToAction("Index");
+                
             }
             return View();
         }

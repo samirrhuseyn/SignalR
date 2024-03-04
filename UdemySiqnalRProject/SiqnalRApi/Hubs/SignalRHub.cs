@@ -1,6 +1,7 @@
 ﻿using Microsoft.AspNetCore.SignalR;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DataAccessLayer.Concrete;
+using System.Xml.Linq;
 
 namespace SiqnalRApi.Hubs
 {
@@ -48,14 +49,20 @@ namespace SiqnalRApi.Hubs
             var totalordercount = _orderService.TTotalOrderDal();
             await Clients.All.SendAsync("ReceiveTotalOrder", totalordercount);
 
-            //var todaytotalearning = _orderService.TTodayTotalEarning();
-            //await Clients.All.SendAsync("ReceiveTodayTotalEarning", todaytotalearning);
+            var nowwatch = DateTime.Now.ToString("MMMM dd, yyyy  dddd HH:mm");
+            await Clients.All.SendAsync("ReceiveWatch", nowwatch);
+
+            string api = "13749a3611369eedf0e43632840b5a4f";
+            string city = "Jalilabad";
+            string connection = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&mode=xml&lang=tr&units=metric&appid=" + api;
+            XDocument document = XDocument.Load(connection);
+            var weather = document.Descendants("temperature").ElementAt(0).Attribute("value").Value;
+
+            var weathertemp = weather;
+            await Clients.All.SendAsync("ReceiveWeatherTemp", weathertemp + "°C") ;
 
             var totalactiveordercount = _orderService.TActiveOrderCount();
             await Clients.All.SendAsync("ReceiveTotalActiveOrder", totalactiveordercount);
-
-            //var lastorderprice = _orderService.TLastOrderPrice();
-            //await Clients.All.SendAsync("ReceiveLastOrderPrice", lastorderprice + "₼");
 
             var totalmoneycaseamount = _moneyCaseService.TTotalMoneyCaseAmount();
             await Clients.All.SendAsync("ReceiveMoneyCaseAmount", "₼ " + totalmoneycaseamount);
@@ -70,6 +77,7 @@ namespace SiqnalRApi.Hubs
             await Clients.All.SendAsync("ReceiveBookingList", bookinglist);
         }
 
+        
         public async Task SendNotifications()
         {
             var falsenotificationcount = _notificationService.NotificationCountByStatusFalse();

@@ -9,5 +9,6 @@ namespace SignalR.DataAccessLayer.Abstarct
 {
     public interface IMoneyCaseActionDal : IGenericDal<MoneyCaseAction>
     {
+        List<MoneyCaseAction> GetListByThisMonth();
     }
 }

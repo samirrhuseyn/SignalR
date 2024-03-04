@@ -15,5 +15,11 @@ namespace SignalR.DataAccessLayer.EntityFramework
         public EfMoneyCaseActionDal(SignalRContext context) : base(context)
         {
         }
+
+        public List<MoneyCaseAction> GetListByThisMonth()
+        {
+            using var context = new SignalRContext();
+            return context.MoneyCaseActions.OrderByDescending(x=>x.DateTime).Where(x=>x.DateTime.Month ==  DateTime.Now.Month).Where(x => x.DateTime.Year == DateTime.Now.Year).ToList();
+        }
     }
 }

@@ -17,10 +17,18 @@ namespace SignalR.DataAccessLayer.EntityFramework
         {
         }
 
-        public List<Notification> GetAllNotificationsByFalse()
+       
+
+        public List<Notification> GetAllNotificationsByFalseWIthTake()
         {
             using var context = new SignalRContext();
-            return context.Notifications.Where(x => x.Status == false).OrderByDescending(x => x.Date).ToList();
+            return context.Notifications.Where(x => x.Status == false).OrderByDescending(x => x.Date).Take(3).ToList();
+        }
+
+        public List<Notification> GetNotificationAllList()
+        {
+            using var context = new SignalRContext();
+            return context.Notifications.OrderByDescending(x => x.Date).ToList();
         }
 
         public int NotificationCountByStatusFalse()

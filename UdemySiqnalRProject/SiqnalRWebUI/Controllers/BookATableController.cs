@@ -1,6 +1,9 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SignalR.DataAccessLayer.Concrete;
+using SignalR.EntityLayer.Entities;
 using SiqnalRWebUI.Dtos.BookingDtos;
+using SiqnalRWebUI.Dtos.NotificationDtos;
 using System.Text;
 
 namespace SiqnalRWebUI.Controllers
@@ -29,6 +32,17 @@ namespace SiqnalRWebUI.Controllers
             var responseMessage = await client.PostAsync("http://localhost:5056/api/Booking", stringContent);
             if (responseMessage.IsSuccessStatusCode)
             {
+                Notification notification = new Notification()
+                {
+                    NotificationDescription = "There is a new reservation!",
+                    Date = Convert.ToDateTime(DateTime.Now.ToShortTimeString()),
+                    NotificationTypeColor = "danger",
+                    NotificationTypeIcon = "las la-calendar-plus",
+                    Status = false
+                };
+                var context = new SignalRContext();
+                context.Notifications.Add(notification);
+                context.SaveChanges();
                 return RedirectToAction("Index", "Home");
             }
             return View();
