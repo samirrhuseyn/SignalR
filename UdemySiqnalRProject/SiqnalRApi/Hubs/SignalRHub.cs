@@ -5,13 +5,13 @@ using System.Xml.Linq;
 
 namespace SiqnalRApi.Hubs
 {
-	public class SignalRHub : Hub
-	{
-		private readonly ICategoryService _categoryService;
-		private readonly IProductService _productService;
-		private readonly IOrderService _orderService;
-		private readonly IMoneyCaseService _moneyCaseService;
-		private readonly IMenuTableService _menuTableService;
+    public class SignalRHub : Hub
+    {
+        private readonly ICategoryService _categoryService;
+        private readonly IProductService _productService;
+        private readonly IOrderService _orderService;
+        private readonly IMoneyCaseService _moneyCaseService;
+        private readonly IMenuTableService _menuTableService;
         private readonly IBookingService _bookingService;
         private readonly INotificationService _notificationService;
 
@@ -60,7 +60,7 @@ namespace SiqnalRApi.Hubs
             var weathertype = document.Descendants("weather").ElementAt(0).Attribute("value").Value;
 
             var weathertemp = weather;
-            await Clients.All.SendAsync("ReceiveWeatherTemp", weathertemp + "°C") ;
+            await Clients.All.SendAsync("ReceiveWeatherTemp", weathertemp + "°C");
 
             var weathertypes = weathertype;
             await Clients.All.SendAsync("ReceiveWeatherType", weathertypes);
@@ -77,11 +77,11 @@ namespace SiqnalRApi.Hubs
 
         public async Task GetBookingList()
         {
-            var bookinglist = _bookingService.TGetListAll();
+            var bookinglist = _bookingService.TGetListAll().OrderByDescending(x => x.Date);
             await Clients.All.SendAsync("ReceiveBookingList", bookinglist);
         }
 
-        
+
         public async Task SendNotifications()
         {
             var falsenotificationcount = _notificationService.NotificationCountByStatusFalse();

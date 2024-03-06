@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
+using SignalR.DataAccessLayer.Concrete;
+using SignalR.EntityLayer.Entities;
 using SiqnalRWebUI.Dtos.MenuTableDtos;
 using SiqnalRWebUI.Dtos.OrderDetailsDtos;
 using SiqnalRWebUI.Dtos.OrderDtos;
@@ -38,7 +40,7 @@ namespace SiqnalRWebUI.Controllers
             var responseMessage = await client.GetAsync("http://localhost:5056/api/MenuTables");
             var jsondata = await responseMessage.Content.ReadAsStringAsync();
             var values = JsonConvert.DeserializeObject<List<ResultMenuTableDto>>(jsondata);
-            List<SelectListItem> value = (from x in values
+            List<SelectListItem> value = (from x in values.Where(x => x.Status is false)
                                           select new SelectListItem
                                           {
                                               Text = x.Name,
@@ -62,6 +64,16 @@ namespace SiqnalRWebUI.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+
+        public IActionResult CloseInvoice(int id)
+        {
+            var context = new SignalRContext();
+            var value = context.Set<Order>().Find(id);
+            value.Description = "Invoice paid";
+            context.Update(value);
+            context.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

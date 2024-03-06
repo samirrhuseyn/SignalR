@@ -79,5 +79,14 @@ namespace SiqnalRApi.Controllers
         {
             return Ok(_orderService.TTodayTotalEarning());
         }
+
+        [HttpPut("{id}")]
+        public IActionResult CloseInvoice(int id)
+        {
+            var value = _orderService.TGetByID(id);
+            value.Description = "Invoice paid";
+            _orderService.TUpdate(value);
+            return Ok("Update successfuly");
+        }
     }
 }
