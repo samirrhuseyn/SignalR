@@ -1,0 +1,65 @@
+﻿@model List<SiqnalRWebUI.Dtos.OrderDtos.ResultOrderDto>
+@{
+    ViewData["Title"] = "Orders";
+    ViewData["OrderActive"] = "active";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="d-flex">
+            <h4 class="page-title">Orders</h4>
+            <a style="margin-left:925px; height:40px;" href="/Order/CreateOrder" class="btn btn-primary"><i class="fa-solid fa-file-circle-plus mr-1"></i> Add Order</a>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Table</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Date</th>
+                                    <th scope="col">TotalPrice</th>
+                                    <th scope="col">Action</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.MenuTableName</td>
+                                        <td>
+                                            @if (item.Description == "Invoice paid")
+                                            {
+                                                <h6 class="text-success">Invoice Paid</h6>
+                                            }
+                                            else
+                                            {
+                                                <a href="#" class="btn btn-success">Close invoice</a>
+                                            }
+                                            
+                                        </td>
+                                        <td>@item.Date.ToString("MMMM dd, yyyy")</td>
+                                        <td>@item.TotalPrice <i class="fa-solid fa-manat-sign"></i></td>
+                                        <td class="demo">
+                                            @if (item.Description != "Invoice paid")
+                                            {
+                                                <a href="/Order/AddDetail/@item.OrderID" class="btn btn-outline-primary"><i class="fa-solid fa-plus"></i></a>
+                                            }
+                                            <a href="#" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
+                                            <a href="/OrderDetail/GetDetail/@item.OrderID" class="btn btn-outline-warning"><i class="fa-solid fa-info"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

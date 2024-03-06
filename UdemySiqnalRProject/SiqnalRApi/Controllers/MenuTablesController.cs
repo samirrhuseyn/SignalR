@@ -15,6 +15,12 @@ namespace SiqnalRApi.Controllers
             _menuTableService = menuTableService;
         }
 
+        [HttpGet]
+        public async Task<IActionResult> TableList()
+        {
+            return Ok(_menuTableService.TGetListAll());
+        }
+
         [HttpGet("MenuTableCount")]
         public ActionResult MenuTableCount() 
         {

@@ -15,5 +15,11 @@ namespace SignalR.DataAccessLayer.EntityFramework
         public EfOrderDetailDal(SignalRContext context) : base(context)
         {
         }
+
+        public List<OrderDetail> GetListByID(int id)
+        {
+            var context = new SignalRContext();
+            return context.OrderDetails.Where(x=>x.OrderID == id).ToList();
+        }
     }
 }

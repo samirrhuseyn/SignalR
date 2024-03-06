@@ -1,0 +1,60 @@
+﻿@using Microsoft.EntityFrameworkCore;
+@using SignalR.DataAccessLayer.Concrete;
+@model List<SiqnalRWebUI.Dtos.OrderDetailsDtos.ResultOrderDetailDto>
+@{
+    ViewData["Title"] = "Order Details";
+    ViewData["OrderActive"] = "active";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+    int count = 0;
+    decimal totalprice = 0;
+    decimal totalcount = 0;
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="container mt-3">
+                            <table class="table table-borderless table-hover">
+                                <thead class="thead thead-dark">
+                                    <tr>
+                                        <th>#</th>
+                                        <th>Product Name</th>
+                                        <th>Count</th>
+                                        <th>Unit Price</th>
+                                        <th>Total Price</th>
+                                    </tr>
+                                </thead>
+                                <tbody>
+                                    @foreach(var item in Model)
+                                    {
+                                        count++;
+                                        var context = new SignalRContext();
+                                        totalprice = context.OrderDetails.Where(x => x.OrderID == item.OrderID).Select(y => y.TotalPrice).Sum();
+                                        totalcount = context.OrderDetails.Where(x => x.OrderID == item.OrderID).Select(y => y.Count).Sum();
+                                        <tr>
+                                            <td>@count</td>
+                                            <td>@item.ProductName</td>
+                                            <td>@item.Count</td>
+                                            <td>@item.ProductPrice <i class="fa-solid fa-manat-sign"></i></td>
+                                            <td>@item.TotalPrice <i class="fa-solid fa-manat-sign"></i></td>
+                                        </tr>
+                                    }
+                                    <tr class="bg-warning">
+                                        <td></td>
+                                        <td></td>
+                                        <td style="-webkit-text-fill-color:black" class="font-weight-bold">@totalcount</td>
+                                        <td></td>
+                                        <td style="-webkit-text-fill-color:black" class="font-weight-bold">@totalprice <i class="fa-solid fa-manat-sign"></i></td>
+                                    </tr>
+                                </tbody>
+                            </table>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>

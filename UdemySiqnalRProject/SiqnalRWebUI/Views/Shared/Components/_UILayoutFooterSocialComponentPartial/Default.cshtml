@@ -2,7 +2,7 @@
 <div class="footer_social">
     @foreach(var item in Model)
     {
-        <a href="@item.Url">
+        <a data-bs-toggle="tooltip" data-bs-placement="top" title="@item.Title" href="@item.Url">
             <i class="fa fa-@item.Icon" aria-hidden="true"></i>
         </a>
     }

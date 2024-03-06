@@ -54,12 +54,16 @@ namespace SiqnalRApi.Hubs
 
             string api = "13749a3611369eedf0e43632840b5a4f";
             string city = "Jalilabad";
-            string connection = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&mode=xml&lang=tr&units=metric&appid=" + api;
+            string connection = "https://api.openweathermap.org/data/2.5/weather?q=" + city + "&mode=xml&lang=en&units=metric&appid=" + api;
             XDocument document = XDocument.Load(connection);
             var weather = document.Descendants("temperature").ElementAt(0).Attribute("value").Value;
+            var weathertype = document.Descendants("weather").ElementAt(0).Attribute("value").Value;
 
             var weathertemp = weather;
             await Clients.All.SendAsync("ReceiveWeatherTemp", weathertemp + "°C") ;
+
+            var weathertypes = weathertype;
+            await Clients.All.SendAsync("ReceiveWeatherType", weathertypes);
 
             var totalactiveordercount = _orderService.TActiveOrderCount();
             await Clients.All.SendAsync("ReceiveTotalActiveOrder", totalactiveordercount);
