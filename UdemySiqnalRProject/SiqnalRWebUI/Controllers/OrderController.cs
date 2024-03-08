@@ -75,5 +75,16 @@ namespace SiqnalRWebUI.Controllers
             context.SaveChanges();
             return RedirectToAction("Index");
         }
+
+        public async Task<IActionResult> DeleteOrder(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.DeleteAsync($"http://localhost:5056/api/Orders/{id}");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                return RedirectToAction("Index", "Order");
+            }
+            return View();
+        }
     }
 }

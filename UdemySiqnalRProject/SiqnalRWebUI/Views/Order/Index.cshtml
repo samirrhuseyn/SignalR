@@ -1,8 +1,10 @@
-﻿@model List<SiqnalRWebUI.Dtos.OrderDtos.ResultOrderDto>
+﻿@using SignalR.DataAccessLayer.Concrete;
+@model List<SiqnalRWebUI.Dtos.OrderDtos.ResultOrderDto>
 @{
     ViewData["Title"] = "Orders";
     ViewData["OrderActive"] = "active";
     Layout = "~/Views/AdminLayout/Index.cshtml";
+
 }
 
 <div class="content">
@@ -46,10 +48,13 @@
                                         </td>
                                         <td>@item.Date.ToString("MMMM dd, yyyy")</td>
                                         <td>@item.TotalPrice <i class="fa-solid fa-manat-sign"></i></td>
+
                                         <td class="demo">
-                                            <a href="#" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
+                                            <a href="/Order/DeleteOrder/@item.OrderID" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
                                             <a href="/OrderDetail/GetDetail/@item.OrderID" class="btn btn-outline-warning"><i class="fa-solid fa-info"></i></a>
                                         </td>
+
+
                                     </tr>
                                 }
                             </tbody>

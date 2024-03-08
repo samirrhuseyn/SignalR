@@ -88,5 +88,13 @@ namespace SiqnalRApi.Controllers
             _orderService.TUpdate(value);
             return Ok("Update successfuly");
         }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteAbout(int id)
+        {
+            var value = _orderService.TGetByID(id);
+            _orderService.TDelete(value);
+            return Ok("Order section has been deleted successfully!");
+        }
     }
 }

@@ -1,0 +1,83 @@
+﻿@model List<SiqnalRWebUI.Dtos.MenuTableDtos.ResultMenuTableDto>
+@{
+    ViewData["Title"] = "Tables";
+    ViewData["MenuTableActive"] = "active";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<script src="~/lib/microsoft/signalr/dist/browser/signalr.min.js"></script>
+<script src="~/lib/jquery/dist/jquery.min.js"></script>
+<script src="~/lib/bootstrap/dist/js/bootstrap.bundle.min.js"></script>
+<script src="~/js/site.js" asp-append-version="true"></script>
+
+<div class="content">
+    <div class="container-fluid">
+
+        <script type="text/javascript">
+            $(document).ready(() => {
+                var connection = new signalR.HubConnectionBuilder().withUrl("http://localhost:5056/SignalRHub").build();
+                $("#connstatus").text(connection.state);
+                connection.start().then(() => {
+                    $("#connstatus").text(connection.state);
+                    setInterval(() => {
+                        connection.invoke("GetMenuTableList");
+                    }, 1000);
+                    j
+                }).catch((err) => { console.log(err) });
+
+                connection.on("ReceiveTableList", (menutablelistvalue) => {
+                    console.log(menutablelistvalue);
+                    let tablehtml = `<table class="table mt-3">
+                                                                <thead>
+                                                                <tr>
+                                                                <th scope="col">Name</th>
+                                                                <th scope="col">Status</th>
+                                                                <th scope="col">Delete</th>
+                                                                </tr>
+                                                                </thead>
+                                                                <tbody>`
+                    $.each(menutablelistvalue, (index, item) => {
+                        if(item.status == false)
+                        {
+                            var Status = "Available"
+                            var color = "success"
+                        }
+                        else{
+                            var Status = "Busy"
+                            var color = "danger"
+                        }
+                        tablehtml += `<tr>
+                                                  <td>${item.name}</td>
+                                                  <td>
+                                                      <h6 class="text-${color}">${Status}</h6>
+                                                  </td>
+                                                  <td><a href="#" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a></td>
+                                                  </tr>`
+                    });
+                    tablehtml += "</tbody></table>"
+                    $("#menutablelist").html(tablehtml);
+                });
+
+
+            });
+
+
+        </script>
+
+        <div class="d-flex">
+            <h4 class="page-title">Tables</h4>
+            <a style="margin-left:925px; height:40px;" href="#" class="btn btn-primary"><i class="fa-solid fa-plus mr-1"></i> Add Table</a>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div id="menutablelist"></div>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+
+

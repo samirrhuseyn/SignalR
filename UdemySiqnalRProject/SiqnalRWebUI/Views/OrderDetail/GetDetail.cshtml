@@ -26,21 +26,34 @@
                                         <th>Count</th>
                                         <th>Unit Price</th>
                                         <th>Total Price</th>
+                                        <th>Actions</th>
                                     </tr>
                                 </thead>
                                 <tbody>
-                                    @foreach(var item in Model)
+                                    @foreach (var item in Model)
                                     {
                                         count++;
                                         var context = new SignalRContext();
                                         totalprice = context.OrderDetails.Where(x => x.OrderID == item.OrderID).Select(y => y.TotalPrice).Sum();
                                         totalcount = context.OrderDetails.Where(x => x.OrderID == item.OrderID).Select(y => y.Count).Sum();
+                                        var value = context.Orders.Where(x => x.OrderID == item.OrderID).Select(y => y.Description).FirstOrDefault();
                                         <tr>
                                             <td>@count</td>
                                             <td>@item.ProductName</td>
                                             <td>@item.Count</td>
                                             <td>@item.ProductPrice <i class="fa-solid fa-manat-sign"></i></td>
                                             <td>@item.TotalPrice <i class="fa-solid fa-manat-sign"></i></td>
+                                            @if (value == "Custumer at the table")
+                                            {
+                                                <td>
+                                                    <a class="btn btn-danger" href="/OrderDetail/DeleteDetail/@item.OrderDetailID"><i class="fa-solid fa-xmark"></i></a>
+                                                    <a class="btn btn-primary" href="/OrderDetail/UpdateOrderDetail/@item.OrderDetailID"><i class="fa-solid fa-pen"></i></a>
+                                                </td>
+                                            }
+                                            else
+                                            {
+                                                <td><h6 class="text-success">Invoice Paid</h6></td>
+                                            }
                                         </tr>
                                     }
                                     <tr class="bg-warning">
@@ -49,6 +62,7 @@
                                         <td style="-webkit-text-fill-color:black" class="font-weight-bold">@totalcount</td>
                                         <td></td>
                                         <td style="-webkit-text-fill-color:black" class="font-weight-bold">@totalprice <i class="fa-solid fa-manat-sign"></i></td>
+                                        <td></td>
                                     </tr>
                                 </tbody>
                             </table>

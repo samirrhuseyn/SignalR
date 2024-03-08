@@ -75,7 +75,7 @@
             <ul class="navbar-nav topbar-nav ml-md-auto align-items-center">
                 <li class="nav-item dropdown hidden-caret">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="las la-angle-down"></i>
+                        <i class="fa-solid fa-angle-down"></i>
                     </a>
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="#">Slider</a>
@@ -86,7 +86,7 @@
                 </li>
                 <li class="nav-item dropdown hidden-caret">
                     <a class="nav-link dropdown-toggle" href="#" id="navbarDropdown" role="button" data-toggle="dropdown" aria-haspopup="true" aria-expanded="false">
-                        <i class="la la-bell"></i>
+                        <i class="fa-regular fa-bell"></i>
                         @{
                             var context = new SignalRContext();
                             var values = context.Notifications.Where(x => x.Status == false).Count();

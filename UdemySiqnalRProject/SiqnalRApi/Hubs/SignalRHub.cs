@@ -81,6 +81,11 @@ namespace SiqnalRApi.Hubs
             await Clients.All.SendAsync("ReceiveBookingList", bookinglist);
         }
 
+        public async Task GetMenuTableList()
+        {
+            var menutablelist = _menuTableService.TGetListAll();
+            await Clients.All.SendAsync("ReceiveTableList", menutablelist);
+        }
 
         public async Task SendNotifications()
         {
