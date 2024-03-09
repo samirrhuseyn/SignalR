@@ -95,7 +95,7 @@ namespace SiqnalRApi.Hubs
             var falsenotificationcounttitle = _notificationService.NotificationCountByStatusFalse();
             await Clients.All.SendAsync("ReceiveFalseNotificationCountTitle", falsenotificationcounttitle);
 
-            var falsenotificationlist = _notificationService.TGetListAll();
+            var falsenotificationlist = _notificationService.TGetListAll().OrderByDescending(x=>x.Date);
             await Clients.All.SendAsync("ReceiveFalseNotificationList", falsenotificationlist);
         }
     }

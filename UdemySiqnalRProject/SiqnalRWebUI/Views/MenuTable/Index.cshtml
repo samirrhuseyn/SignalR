@@ -51,7 +51,7 @@
                                                   <td>
                                                       <h6 class="text-${color}">${Status}</h6>
                                                   </td>
-                                                  <td><a href="#" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a></td>
+                                                  <td><a href="/MenuTable/DeleteTable/${item.menuTableID}" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a></td>
                                                   </tr>`
                     });
                     tablehtml += "</tbody></table>"
@@ -66,7 +66,7 @@
 
         <div class="d-flex">
             <h4 class="page-title">Tables</h4>
-            <a style="margin-left:925px; height:40px;" href="#" class="btn btn-primary"><i class="fa-solid fa-plus mr-1"></i> Add Table</a>
+            <a style="margin-left:925px; height:40px;" href="/MenuTable/CreateTable" class="btn btn-primary"><i class="fa-solid fa-plus mr-1"></i> Add Table</a>
         </div>
         <div class="row">
             <div class="col-md-12">

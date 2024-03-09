@@ -1,45 +1,47 @@
-﻿@model List<SiqnalRWebUI.Dtos.ContactDtos.ResultContactDto>
+﻿@using SignalR.DataAccessLayer.Concrete;
+@model SiqnalRWebUI.Dtos.ContactDtos.GetContactDto
 @{
     ViewData["Title"] = "Contacts";
     Layout = "~/Views/AdminLayout/Index.cshtml";
+    var context = new SignalRContext();
+    var value = context.Contacts.Count();
 }
 
 <div class="content">
-	<div class="container-fluid">
-		<h4 class="page-title">Contact Informations</h4>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="card-body">
-						<table class="table mt-3">
-							<thead>
-								<tr>
-									<th scope="col">Location</th>
-									<th scope="col">Phone</th>
-									<th scope="col">Mail</th>
-									<th scope="col">Description</th>
-									<th scope="col">Delete</th>
-									<th scope="col">Update</th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach (var item in Model)
-								{
-									<tr>
-										<td>@item.Location</td>
-										<td>@item.Phone</td>
-										<td>@item.Mail</td>
-										<td>@item.FooterDescription</td>
-										<td><a href="/Contact/DeleteContact/@item.ContactID" class="btn btn-outline-danger">Delete</a></td>
-										<td><a href="/Contact/UpdateContact/@item.ContactID" class="btn btn-outline-success">Update</a></td>
-									</tr>
-								}
-							</tbody>
-						</table>
-						<a href="/Contact/CreateContact" class="btn btn-outline-primary">+ Add Contact</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="container-fluid">
+        <div class="d-flex">
+            <h4 class="page-title">Contacts</h4>
+            @if (value is not 1)
+            {
+                <a style="margin-left:890px; height:40px;" href="/Contact/CreateContact" class="btn btn-primary"><i class="fa-solid fa-plus mr-1"></i> Add Contact</a>
+            }
+            else
+            {
+                <a style="margin-left:890px; height:40px;" href="/Contact/UpdateContact/2" class="btn btn-primary"><i class="fa-solid fa-pen mr-1"></i> Edit Contact</a>
+            }
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <div class="d-flex">
+                            <ul class="list-group col-lg-6">
+                                <li class="list-group-item"><i class="fa-solid fa-location-dot text-primary mr-3"></i> @Model.Location</li>
+                                <li class="list-group-item"><i class="fa-solid fa-phone text-primary mr-3"></i> @Model.Phone</li>
+                                <li class="list-group-item"><i class="fa-solid fa-envelope text-primary mr-3"></i> @Model.Mail</li>
+                            </ul>
+                            <div class="col-lg-6">
+                                <div class="d-flex mr-5">
+                                    <i class="fa-solid fa-bookmark text-primary fs-5 ml-2 mt-4 mr-2"></i>
+                                    <p class="mt-3">@Model.FooterDescription</p>
+                                </div>
+                            </div>
+                        </div>
+                        <br />
+                        @Html.Raw(Model.LocationIframe)
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

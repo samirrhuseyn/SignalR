@@ -1,6 +1,8 @@
 ﻿using Microsoft.AspNetCore.Http;
 using Microsoft.AspNetCore.Mvc;
 using SignalR.BusinessLayer.Abstract;
+using SignalR.DtoLayer.MenuTableDto;
+using SignalR.EntityLayer.Entities;
 
 namespace SiqnalRApi.Controllers
 {
@@ -22,9 +24,28 @@ namespace SiqnalRApi.Controllers
         }
 
         [HttpGet("MenuTableCount")]
-        public ActionResult MenuTableCount() 
+        public IActionResult MenuTableCount()
         {
             return Ok(_menuTableService.MenuTableCount());
+        }
+
+        [HttpPost]
+        public IActionResult CreateTable(CreateMenuTableDto createMenuTableDto)
+        {
+            _menuTableService.TAdd(new MenuTable
+            {
+                Name = createMenuTableDto.Name,
+                Status = false
+            });
+            return Ok("Addition successfuly");
+        }
+
+        [HttpDelete("{id}")]
+        public IActionResult DeleteTable(int id)
+        {
+            var value = _menuTableService.TGetByID(id);
+            _menuTableService.TDelete(value);
+            return Ok("Deletion successfuly");
         }
     }
 }
