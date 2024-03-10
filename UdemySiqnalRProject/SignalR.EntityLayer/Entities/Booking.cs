@@ -1,4 +1,6 @@
-﻿namespace SiqnalR.EntityLayer.Entities
+﻿using System.ComponentModel.DataAnnotations.Schema;
+
+namespace SiqnalR.EntityLayer.Entities
 {
     public class Booking
     {
@@ -7,6 +9,6 @@
         public string Phone { get; set; }
         public string Mail { get; set; }
         public string PersonCount { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
     }
 }

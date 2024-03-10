@@ -19,7 +19,7 @@ namespace SignalR.DataAccessLayer.EntityFramework
         public int ActiveOrderCount()
         {
             using var context = new SignalRContext();
-            return context.Orders.Where(x => x.Description == "Customer at the table").Count();
+            return context.Orders.Where(x => x.Description == "Custumer at the table").Count();
         }
 
         public decimal LastOrderPrice()

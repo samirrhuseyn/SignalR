@@ -34,9 +34,8 @@
                                                     <th scope="col">Name</th>
                                                     <th scope="col">Phone</th>
                                                     <th scope="col">Person Count</th>
-                                                    <th scope="col">Status</th>
-                                                    <th scope="col">Delete</th>
-                                                    <th scope="col">Update</th>
+                                                    <th scope="col">Date</th>
+                                                    <th scope="col">Actions</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>`
@@ -45,9 +44,11 @@
                                       <td>${item.name}</td>
                                       <td>${item.phone}</td>
                                       <td>${item.personCount}</td>
-                                      <td>${"Booking received"}</td>
-                                      <td><a href="/Booking/DeleteBooking/${item.bookingID}" class="btn btn-outline-danger">Delete</a></td>
-                                      <td><a href="/Booking/UpdateBooking/${item.bookingID}" class="btn btn-outline-success">Update</a></td>
+                                      <td>${item.date}</td>
+                                      <td>
+                                          <a href="/Booking/DeleteBooking/${item.bookingID}" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
+                                          <a href="/Booking/UpdateBooking/${item.bookingID}" class="btn btn-outline-success"><i class="fa-solid fa-pen"></i></a>
+                                      </td>
                                       </tr>`
                     });
                     tablehtml += "</tbody></table>"

@@ -6,40 +6,50 @@
 }
 
 <div class="content">
-	<div class="container-fluid">
-		<div class="d-flex">
-			<h4 class="page-title">Categories</h4>
-			<a style="margin-left:890px; height:40px;" href="/Category/CreateCategory" class="btn btn-primary"><i class="fa-solid fa-plus mr-1"></i> Add Category</a>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="card-body">
-						<table class="table mt-3">
-							<thead>
-								<tr>
-									<th scope="col">Category Name</th>
-									<th scope="col">Status</th>
-									<th scope="col">Delete</th>
-									<th scope="col">Update</th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach(var item in Model)
-								{
-									<tr>
-										<td>@item.CategoryName</td>
-										<td>@item.Status</td>
-										<td><a href="/Category/DeleteCategory/@item.CategoryID" class="btn btn-outline-danger">Delete</a></td>
-										<td><a href="/Category/UpdateCategory/@item.CategoryID" class="btn btn-outline-success">Update</a></td>
-									</tr>
-								}
-								
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+    <div class="container-fluid">
+        <div class="d-flex">
+            <h4 class="page-title">Categories</h4>
+            <a style="margin-left:890px; height:40px;" href="/Category/CreateCategory" class="btn btn-primary"><i class="fa-solid fa-plus mr-1"></i> Add Category</a>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Category Name</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td>@item.CategoryName</td>
+                                        <td>
+                                            @if (item.Status)
+                                            {
+                                                <a href="/Category/FalseStatus/@item.CategoryID"><span class="badge badge-primary">Active</span></a>
+                                            }
+                                            else
+                                            {
+                                                <a href="/Category/ActiveStatus/@item.CategoryID"><span class="badge badge-danger">Passive</span></a>
+                                            }
+                                        </td>
+                                        <td>
+                                            <a href="/Category/DeleteCategory/@item.CategoryID" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
+                                            <a href="/Category/UpdateCategory/@item.CategoryID" class="btn btn-outline-success"><i class="fa-solid fa-pen"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

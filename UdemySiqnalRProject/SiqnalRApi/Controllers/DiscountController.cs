@@ -25,7 +25,14 @@ namespace SiqnalRApi.Controllers
         [HttpGet]
         public IActionResult DiscountList()
         {
-            var value = _mapper.Map<List<ResultDiscountDto>>(_discountService.TGetListAll());
+            var value = _discountService.TGetListAll();
+            return Ok(value);
+        }
+
+        [HttpGet("DiscountListUI")]
+        public IActionResult DiscountListUI()
+        {
+            var value = _discountService.TGetListAll().Where(x => x.Status is true);
             return Ok(value);
         }
 
@@ -37,7 +44,8 @@ namespace SiqnalRApi.Controllers
                 Title = createDiscountDto.Title,
                 Amount = createDiscountDto.Amount,
                 Description = createDiscountDto.Description,
-                ImageURL = createDiscountDto.ImageURL
+                ImageURL = createDiscountDto.ImageURL,
+                Status = true
             });
             return Ok("Discount section added successfully!");
         }
@@ -59,7 +67,8 @@ namespace SiqnalRApi.Controllers
                 Title = updateDiscountDto.Title,
                 Amount = updateDiscountDto.Amount,
                 Description = updateDiscountDto.Description,
-                ImageURL = updateDiscountDto.ImageURL
+                ImageURL = updateDiscountDto.ImageURL,
+                Status = updateDiscountDto.Status
             });
             return Ok("Discount section has been successfully updated!");
         }

@@ -24,7 +24,14 @@ namespace SiqnalRApi.Controllers
         [HttpGet]
         public IActionResult TestimonialList()
         {
-            var value = _mapper.Map<List<ResultTestimonialDto>>(_testimonialService.TGetListAll());
+            var value = _testimonialService.TGetListAll();
+            return Ok(value);
+        }
+
+        [HttpGet("TestimonialListUI")]
+        public IActionResult TestimonialListUI()
+        {
+            var value = _testimonialService.TGetListAll().Where(x=>x.Status is true);
             return Ok(value);
         }
 

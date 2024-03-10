@@ -22,8 +22,7 @@
 									<th scope="col">Price</th>
 									<th scope="col">Category</th>
 									<th scope="col">Status</th>
-									<th scope="col">Delete</th>
-									<th scope="col">Update</th>
+									<th scope="col">Actions</th>
 								</tr>
 							</thead>
 							<tbody>
@@ -33,9 +32,20 @@
 										<td>@item.ProductName</td>
 										<td>@item.Price</td>
 										<td>@item.CategoryName</td>
-										<td>@item.ProductStatus</td>
-										<td><a href="/Product/DeleteProduct/@item.ProductId" class="btn btn-outline-danger">Delete</a></td>
-										<td><a href="/Product/UpdateProduct/@item.ProductId" class="btn btn-outline-success">Update</a></td>
+										<td>
+											@if (item.ProductStatus)
+											{
+												<a href="/Product/FalseStatus/@item.ProductId"><span class="badge badge-primary">Active</span></a>
+											}
+											else
+											{
+												<a href="/Product/ActiveStatus/@item.ProductId"><span class="badge badge-danger">Passive</span></a>
+											}
+										</td>
+										<td>
+											<a href="/Product/DeleteProduct/@item.ProductId" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
+											<a href="/Product/UpdateProduct/@item.ProductId" class="btn btn-outline-success"><i class="fa-solid fa-pen"></i></a>
+										</td>
 									</tr>
 								}
 

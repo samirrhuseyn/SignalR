@@ -16,7 +16,7 @@ namespace SiqnalRWebUI.ViewComponents.HomePage
         public async Task<IViewComponentResult> InvokeAsync()
         {
             var client = _httpClientFactory.CreateClient();
-            var responseMessage = await client.GetAsync("http://localhost:5056/api/Testimonial");
+            var responseMessage = await client.GetAsync("http://localhost:5056/api/Testimonial/TestimonialListUI");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();

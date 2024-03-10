@@ -6,38 +6,49 @@
 }
 
 <div class="content">
-	<div class="container-fluid">
-		<h4 class="page-title">Testimonials</h4>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="card-body">
-						<table class="table mt-3">
-							<thead>
+    <div class="container-fluid">
+        <div class="d-flex">
+            <h4 class="page-title">Testimonials</h4>
+            <a style="margin-left:850px; height:40px;" href="/Testimonial/CreateTestimonial" class="btn btn-primary"><i class="fa-solid fa-plus mr-1"></i> Add Testimonial</a>
+        </div>        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table mt-3">
+                            <thead>
                                 <tr>
-									<th scope="col">Name</th>
-									<th scope="col">Status</th>
-									<th scope="col">Delete</th>
-									<th scope="col">Update</th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach(var item in Model)
-								{
-									<tr>
-										<td><img src="@item.ImamgeURL" width="50" style="border-radius:50%;"> @item.Name</td>
-										<td>@item.Status</td>
-										<td><a href="/Testimonial/DeleteTestimonial/@item.TestimonialID" class="btn btn-outline-danger">Delete</a></td>
-										<td><a href="/Testimonial/UpdateTestimonial/@item.TestimonialID" class="btn btn-outline-success">Update</a></td>
-									</tr>
-								}
-								
-							</tbody>
-						</table>
-						<a href="/Testimonial/CreateTestimonial" class="btn btn-outline-primary">+ Add Testimonial</a>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                                    <th scope="col">Name</th>
+                                    <th scope="col">Status</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td><img src="@item.ImamgeURL" width="50" style="border-radius:50%;"> @item.Name</td>
+                                        <td>
+                                            @if (item.Status)
+                                            {
+                                                <a href="/Testimonial/FalseStatus/@item.TestimonialID"><span class="badge badge-primary">Active</span></a>
+                                            }
+                                            else
+                                            {
+                                                <a href="/Testimonial/ActiveStatus/@item.TestimonialID"><span class="badge badge-danger">Passive</span></a>
+                                            }
+                                        </td>
+                                        <td>
+                                            <a href="/Testimonial/DeleteTestimonial/@item.TestimonialID" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
+                                            <a href="/Testimonial/UpdateTestimonial/@item.TestimonialID" class="btn btn-outline-success"><i class="fa-solid fa-pen"></i></a>
+                                        </td>
+                                    </tr>
+                                }
+
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>

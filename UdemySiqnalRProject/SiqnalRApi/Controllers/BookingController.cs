@@ -35,7 +35,7 @@ namespace SiqnalRApi.Controllers
             _bookingService.TAdd(new Booking
             {
                 Name = createBookingDto.Name,
-                Date = createBookingDto.Date,
+                Date = createBookingDto.Date.ToString("MMMM dd, yyyy HH:mm"),
                 Mail = createBookingDto.Mail,
                 PersonCount = createBookingDto.PersonCount,
                 Phone = createBookingDto.Phone

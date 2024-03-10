@@ -22,7 +22,7 @@ namespace SiqnalRApi.Controllers
         [HttpGet]
         public IActionResult GetSlider()
         {
-            var value = _mapper.Map<List<ResultSlideDto>>(_sliderService.TGetListAll());
+            var value = _sliderService.TGetListAll();
             return Ok(value);
         }
     }

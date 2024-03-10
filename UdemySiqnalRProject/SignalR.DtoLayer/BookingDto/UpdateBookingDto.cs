@@ -13,6 +13,6 @@ namespace SignalR.DtoLayer.BookingDto
         public string Phone { get; set; }
         public string Mail { get; set; }
         public string PersonCount { get; set; }
-        public DateTime Date { get; set; }
+        public string Date { get; set; }
     }
 }

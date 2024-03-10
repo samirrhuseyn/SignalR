@@ -7,7 +7,10 @@
 
 <div class="content">
 	<div class="container-fluid">
-		<h4 class="page-title">Discounts</h4>
+		<div class="d-flex">
+			<h4 class="page-title">Discounts</h4>
+			<a style="margin-left:890px; height:40px;" href="/Discount/CreateDiscount" class="btn btn-primary"><i class="fa-solid fa-plus mr-1"></i> Add Discount</a>
+		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card">
@@ -18,25 +21,34 @@
 									<th scope="col">Title</th>
 									<th scope="col">Amount</th>
 									<th scope="col">Status</th>
-									<th scope="col">Delete</th>
-									<th scope="col">Update</th>
+									<th scope="col">Action</th>
 								</tr>
 							</thead>
 							<tbody>
 								@foreach (var item in Model)
 								{
-									<tr>
-										<td>@item.Title</td>
-										<td>@item.Amount%</td>
-										<td><a href="/Discount/#Discount/@item.DiscountID" class="btn btn-outline-warning">Change</a></td>
-										<td><a href="/Discount/DeleteDiscount/@item.DiscountID" class="btn btn-outline-danger">Delete</a></td>
-										<td><a href="/Discount/UpdateDiscount/@item.DiscountID" class="btn btn-outline-success">Update</a></td>
+                                    <tr>
+                                        <td>@item.Title</td>
+                                        <td>@item.Amount%</td>
+										<td>
+											@if (item.Status)
+											{
+												<a href="/Discount/FalseStatus/@item.DiscountID"><span class="badge badge-primary">Active</span></a>
+											}
+											else
+											{
+												<a href="/Discount/ActiveStatus/@item.DiscountID"><span class="badge badge-danger">Passive</span></a>
+											}
+										</td>
+										<td>
+											<a href="/Discount/DeleteDiscount/@item.DiscountID" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
+											<a href="/Discount/UpdateDiscount/@item.DiscountID" class="btn btn-outline-success"><i class="fa-solid fa-pen"></i></a>
+										</td>
 									</tr>
 								}
 
 							</tbody>
 						</table>
-						<a href="/Discount/CreateDiscount" class="btn btn-outline-primary">+ Add Discount</a>
 					</div>
 				</div>
 			</div>

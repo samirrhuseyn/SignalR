@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SignalR.DataAccessLayer.Concrete;
+using SiqnalR.EntityLayer.Entities;
 using SiqnalRWebUI.Dtos.CategoryDtos;
 using SiqnalRWebUI.Dtos.NotificationDtos;
 using System.Text;
@@ -88,6 +90,26 @@ namespace SiqnalRWebUI.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+
+        public IActionResult FalseStatus(int id)
+        {
+            var context = new SignalRContext();
+            var value = context.Set<Category>().Find(id);
+            value.Status = false;
+            context.Update(value);
+            context.SaveChanges();
+            return RedirectToAction("Index");
+        }
+
+        public IActionResult ActiveStatus(int id)
+        {
+            var context = new SignalRContext();
+            var value = context.Set<Category>().Find(id);
+            value.Status = true;
+            context.Update(value);
+            context.SaveChanges();
+            return RedirectToAction("Index");
         }
     }
 }

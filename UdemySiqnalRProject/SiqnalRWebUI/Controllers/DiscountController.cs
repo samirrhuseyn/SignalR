@@ -1,5 +1,7 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SignalR.DataAccessLayer.Concrete;
+using SiqnalR.EntityLayer.Entities;
 using SiqnalRWebUI.Dtos.DiscountDto;
 using System.Text;
 
@@ -36,6 +38,7 @@ namespace SiqnalRWebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> CreateDiscount(CreateDiscountDto createDiscountDto)
         {
+            createDiscountDto.Status = true;
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createDiscountDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -85,5 +88,25 @@ namespace SiqnalRWebUI.Controllers
             }
             return View();
         }
-    }
+
+		public IActionResult FalseStatus(int id)
+		{
+			var context = new SignalRContext();
+			var value = context.Set<Discount>().Find(id);
+			value.Status = false;
+			context.Update(value);
+			context.SaveChanges();
+			return RedirectToAction("Index");
+		}
+
+		public IActionResult ActiveStatus(int id)
+		{
+			var context = new SignalRContext();
+			var value = context.Set<Discount>().Find(id);
+			value.Status = true;
+			context.Update(value);
+			context.SaveChanges();
+			return RedirectToAction("Index");
+		}
+	}
 }
