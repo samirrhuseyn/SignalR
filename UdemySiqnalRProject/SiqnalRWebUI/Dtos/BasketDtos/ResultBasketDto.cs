@@ -15,5 +15,6 @@ namespace SiqnalRWebUI.Dtos.BasketDto
         public int MenuTableID { get; set; }
         public string ProductName { get; set; }
         public decimal ProductPrice { get; set; }
+        public string MenuTableName { get; set; }
     }
 }

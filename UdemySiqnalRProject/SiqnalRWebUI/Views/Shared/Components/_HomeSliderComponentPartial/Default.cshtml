@@ -1,11 +1,16 @@
 ﻿@model List<SiqnalRWebUI.Dtos.SlideDtos.ResultSlideDto>
+@{
+    int count = -1;
+}
 <section class="slider_section ">
     <div id="customCarousel1" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             @foreach (var item in Model)
             {
-                @if (item.DataValue == 0)
+                count++;
+                @if (count == 0)
                 {
+                    
                     <div class="carousel-item active">
                         <div class="container ">
                             <div class="row">

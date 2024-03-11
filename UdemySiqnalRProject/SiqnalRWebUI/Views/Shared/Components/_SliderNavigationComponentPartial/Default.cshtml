@@ -1,15 +1,17 @@
 ﻿@model List<SiqnalRWebUI.Dtos.SlideDtos.ResultSlideDto>
+@{int count = -1;}
 <div class="container">
     <ol class="carousel-indicators">
         @foreach (var item in Model)
         {
-            @if (item.DataValue == 0)
+            count++;
+            @if (count == 0)
             {
-                <li data-target="#customCarousel1" data-slide-to="@item.DataValue" class="active"></li>
+                <li data-target="#customCarousel1" data-slide-to="@count" class="active"></li>
             }
             else
             {
-                <li data-target="#customCarousel1" data-slide-to="@item.DataValue"></li>
+                <li data-target="#customCarousel1" data-slide-to="@count"></li>
             }
         }
     </ol>

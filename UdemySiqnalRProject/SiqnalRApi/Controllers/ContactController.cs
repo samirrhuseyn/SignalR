@@ -37,7 +37,9 @@ namespace SiqnalRApi.Controllers
                 FooterDescription = createContactDto.FooterDescription,
                 Location = createContactDto.Location,
                 Mail = createContactDto.Mail,
-                Phone = createContactDto.Phone
+                Phone = createContactDto.Phone,
+                LocationIframe = createContactDto.LocationIframe,
+                ProjectTitle = createContactDto.ProjectTitle
             });
             return Ok("Contact section added successfully!");
         }
@@ -59,7 +61,9 @@ namespace SiqnalRApi.Controllers
                 FooterDescription = updateContactDto.FooterDescription,
                 Location = updateContactDto.Location,
                 Mail = updateContactDto.Mail,
-                Phone = updateContactDto.Phone
+                Phone = updateContactDto.Phone,
+                ProjectTitle= updateContactDto.ProjectTitle,
+                LocationIframe = updateContactDto.LocationIframe
             });
             return Ok("Contact section has been successfully updated!");
         }

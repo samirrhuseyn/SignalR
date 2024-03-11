@@ -29,6 +29,22 @@ namespace SiqnalRApi.Controllers
             return Ok(_basketService.TGetBasketByTableName(id));
         }
 
+        [HttpGet("GetBasketByMenuTableGroupBy")]
+        public IActionResult GetBasketByMenuTableGroupBy()
+        {
+            using var context = new SignalRContext();
+            var values = context.Baskets.Include(x=>x.MenuTables).Select(y=> new ResultBasketListByTable
+            {
+                MenuTableID = y.MenuTableID,
+                BasketID = y.BasketID,
+                Count = y.Count,
+                MenuTableName = y.MenuTables.Name,
+                ProductID = y.ProductID,
+                TotalPrice = y.TotalPrice,
+            }).ToList().DistinctBy(x=>x.MenuTableName);
+            return Ok(values);
+        }
+
         [HttpGet("BasketListByMenuTableWithProductName")]
         public IActionResult BasketListByMenuTableWithProductName(int id)
         {

@@ -4,9 +4,8 @@
     int count = 0;
     decimal basketTotalPrice = 0;
     decimal vat = 0;
-    decimal totalpricewithvat = 0;
-}
 
+}
 <!DOCTYPE html>
 <html>
 
@@ -22,11 +21,7 @@
         <header class="header_section">
             <div class="container">
                 <nav class="navbar navbar-expand-lg custom_nav-container ">
-                    <a class="navbar-brand" href="/Home/Index">
-                        <span>
-                            Restaurant Project
-                        </span>
-                    </a>
+                    @await Component.InvokeAsync("_UILayoutProjectTitleComponentPartial")
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class=""> </span>
@@ -41,7 +36,7 @@
                                 <a class="nav-link" href="/Menu/Index/">Menu <span class="sr-only">(current)</span> </a>
                             </li>
                             <li class="nav-item">
-                                <a class="nav-link" href="about.html">About</a>
+                                <a class="nav-link" href="/About/IndexUI">About</a>
                             </li>
                             <li class="nav-item">
                                 <a class="nav-link" href="/BookATable/Index">Book Table</a>
@@ -51,7 +46,7 @@
                             <a href="" class="user_link">
                                 <i class="fa fa-user" aria-hidden="true"></i>
                             </a>
-                            <a class="cart_link" href="/Baskets/Index">
+                            <a class="cart_link" href="/Baskets/MenuTableList">
                                 <svg version="1.1" id="Capa_1" xmlns="http://www.w3.org/2000/svg" xmlns:xlink="http://www.w3.org/1999/xlink" x="0px" y="0px" viewBox="0 0 456.029 456.029" style="enable-background:new 0 0 456.029 456.029;" xml:space="preserve">
                                 <g>
                                 <g>
@@ -152,7 +147,6 @@
                         {
                             basketTotalPrice = Model.Sum(x => x.TotalPrice);
                             vat = (basketTotalPrice * 18) / 100;
-                            totalpricewithvat = vat + basketTotalPrice;
                             count++;
                             <tr>
                                 <td class="align-middle">@count</td>
@@ -184,17 +178,10 @@
                             <h6>Total Amount:</h6>
                             <h6><span id="totalprice">@basketTotalPrice₼</span></h6>
                         </div>
-                        <div style="padding:5px;" class="d-flex justify-content-between">
-                            <h6 class="font-weight-medium">VAT Amount:</h6>
-                            <h6 class="font-weight-medium" id="vat">@vat₼</h6>
-                        </div>
                     </div>
                     <br />
                     <div class="pt-2">
-                        <div style="padding:5px;" class="d-flex justify-content-between">
-                            <h5>Total Amount:</h5>
-                            <h5><span id="totalpricewithvat">@totalpricewithvat₼</span></h5>
-                        </div>
+                       
                         <button id="btnchecked" class="btn btn-block btn-success font-weight-bold my-3">Complete the Payment</button>
                     </div>
                 </div>
@@ -211,5 +198,8 @@
 
 </body>
 
-</html>
+</html>ecimal totalpricewithvat = 0;
+}
+
+
 
