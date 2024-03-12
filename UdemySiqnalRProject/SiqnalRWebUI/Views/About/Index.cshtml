@@ -7,18 +7,17 @@
 	var context = new SignalRContext();
 	var value = context.Abouts.Count();
 }
-
 <div class="content">
 	<div class="container-fluid">
 		<div class="d-flex">
 			<h4 class="page-title">About Us</h4>
 			@if(value is not 1)
 			{
-				<a style="margin-left:890px; height:40px;" href="/About/CreateAbout" class="btn btn-primary"><i class="fa-solid fa-plus mr-1"></i> Add About</a>
+				<a style="height:40px;" href="/About/CreateAbout" class="btn btn-primary"><i class="fa-solid fa-plus mr-1"></i> Add About</a>
 			}
 			else
 			{
-				<a style="margin-left:890px; height:40px;" href="/About/UpdateAbout/5" class="btn btn-primary"><i class="fa-solid fa-pen mr-1"></i> Edit About</a>
+				<a style="height:40px;" href="/About/UpdateAbout/5" class="btn btn-primary"><i class="fa-solid fa-pen mr-1"></i> Edit About</a>
 			}
 		</div>
 		<div class="row">

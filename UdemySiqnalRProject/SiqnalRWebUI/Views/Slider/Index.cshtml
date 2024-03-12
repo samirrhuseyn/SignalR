@@ -3,12 +3,11 @@
     ViewData["Title"] = "Slider";
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
-
 <div class="content">
     <div class="container-fluid">
         <div class="d-flex">
             <h4 class="page-title">Slider</h4>
-            <a style="margin-left:950px; height:40px;" href="/Slider/CreateSlider" class="btn btn-primary"><i class="fa-solid fa-plus mr-1"></i> Add Slider</a>
+            <a style="height:40px;" href="/Slider/CreateSlider" class="btn btn-primary"><i class="fa-solid fa-plus mr-1"></i> Add Slider</a>
         </div>
         <div class="row">
             @foreach (var item in Model)
@@ -18,16 +17,16 @@
                         <div class="card-body">
                             <h5 class="card-title">@item.Title</h5>
                             <p class="card-text">@item.Description</p>
-                            <div class="d-flex">
+                            <div class="row">
                                 <a href="/Slider/DeleteSlider/@item.SliderID" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
                                 <a href="/Slider/UpdateSlider/@item.SliderID" class="btn btn-outline-primary ml-2"><i class="fa-solid fa-pen"></i></a>
                                 @if (item.Status)
                                 {
-                                    <a href="/Slider/FalseStatus/@item.SliderID"><span style="margin-left:370px;" class="badge badge-primary mt-3">Active</span></a>
+                                    <a href="/Slider/FalseStatus/@item.SliderID"><span  class="badge badge-primary">Active</span></a>
                                 }
                                 else
                                 {
-                                    <a href="/Slider/ActiveStatus/@item.SliderID"><span style="margin-left:370px;" class="badge badge-danger mt-3">Passive</span></a>
+                                    <a href="/Slider/ActiveStatus/@item.SliderID"><span class="badge badge-danger">Passive</span></a>
                                 }
                             </div>
                         </div>

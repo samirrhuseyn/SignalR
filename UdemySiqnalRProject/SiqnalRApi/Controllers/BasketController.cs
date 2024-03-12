@@ -69,7 +69,7 @@ namespace SiqnalRApi.Controllers
             _basketService.TAdd(new Basket()
             {
                 Count = 1,
-                MenuTableID = 4,
+                MenuTableID = 6,
                 TotalPrice = 0,
                 ProductID = createBasketDto.ProductID
             });

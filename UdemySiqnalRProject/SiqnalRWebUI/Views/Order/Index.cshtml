@@ -6,14 +6,13 @@
     Layout = "~/Views/AdminLayout/Index.cshtml";
 
 }
-
 <div class="content">
     <div class="container-fluid">
         <div class="d-flex">
             <h4 class="page-title">Orders</h4>
-            <div class="d-flex">
-                <a style="margin-left:800px; height:40px;" href="/Order/CreateOrder" class="btn btn-primary"><i class="fa-solid fa-file-circle-plus mr-1"></i> Add Order</a>
-                <a style="margin-left:5px; height:40px;" href="/OrderDetail/CreateDetail" class="btn btn-primary"><i class="fa-solid fa-plus mr-1"></i> Add Detail</a>
+            <div class="d-flex buttongroup">
+                <a style="height:40px;" href="/Order/CreateOrder" class="btn btn-primary"><i class="fa-solid fa-file-circle-plus mr-1"></i> Add Order</a>
+                <a style="height:40px;" href="/OrderDetail/CreateDetail" class="ml-2 btn btn-primary"><i class="fa-solid fa-plus mr-1"></i> Add Detail</a>
             </div>
         </div>
         <div class="row">

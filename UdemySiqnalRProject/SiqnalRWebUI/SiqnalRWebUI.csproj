@@ -12,6 +12,7 @@
 
   <ItemGroup>
     <ProjectReference Include="..\SignalR.DataAccessLayer\SignalR.DataAccessLayer.csproj" />
+    <ProjectReference Include="..\SiqnalRApi\SiqnalRApi.csproj" />
   </ItemGroup>
 
 </Project>

@@ -7,7 +7,7 @@
 <html>
 
 @await Component.InvokeAsync("_UILayoutHeadComponentPartial")
-
+<link href="~/feane-1.0.0/css/phonemedia.css" rel="stylesheet" />
 <body class="sub_page">
 
     <div class="hero_area">
@@ -18,7 +18,11 @@
         <header class="header_section">
             <div class="container">
                 <nav class="navbar navbar-expand-lg custom_nav-container ">
-                    @await Component.InvokeAsync("_UILayoutProjectTitleComponentPartial")
+                    <a class="navbar-brand" href="/Home/Index">
+                        <span>
+                            @await Component.InvokeAsync("_UILayoutProjectTitleComponentPartial")
+                        </span>
+                    </a>
 
                     <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
                         <span class=""> </span>
@@ -122,18 +126,29 @@
                     <span class="breadcrumb-item active">Tables</span>
                 </nav>
             </div>
+            
         </div>
     </div>
+    <div class="heading_container mb-5 mt-3">
+        <h2>
+            Tables in Basket
+        </h2>
+    </div>
+    
     <div class="container-fluid">
         <div class="row px-xl-5">
-            <div style="margin-left:350px;" class="col-6">
-                <ul class="list-group">
-                    @foreach(var item in Model)
-                    {
-                        <li class="list-group-item"><a href="/Baskets/Index/@item.MenuTableID">@item.MenuTableName</a></li>
-                    }
-                </ul>
-            </div>
+            @foreach (var item in Model)
+            {
+                <div class="col-4">
+                    <div class="card">
+                        <div class="card-body">
+                            <a href="/Baskets/Index/@item.MenuTableID" class="text-dark mt-1"><i class="fa-solid fa-circle-chevron-right mr-3"></i>@item.MenuTableName</a>
+                        </div>
+                    </div>
+                </div>
+            }
+
+
         </div>
     </div>
     <br />

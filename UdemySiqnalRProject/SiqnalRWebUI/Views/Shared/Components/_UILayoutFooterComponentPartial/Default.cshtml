@@ -11,8 +11,9 @@
             </div>
             <div class="col-md-4 footer-col">
                 <div class="footer_detail">
-                    
-                    @await Component.InvokeAsync("_UILayoutFooterTitleComponentPartial")
+                    <a href="/Home/Index" class="footer-logo">
+                        @await Component.InvokeAsync("_UILayoutProjectTitleComponentPartial")
+                    </a>
                     @await Component.InvokeAsync("_UILayoutFooterDescriptionComponentPartial")
                     @await Component.InvokeAsync("_UILayoutFooterSocialComponentPartial")
                 </div>

@@ -6,7 +6,10 @@
 
 <div class="content">
 	<div class="container-fluid">
-		<h4 class="page-title">Social Media Accounts</h4>
+		<div class="d-flex">
+			<h4 class="page-title">Socials</h4>
+			<a style="height:40px;" href="/SocialMedia/CreateSocialMedia" class="btn btn-primary"><i class="fa-solid fa-plus mr-1"></i> Add Social</a>
+		</div>
 		<div class="row">
 			<div class="col-md-12">
 				<div class="card">
@@ -23,7 +26,7 @@
 								@foreach (var item in Model)
 								{
 									<tr>
-										<td><a href="@item.Url"><i class="la la-@item.Icon" style="font-size:20px; margin-right:10px;"></i> @item.Title</a></td>
+										<td><a href="@item.Url"><i class="fa-brands fa-@item.Icon" style="font-size:20px; margin-right:10px;"></i> @item.Title</a></td>
 										<td><a href="/SocialMedia/DeleteSocialMedia/@item.SocialMediaID" class="btn btn-outline-danger">Delete</a></td>
 										<td><a href="/SocialMedia/UpdateSocialMedia/@item.SocialMediaID" class="btn btn-outline-success">Update</a></td>
 									</tr>
@@ -31,7 +34,6 @@
 
 							</tbody>
 						</table>
-						<a href="/SocialMedia/CreateSocialMedia" class="btn btn-outline-primary">+ Add Social Media Account</a>
 					</div>
 				</div>
 			</div>
