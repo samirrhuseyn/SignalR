@@ -4,6 +4,7 @@
         margin-left: 600px;
     }
 
+
     .card .card-body .text-dark {
         font-size: 20px;
     }
@@ -34,8 +35,9 @@
             margin-left: 120px;
         }
 
-        .card .card-body a {
-            font-size: 16px;
+
+        .card .card-body .text-dark {
+            font-size: 15px;
         }
 
         .container-fluid .row .rightgism {

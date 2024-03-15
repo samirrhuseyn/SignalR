@@ -5,39 +5,40 @@
 }
 
 <div class="content">
-	<div class="container-fluid">
-		<div class="d-flex">
-			<h4 class="page-title">Socials</h4>
-			<a style="height:40px;" href="/SocialMedia/CreateSocialMedia" class="btn btn-primary"><i class="fa-solid fa-plus mr-1"></i> Add Social</a>
-		</div>
-		<div class="row">
-			<div class="col-md-12">
-				<div class="card">
-					<div class="card-body">
-						<table class="table mt-3">
-							<thead>
-								<tr>
-									<th scope="col">Title</th>
-									<th scope="col">Delete</th>
-									<th scope="col">Update</th>
-								</tr>
-							</thead>
-							<tbody>
-								@foreach (var item in Model)
-								{
-									<tr>
-										<td><a href="@item.Url"><i class="fa-brands fa-@item.Icon" style="font-size:20px; margin-right:10px;"></i> @item.Title</a></td>
-										<td><a href="/SocialMedia/DeleteSocialMedia/@item.SocialMediaID" class="btn btn-outline-danger">Delete</a></td>
-										<td><a href="/SocialMedia/UpdateSocialMedia/@item.SocialMediaID" class="btn btn-outline-success">Update</a></td>
-									</tr>
-								}
+    <div class="container-fluid">
+        <div class="d-flex">
+            <h4 class="page-title">Socials</h4>
+            <a style="height:40px;" href="/SocialMedia/CreateSocialMedia" class="btn btn-primary"><i class="fa-solid fa-plus mr-1"></i> Add Social</a>
+        </div>
+        <div class="row">
+            <div class="col-md-12">
+                <div class="card">
+                    <div class="card-body">
+                        <table class="table mt-3">
+                            <thead>
+                                <tr>
+                                    <th scope="col">Title</th>
+                                    <th scope="col">Actions</th>
+                                </tr>
+                            </thead>
+                            <tbody>
+                                @foreach (var item in Model)
+                                {
+                                    <tr>
+                                        <td><a href="@item.Url"><i class="fa-brands fa-@item.Icon" style="font-size:20px; margin-right:10px;"></i> @item.Title</a></td>
+                                        <td>
+                                            <a href="/SocialMedia/DeleteSocialMedia/@item.SocialMediaID" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
+                                            <a href="/SocialMedia/UpdateSocialMedia/@item.SocialMediaID" class="btn btn-outline-success"><i class="fa-solid fa-pen"></i></a>
+                                        </td>
+                                    </tr>
+                                }
 
-							</tbody>
-						</table>
-					</div>
-				</div>
-			</div>
-		</div>
-	</div>
+                            </tbody>
+                        </table>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
 </div>
 

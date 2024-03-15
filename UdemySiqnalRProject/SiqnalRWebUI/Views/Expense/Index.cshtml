@@ -1,0 +1,38 @@
+﻿@model List<SiqnalRWebUI.Dtos.ExpenseDtos.ResultExpenseDto>
+@{
+    ViewData["Title"] = "Expenses";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+<div class="content">
+    <div class="container-fluid">
+        <div class="d-flex">
+            <h4 class="page-title">Expenses</h4>
+            <a style="height:40px;" href="/Expense/CreateExpense" class="btn btn-primary"><i class="fa-solid fa-plus mr-1"></i> Add Expense</a>
+        </div>
+        <div class="card">
+            <div class="card-body">
+                <table class="table table-striped mt-3">
+                    <thead>
+                        <tr>
+                            <th scope="col">Amount</th>
+                            <th scope="col">Description</th>
+                            <th scope="col">Date and Time</th>
+                        </tr>
+                    </thead>
+                    <tbody>
+                        @foreach (var item in Model)
+                        {
+                            <tr>
+                                <td>@item.ExpenseAmount <i class="fa-solid fa-manat-sign"></i></td>
+                                <td>@item.ExpenseDescription</td>
+                                <td>@item.ExpenseDate.ToString("MMMM dd, yyyy HH:mm")</td>
+                            </tr>
+                        }
+
+                    </tbody>
+                </table>
+            </div>
+        </div>
+
+    </div>
+</div>

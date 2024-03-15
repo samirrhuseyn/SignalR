@@ -51,8 +51,8 @@
     </script>
 
     <div class="logo-header">
-        <a href="index.html" class="logo">
-            SignalR Admin
+        <a href="/Statistic/Index" class="logo">
+            @await Component.InvokeAsync("_UILayoutProjectTitleComponentPartial")
         </a>
         <button class="navbar-toggler sidenav-toggler ml-auto" type="button" data-toggle="collapse" data-target="collapse" aria-controls="sidebar" aria-expanded="false" aria-label="Toggle navigation">
             <span class="navbar-toggler-icon"></span>
@@ -80,6 +80,7 @@
                     <div class="dropdown-menu" aria-labelledby="navbarDropdown">
                         <a class="dropdown-item" href="/Slider/Index">Slider</a>
                         <a class="dropdown-item" href="/SocialMedia/Index">Social Media</a>
+                        <a class="dropdown-item" href="#">Add Notification</a>
                         <div class="dropdown-divider"></div>
                         <a class="dropdown-item" href="/Contact/Index">Contact</a>
                     </div>

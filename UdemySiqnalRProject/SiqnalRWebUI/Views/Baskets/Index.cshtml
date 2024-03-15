@@ -149,6 +149,7 @@
                     <tbody class="align-middle">
                         @foreach (var item in Model)
                         {
+                            ViewData["MenuTableID"] = item.MenuTableID;
                             basketTotalPrice = Model.Sum(x => x.TotalPrice);
                             vat = (basketTotalPrice * 18) / 100;
                             count++;
@@ -185,8 +186,7 @@
                     </div>
                     <br />
                     <div class="pt-2">
-                       
-                        <button id="btnchecked" class="btn btn-block btn-success font-weight-bold my-3">Complete the Payment</button>
+                        <a href="/Baskets/DeleteBaskets/@ViewBag.MenuTableID" class="btn btn-block btn-success font-weight-bold my-3">Complete the Payment</a>
                     </div>
                 </div>
             </div>

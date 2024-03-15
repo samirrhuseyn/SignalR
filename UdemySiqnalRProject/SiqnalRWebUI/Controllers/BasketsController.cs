@@ -1,5 +1,6 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SignalR.DataAccessLayer.Concrete;
 using SiqnalRWebUI.Dtos.BasketDto;
 using System.Text;
 
@@ -45,9 +46,18 @@ namespace SiqnalRWebUI.Controllers
             var responseMessage = await client.DeleteAsync($"http://localhost:5056/api/Basket/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction("Index");
+                return RedirectToAction("MenuTableList");
             }
             return NoContent();
+        }
+
+        public IActionResult DeleteBaskets(int id)
+        {
+            var context = new SignalRContext();
+            var value = context.Baskets.Where(x => x.MenuTableID == id);
+            context.BulkDelete(value);
+            context.BulkSaveChanges();
+            return RedirectToAction("MenuTableList");
         }
     }
 }

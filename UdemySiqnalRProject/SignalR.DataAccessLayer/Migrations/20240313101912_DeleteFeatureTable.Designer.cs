@@ -3,6 +3,7 @@ using System;
 using Microsoft.EntityFrameworkCore;
 using Microsoft.EntityFrameworkCore.Infrastructure;
 using Microsoft.EntityFrameworkCore.Metadata;
+using Microsoft.EntityFrameworkCore.Migrations;
 using Microsoft.EntityFrameworkCore.Storage.ValueConversion;
 using SignalR.DataAccessLayer.Concrete;
 
@@ -11,9 +12,10 @@ using SignalR.DataAccessLayer.Concrete;
 namespace SignalR.DataAccessLayer.Migrations
 {
     [DbContext(typeof(SignalRContext))]
-    partial class SignalRContextModelSnapshot : ModelSnapshot
+    [Migration("20240313101912_DeleteFeatureTable")]
+    partial class DeleteFeatureTable
     {
-        protected override void BuildModel(ModelBuilder modelBuilder)
+        protected override void BuildTargetModel(ModelBuilder modelBuilder)
         {
 #pragma warning disable 612, 618
             modelBuilder
@@ -86,29 +88,6 @@ namespace SignalR.DataAccessLayer.Migrations
                     b.HasKey("ContactID");
 
                     b.ToTable("Contacts");
-                });
-
-            modelBuilder.Entity("SignalR.EntityLayer.Entities.Expense", b =>
-                {
-                    b.Property<int>("ExpenseID")
-                        .ValueGeneratedOnAdd()
-                        .HasColumnType("int");
-
-                    SqlServerPropertyBuilderExtensions.UseIdentityColumn(b.Property<int>("ExpenseID"), 1L, 1);
-
-                    b.Property<decimal>("ExpenseAmount")
-                        .HasColumnType("decimal(18,2)");
-
-                    b.Property<DateTime>("ExpenseDate")
-                        .HasColumnType("datetime2");
-
-                    b.Property<string>("ExpenseDescription")
-                        .IsRequired()
-                        .HasColumnType("nvarchar(max)");
-
-                    b.HasKey("ExpenseID");
-
-                    b.ToTable("Expenses");
                 });
 
             modelBuilder.Entity("SignalR.EntityLayer.Entities.MenuTable", b =>

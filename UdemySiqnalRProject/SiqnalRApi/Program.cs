@@ -39,9 +39,6 @@ builder.Services.AddScoped<IContactDal, EfContactDal>();
 builder.Services.AddScoped<IDiscountService, DiscountManager>();
 builder.Services.AddScoped<IDiscountDal, EfDiscountDal>();
 
-builder.Services.AddScoped<IFeatureService, FeatureManager>();
-builder.Services.AddScoped<IFeatureDal, EfFeatureDal>();
-
 builder.Services.AddScoped<IProductService, ProductManager>();
 builder.Services.AddScoped<IProductDal, EfProductDal>();
 
@@ -75,7 +72,8 @@ builder.Services.AddScoped<IBasketService, BasketManager>();
 builder.Services.AddScoped<INotificationDal, EfNotificationDal>();
 builder.Services.AddScoped<INotificationService, NotificationManager>();
 
-
+builder.Services.AddScoped<IExpenseDal, EfExpenseDal>();
+builder.Services.AddScoped<IExpenseService, ExpenseManager>();
 
 builder.Services.AddControllersWithViews()
     .AddJsonOptions(options => options.JsonSerializerOptions.ReferenceHandler = ReferenceHandler.IgnoreCycles);

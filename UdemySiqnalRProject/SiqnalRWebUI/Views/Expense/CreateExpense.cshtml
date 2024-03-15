@@ -1,0 +1,36 @@
+﻿@model SiqnalRWebUI.Dtos.ExpenseDtos.CreateExpenseDto
+@{
+    ViewData["Title"] = "Create Expense";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <div class="row">
+            <div class="col-md-12">
+                <form method="post">
+                    <div class="card">
+                        <div class="card-header">
+                            <div class="card-title">Expense Create Form</div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="title">Amount</label>
+                                <input type="text" asp-for="ExpenseAmount" class="form-control" id="title">
+                            </div>
+                        </div>
+                        <div class="card-body">
+                            <div class="form-group">
+                                <label for="Url">Description</label>
+                                <input type="text" asp-for="ExpenseDescription" class="form-control" id="Url">
+                            </div>
+                        </div>
+                        <div class="card-action">
+                            <button type="submit" class="btn btn-success">Save</button>
+                        </div>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+</div>

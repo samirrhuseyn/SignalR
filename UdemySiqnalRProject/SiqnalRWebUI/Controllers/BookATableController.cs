@@ -36,7 +36,7 @@ namespace SiqnalRWebUI.Controllers
                 {
                     NotificationDescription = "There is a new reservation!",
                     Date = DateTime.Now.ToString("MMMM dd, yyyy HH:mm"),
-                    NotificationTypeColor = "danger",
+                    NotificationTypeColor = "info",
                     NotificationTypeIcon = "las la-calendar-plus",
                     Status = false
                 };
