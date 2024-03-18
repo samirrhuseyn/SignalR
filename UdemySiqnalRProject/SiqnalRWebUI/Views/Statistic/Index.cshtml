@@ -72,6 +72,10 @@
                     $("#nowwatch").text(nowwatchvalue);
                 });
 
+                connection.on("ReceiveTotalEarning", (todayearningvalue) => {
+                    $("#todayearning").text(todayearningvalue);
+                });
+
                 connection.on("ReceiveWeatherTemp", (weathertempvalue) => {
                     $("#weathertemp").text(weathertempvalue);
                 });
@@ -234,7 +238,7 @@
                             <div class="col-7 d-flex align-items-center">
                                 <div class="numbers">
                                     <p class="card-category">Today Earning</p>
-                                    <h4 class="card-title" id=""></h4>
+                                    <h4 class="card-title" id="todayearning"></h4>
                                 </div>
                             </div>
                         </div>

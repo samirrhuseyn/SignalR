@@ -49,6 +49,9 @@ namespace SiqnalRApi.Hubs
             var totalordercount = _orderService.TTotalOrderDal();
             await Clients.All.SendAsync("ReceiveTotalOrder", totalordercount);
 
+            var todayearning = _orderService.TTodayTotalEarning();
+            await Clients.All.SendAsync("ReceiveTotalEarning", todayearning + "₼");
+
             var nowwatch = DateTime.Now.ToString("MMMM dd, yyyy  dddd HH:mm");
             await Clients.All.SendAsync("ReceiveWatch", nowwatch);
 

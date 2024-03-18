@@ -38,7 +38,7 @@ namespace SiqnalRWebUI.Controllers
             var responseMessageProduct = await clientProduct.GetAsync("http://localhost:5056/api/Product");
             var jsondataProduct = await responseMessageProduct.Content.ReadAsStringAsync();
             var valuesProduct = JsonConvert.DeserializeObject<List<ResultProductDto>>(jsondataProduct);
-            List<SelectListItem> valueProduct = (from x in valuesProduct
+            List<SelectListItem> valueProduct = (from x in valuesProduct.Where(x=>x.ProductStatus is true)
                                           select new SelectListItem
                                           {
                                               Text = x.ProductName,

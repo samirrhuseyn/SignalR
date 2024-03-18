@@ -31,7 +31,7 @@ namespace SignalR.DataAccessLayer.EntityFramework
         public decimal TodayTotalEarning()
         {
             using var context = new SignalRContext();
-            return context.Orders.Where(x => x.Date.ToShortDateString == DateTime.Now.ToShortDateString).Sum(y => y.TotalPrice);
+            return context.Orders.Where(x=>x.Description == "Invoice paid").Where(x => x.Date.Day == DateTime.Now.Day).Where(y=>y.Date.Month == DateTime.Now.Month).Where(x=>x.Date.Year == DateTime.Now.Year).Sum(x=>x.TotalPrice);
         }
 
         public int TotalOrderCount()

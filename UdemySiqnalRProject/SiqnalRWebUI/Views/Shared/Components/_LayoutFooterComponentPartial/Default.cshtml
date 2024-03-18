@@ -20,7 +20,7 @@
             </ul>
         </nav>
         <div class="copyright ml-auto">
-            @DateTime.Now.Year | &copy; Copyright - SignalR Project
+            @DateTime.Now.Year | &copy; Copyright - @await Component.InvokeAsync("_UILayoutProjectTitleComponentPartial")
         </div>
     </div>
 </footer>

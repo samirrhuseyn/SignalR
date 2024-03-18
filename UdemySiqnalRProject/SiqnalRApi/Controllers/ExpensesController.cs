@@ -19,7 +19,7 @@ namespace SiqnalRApi.Controllers
         [HttpGet]
         public IActionResult ExpenseList()
         {
-            var value = _expenseService.TGetListAll();
+            var value = _expenseService.TGetListAll().OrderByDescending(x=>x.ExpenseDate);
             return Ok(value);
         }
 
