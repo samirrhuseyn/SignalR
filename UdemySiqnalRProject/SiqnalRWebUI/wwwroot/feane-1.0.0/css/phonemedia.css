@@ -4,6 +4,27 @@
         margin-left: 600px;
     }
 
+    #thcontact{
+        display:none;
+    }
+
+    #tdcontact {
+        display: none;
+    }
+
+    .col-12 .fileimage {
+        margin-left: 300px;
+        margin-right: 400px;
+    }
+
+    #pic {
+        margin-left: 120px;
+    }
+
+    #imgsize {
+        height: 50px;
+        width: 50px;
+    }
 
     .card .card-body .text-dark {
         font-size: 20px;
@@ -29,12 +50,82 @@
         margin-top: 20px;
         margin-left:350px;
     }
-
+    
     @media (max-width: 1200px) {
         .heading_container {
             margin-left: 120px;
         }
 
+        .col-12 .fileimage {
+            margin-left: 50px;
+            margin-right: 70px;
+        }
+
+        #pic {
+            margin-left: 60px;
+        }
+
+        #tdtext{
+            font-size: 10px;
+        }
+
+        #thtext {
+            font-size: 10px;
+        }
+
+        #thcontact {
+            display: block;
+            font-size: 10px;
+        }
+
+        #tdcontact {
+            display: block;
+        }
+
+        #throle {
+            font-size: 10px;
+        }
+
+        #tdrole {
+            font-size: 10px;
+        }
+
+        #thusername {
+            font-size: 10px;
+        }
+
+        #tdusername {
+            font-size: 10px;
+        }
+
+        #imgsize {
+            display: none;
+        }
+
+        #imgsize {
+            height: 20px;
+            width: 20px;
+        }
+
+        #adminbtn{
+            font-size:10px;
+        }
+
+        #tdemail {
+            display: none;
+        }
+
+        #tdnumber {
+            display: none;
+        }
+
+        #themail {
+            display: none;
+        }
+
+        #thnumber {
+            display: none;
+        }
 
         .card .card-body .text-dark {
             font-size: 15px;
@@ -82,5 +173,7 @@
         .content .container-fluid .row .col-md-12 .card .card-body .d-flex p {
             font-size:12px;
         }
+
+        
     }
 }
