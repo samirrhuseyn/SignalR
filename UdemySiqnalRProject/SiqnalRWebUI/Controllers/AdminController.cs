@@ -45,7 +45,7 @@ namespace SiqnalRWebUI.Controllers
                 var result = await _userManager.CreateAsync(appUser, createAdminDto.Password);
                 if (result.Succeeded)
                 {
-                    await _userManager.AddToRoleAsync(appUser,"ADMIN");
+                    await _userManager.AddToRoleAsync(appUser,"JUNIOR");
                     return RedirectToAction("AdminList");
                 }
                 return View();

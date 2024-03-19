@@ -1,0 +1,39 @@
+﻿@model SignalR.EntityLayer.Entities.AppUser
+@using SignalR.DataAccessLayer.Concrete;
+@{
+	var context = new SignalRContext();
+}
+<div class="user">
+	<div class="photo">
+		<img src="@Model.ImageURL">
+	</div>
+	<div class="info">
+		<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
+			<span>
+				@Model.Name @Model.Surname
+				@{
+					var value = context.UserRoles.Where(x => x.UserId == Model.Id).Select(x => x.RoleId).FirstOrDefault();
+					var rolename = context.Roles.Where(x => x.Id == value).Select(x => x.Name).FirstOrDefault();
+				}
+				<span class="user-level">@rolename</span>
+				<span class="caret"></span>
+			</span>
+		</a>
+		<div class="clearfix"></div>
+
+		<div class="collapse in" id="collapseExample" aria-expanded="true" style="">
+			<ul class="nav">
+				<li>
+					<a href="#edit">
+						<span class="link-collapse">Update Password</span>
+					</a>
+				</li>
+				<li>
+					<a href="#settings">
+						<span class="link-collapse">Settings</span>
+					</a>
+				</li>
+			</ul>
+		</div>
+	</div>
+</div>

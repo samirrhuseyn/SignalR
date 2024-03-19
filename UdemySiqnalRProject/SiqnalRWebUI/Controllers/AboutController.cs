@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SiqnalRWebUI.Dtos.AboutDtos;
 using System.Text;
@@ -14,6 +15,7 @@ namespace SiqnalRWebUI.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
+        [AllowAnonymous]
         public async Task<IActionResult> IndexUI()
         {
             var client = _httpClientFactory.CreateClient();

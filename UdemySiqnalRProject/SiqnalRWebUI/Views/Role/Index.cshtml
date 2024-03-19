@@ -1,0 +1,21 @@
+﻿@model List<SignalR.EntityLayer.Entities.AppRole>
+@{
+    ViewData["Title"] = "Roles";
+    ViewData["ActiveRole"] = "active";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">Roles</h4>
+        <div class="card">
+            <ul class="list-group p-3 font-weight-bold">
+                @foreach(var item in Model)
+                {
+                    <li class="list-group-item">@item.Name</li>
+                }
+            </ul>
+        </div>
+    </div>
+</div>
+

@@ -1,40 +1,6 @@
 ﻿<div class="sidebar">
 	<div class="scrollbar-inner sidebar-wrapper">
-		<div class="user">
-			<div class="photo">
-				<img src="~/Ready-Bootstrap-Dashboard-master/assets/img/profile.jpg">
-			</div>
-			<div class="info">
-				<a class="" data-toggle="collapse" href="#collapseExample" aria-expanded="true">
-					<span>
-						Admin Panel
-						<span class="user-level">Admin</span>
-						<span class="caret"></span>
-					</span>
-				</a>
-				<div class="clearfix"></div>
-
-				<div class="collapse in" id="collapseExample" aria-expanded="true" style="">
-					<ul class="nav">
-						<li>
-							<a href="#profile">
-								<span class="link-collapse">See Menu</span>
-							</a>
-						</li>
-						<li>
-							<a href="#edit">
-								<span class="link-collapse">Update Password</span>
-							</a>
-						</li>
-						<li>
-							<a href="#settings">
-								<span class="link-collapse">Settings</span>
-							</a>
-						</li>
-					</ul>
-				</div>
-			</div>
-		</div>
+		@await Component.InvokeAsync("_LayoutProfileImageSidebarComponentPartial")
 		<ul class="nav">
 			<li class="nav-item @ViewBag.ActiveDashboard">
 				<a href="/Statistic/Index">
@@ -97,9 +63,20 @@
 				</a>
 			</li>
 			<li class="nav-item @ViewBag.ActiveAdmin">
-				<a href="/Admin/AdminList/">
+				<a href="/Admin/AdminList">
 					<i class="fa-solid fa-user"></i>
 					<p>Admins</p>
+				</a>
+			</li>
+			<li class="nav-item @ViewBag.ActiveRole">
+				<a href="/Role/Index">
+					<i class="fa-solid fa-circle-check"></i>
+					<p>Roles</p>
+				</a>
+			</li>
+			<li class="nav-item">
+				<a href="#">
+					<hr />
 				</a>
 			</li>
 		</ul>
