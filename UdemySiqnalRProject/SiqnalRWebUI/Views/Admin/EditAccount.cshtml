@@ -1,0 +1,56 @@
+﻿@model SiqnalRWebUI.Dtos.IdentityDtos.EditAccountDto
+@{
+    ViewData["Title"] = "Edit Account";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title ml-4">Edit Account</h4>
+        <div class="col-md-12">
+            <div class="card">
+                <div class="card-body">
+                    <form method="post" enctype="multipart/form-data">
+                        <div class="text-danger" asp-validation-summary="ModelOnly"></div>
+                        <div class="col-12">
+                            <div id="fileimage" class="form-group fileimage">
+                                <label for="squareInput">Image</label>
+                                <input asp-for="Image" type="file" class="form-control input-square" oninput="pic.src=window.URL.createObjectURL(this.files[0])">
+                                <img id="pic" width="100" src="@Model.ImagePreview" />
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="squareInput">Name</label>
+                                    <input type="text" asp-for="Name" class="form-control input-square" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="squareInput">Surname</label>
+                                    <input type="text" asp-for="Surname" class="form-control input-square" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="squareInput">Username</label>
+                                    <input type="text" asp-for="Username" class="form-control input-square" required>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="squareInput">Phone</label>
+                                    <input type="tel" asp-for="Phone" class="form-control input-square" required>
+                                </div>
+                                <div class="form-group">
+                                    <label for="squareInput">Mail</label>
+                                    <input type="email" asp-for="Email" class="form-control input-square" required>
+                                </div>
+                            </div>
+                        </div>
+                        <hr />
+                        <button type="submit" class="btn btn-success ml-4">Save</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+

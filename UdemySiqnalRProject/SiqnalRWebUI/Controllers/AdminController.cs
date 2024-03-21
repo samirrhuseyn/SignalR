@@ -12,11 +12,13 @@ namespace SiqnalRWebUI.Controllers
     public class AdminController : Controller
     {
         private readonly UserManager<AppUser> _userManager;
+        private readonly SignInManager<AppUser> _signInManager;
         MailManager mailManager = new MailManager();
 
-        public AdminController(UserManager<AppUser> userManager)
+        public AdminController(UserManager<AppUser> userManager, SignInManager<AppUser> signInManager)
         {
             _userManager = userManager;
+            _signInManager = signInManager;
         }
 
         public async Task<IActionResult> AdminList()
@@ -81,7 +83,39 @@ namespace SiqnalRWebUI.Controllers
             return View(createAdminDto);
         }
 
-        
+        [HttpGet]
+        public async Task<IActionResult> EditAccount()
+        {
+            var values = await _userManager.FindByNameAsync(User.Identity.Name);
+            var account = new EditAccountDto
+            {
+                Name = values.Name,
+                Surname = values.Surname,
+                Email = values.Email,
+                Username = values.UserName,
+                Phone = values.PhoneNumber,
+                ImagePreview = values.ImageURL
+            };
+            return View(account);
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> EditAccount(EditAccountDto editAccount)
+        {
+            if (ModelState.IsValid)
+            {
+                var values = await _userManager.FindByNameAsync(User.Identity.Name);
+                values.Name = editAccount.Name;
+                values.Surname = editAccount.Surname;
+                values.Email = editAccount.Email;
+                values.UserName = editAccount.Username;
+                values.PhoneNumber = editAccount.Phone;
+                values.ImageURL = editAccount.Image != null ? UploadFile(editAccount.Image) : values.ImageURL;
+                await _userManager.UpdateAsync(values);
+                return RedirectToAction("Index", "Statistic");
+            }
+            return View(editAccount);
+        }
 
         public async Task<IActionResult> DeleteAdmin(string id)
         {
@@ -163,6 +197,36 @@ namespace SiqnalRWebUI.Controllers
             return RedirectToAction("UpdateFailed");
         }
 
+        [HttpGet]
+        public async Task<IActionResult> ChangePassword()
+        {
+            var user = await _userManager.FindByNameAsync(User.Identity.Name);
+            ViewBag.UserId = user.Id;
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> ChangePassword(ChangePassword changePassword)
+        {
+            if (!ModelState.IsValid)
+                return View(changePassword);
+            var user = await _userManager.FindByIdAsync(changePassword.UserId);
+            var checkPassword = await _signInManager.CheckPasswordSignInAsync(user, changePassword.CurrentPassword, false);
+            if (checkPassword.Succeeded) 
+            {
+                user.PasswordHash = _userManager.PasswordHasher.HashPassword(user, changePassword.NewPassword);
+                var result = await _userManager.UpdateAsync(user);
+
+                if (result.Succeeded)
+                {
+                    await _signInManager.SignOutAsync();
+					return RedirectToAction("UpdatePasswordSuccess");
+				}    
+                
+            }
+            return RedirectToAction("UpdatePasswordError");
+        }
+
         [AllowAnonymous]
         public IActionResult ConfirmSuccess()
         {
@@ -207,6 +271,18 @@ namespace SiqnalRWebUI.Controllers
 
         [AllowAnonymous]
         public IActionResult UpdateFailed()
+        {
+            return View();
+        }
+
+        [AllowAnonymous]
+        public IActionResult UpdatePasswordSuccess()
+        {
+            return View();
+        }
+        
+        [AllowAnonymous]
+        public IActionResult UpdatePasswordError()
         {
             return View();
         }
