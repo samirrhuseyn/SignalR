@@ -33,7 +33,12 @@
                                 var value = context.UserRoles.Where(x => x.UserId == item.Id).Select(x => x.RoleId).FirstOrDefault();
                                 var rolename = context.Roles.Where(x => x.Id == value).Select(x => x.Name).FirstOrDefault();
                                 <tr>
-                                    <td id="tdtext" style="font-weight:bold"><img id="imgsize" src="@item.ImageURL" style="border-radius:50%; margin-right:10px;" /> @item.Name @item.Surname </td>
+                                    <td id="tdtext" style="font-weight:bold"><img id="imgsize" src="@item.ImageURL" style="border-radius:50%; margin-right:10px;" /> @item.Name @item.Surname
+                                        @if (!item.EmailConfirmed)
+                                        {
+                                            <span style="font-size:25px;"><i class="fa-solid fa-exclamation text-danger" title="This user has not verified their email"></i></span>
+                                        }
+                                    </td>
                                     <td id="tdusername">@item.UserName</td>
                                     <td id="tdrole">@rolename</td>
                                     <td id="tdemail"><a href="mailto:@item.Email">@item.Email</a></td>

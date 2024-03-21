@@ -10,10 +10,11 @@ namespace SiqnalRWebUI.Controllers
     public class LoginController : Controller
     {
         private readonly SignInManager<AppUser> _signInManager;
-
-        public LoginController(SignInManager<AppUser> signInManager)
+        private readonly UserManager<AppUser> _userManager;
+        public LoginController(SignInManager<AppUser> signInManager, UserManager<AppUser> userManager)
         {
             _signInManager = signInManager;
+            _userManager = userManager;
         }
 
         [HttpGet]
@@ -25,18 +26,30 @@ namespace SiqnalRWebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(LoginDto loginDto)
         {
-            var result = await _signInManager.PasswordSignInAsync(loginDto.Username, loginDto.Password, false, true);
-            if(result.Succeeded)
+            var user = await _userManager.FindByNameAsync(loginDto.Username);
+            var isConfirmMail = await _userManager.IsEmailConfirmedAsync(user);
+            if (isConfirmMail)
             {
-                return RedirectToAction("Index", "Statistic");
+                var result = await _signInManager.PasswordSignInAsync(loginDto.Username, loginDto.Password, false, true);
+                if (result.Succeeded)
+                {
+                    return RedirectToAction("Index", "Statistic");
+                }
+                return View();
             }
-            return View();
+            else return RedirectToAction("NotConfirm");
         }
 
         public async Task<IActionResult> LogOut()
         {
             await _signInManager.SignOutAsync();
             return RedirectToAction("Index", "Login");
+        }
+
+        [AllowAnonymous]
+        public IActionResult NotConfirm()
+        {
+            return View();
         }
     }
 }
