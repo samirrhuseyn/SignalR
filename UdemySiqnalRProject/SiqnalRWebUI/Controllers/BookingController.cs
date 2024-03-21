@@ -1,5 +1,8 @@
 ﻿using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
+using SignalR.BusinessLayer.Abstract;
+using SignalR.DataAccessLayer.Concrete;
+using SiqnalR.EntityLayer.Entities;
 using SiqnalRWebUI.Dtos.BookingDtos;
 using System.Text;
 
@@ -8,7 +11,7 @@ namespace SiqnalRWebUI.Controllers
     public class BookingController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
-
+        MailManager mailManager = new MailManager();
         public BookingController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
@@ -86,6 +89,26 @@ namespace SiqnalRWebUI.Controllers
                 return RedirectToAction("Index");
             }
             return View();
+        }
+
+        public IActionResult FalseStatus(int id)
+        {
+            var context = new SignalRContext();
+            var value = context.Set<Booking>().Find(id);
+            value.Status = false;
+            context.Update(value);
+            context.SaveChanges();
+            mailManager.SendMail(value.Mail,
+                "<!DOCTYPE html>" +
+                "<html>" +
+                "<body>" +
+                "<h2>Reservation canceled!</h2>" +
+                "<br/>" +
+                "<h3>" + "Your reservation for date " + value.Date + " has been canceled." + "</h3>" +
+                "</body>" +
+                "</html>",
+                "Reservation canceled");
+            return RedirectToAction("Index");
         }
     }
 }

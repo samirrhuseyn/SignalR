@@ -14,6 +14,7 @@ namespace SiqnalRApi.Controllers
     {
         private readonly IBookingService _bookingService;
         private readonly IMapper _mapper;
+        MailManager mailManager = new MailManager();
 
         public BookingController(IBookingService bookingService, IMapper mapper)
         {
@@ -38,8 +39,19 @@ namespace SiqnalRApi.Controllers
                 Date = createBookingDto.Date.ToString("MMMM dd, yyyy HH:mm"),
                 Mail = createBookingDto.Mail,
                 PersonCount = createBookingDto.PersonCount,
-                Phone = createBookingDto.Phone
+                Phone = createBookingDto.Phone,
+                Status = true
             });
+            mailManager.SendMail(createBookingDto.Mail,
+                "<!DOCTYPE html>" +
+                "<html>" +
+                "<body>" +
+                "<h2>Reservation received!</h2>" +
+                "<br/>" +
+                "<h3>" + "Your reservation for date " + createBookingDto.Date.ToString("MMMM dd, yyyy HH:mm") + " has been received." + "</h3>" +
+                "</body>" +
+                "</html>", 
+                "Reservation received");
             return Ok("Booking section added successfully!");
         }
 

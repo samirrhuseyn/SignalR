@@ -35,19 +35,31 @@
                                                     <th scope="col">Phone</th>
                                                     <th scope="col">Person Count</th>
                                                     <th scope="col">Date</th>
+                                                    <th scope="col">Status</th>
                                                     <th scope="col">Actions</th>
                                                     </tr>
                                                     </thead>
                                                     <tbody>`
                     $.each(bookinglistvalue,(index,item) => {
+                        if (item.status == false) {
+                            var Status = "Reservation canceled"
+                            var color = "danger"
+                            var display = "none"
+                        }
+                        else {
+                            var Status = "Reservation received"
+                            var color = "success"
+                        }
                         tablehtml += `<tr>
                                       <td>${item.name}</td>
                                       <td>${item.phone}</td>
                                       <td>${item.personCount}</td>
                                       <td>${item.date}</td>
+                                      <td class="text-${color}"><h6>${Status}</h6></td>
                                       <td>
                                           <a href="/Booking/DeleteBooking/${item.bookingID}" class="btn btn-outline-danger"><i class="fa-solid fa-trash"></i></a>
-                                          <a href="/Booking/UpdateBooking/${item.bookingID}" class="btn btn-outline-success"><i class="fa-solid fa-pen"></i></a>
+                                          <a style="display:${display}" href="/Booking/UpdateBooking/${item.bookingID}" class="btn btn-outline-success"><i class="fa-solid fa-pen"></i></a>
+                                          <a style="display:${display}"href="/Booking/FalseStatus/${item.bookingID}" class="btn btn-outline-primary"><i class="fa-solid fa-xmark"></i></a>
                                       </td>
                                       </tr>`
                     });

@@ -8,6 +8,7 @@ namespace SiqnalR.EntityLayer.Entities
         public string Name { get; set; }
         public string Phone { get; set; }
         public string Mail { get; set; }
+        public bool Status { get; set; }
         public string PersonCount { get; set; }
         public string Date { get; set; }
     }
