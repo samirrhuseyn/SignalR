@@ -1,0 +1,29 @@
+﻿@{
+    ViewData["Title"] = "QR Code Create";
+    ViewData["ActiveQRCode"] = "active";
+    Layout = "~/Views/AdminLayout/Index.cshtml";
+}
+
+<div class="content">
+    <div class="container-fluid">
+        <h4 class="page-title">QR Code Create</h4>
+        <div class="card col-6">
+            <div class="card-body">
+                <form method="post" asp-controller="QRCode" asp-action="Index">
+                    <div class="form-group">
+                        <label for="squareInput">Insert value</label>
+                        <input type="text" class="form-control input-square" name="value" required />
+                        <br />
+                        <input type="submit" value="Create QR Code" class="btn btn-primary"  />
+                    </div>
+                </form>
+
+                @if (ViewBag.QrCodeImage != null)
+                {
+                    <img src="@ViewBag.QrCodeImage" alt="" style="width:400px; height:400px;" />
+                }
+            </div>
+        </div>
+    </div>
+</div>
+

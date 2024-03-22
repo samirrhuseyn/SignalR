@@ -18,6 +18,7 @@ namespace SiqnalRWebUI.Controllers
         }
         public async Task<IActionResult> Index(int id)
         {
+            var context = new SignalRContext();
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync($"http://localhost:5056/api/Basket/BasketListByMenuTableWithProductName?id={id}");
             if (responseMessage.IsSuccessStatusCode)
@@ -44,11 +45,13 @@ namespace SiqnalRWebUI.Controllers
 
         public async Task<IActionResult> DeleteBasket(int id)
         {
+            var context = new SignalRContext();
+            var menuTableID = context.Baskets.Where(x=>x.BasketID == id).Select(x=>x.MenuTableID).FirstOrDefault();
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.DeleteAsync($"http://localhost:5056/api/Basket/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
-                return RedirectToAction("MenuTableList");
+                return LocalRedirect("/Baskets/Index/" + menuTableID);
             }
             return NoContent();
         }
