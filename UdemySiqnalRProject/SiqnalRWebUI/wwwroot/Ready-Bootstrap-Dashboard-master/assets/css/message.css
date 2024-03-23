@@ -1,0 +1,91 @@
+﻿@media (max-width: 3000px) {
+    .content .container-fluid .d-flex .listmessage {
+        margin-left: 0;
+    }
+
+    #mySidebar{
+        width:700px;
+    }
+
+    #messagebody {
+        width: 2000px;
+    }
+
+    #chatonbtn {
+        display: none;
+        margin-left: 0px;
+    }
+
+    #chatoffbtn {
+        display:none;
+    }
+
+    #messageicon {
+        margin-left: 400px;
+        margin-top: 200px;
+    }
+
+    #createchatbtn {
+        margin-left: 0px;
+        width: 250px;
+    }
+
+    #messageinfo {
+        margin-left: 180px;
+    }
+
+    #chatonbtnchats{
+        display:none;
+    }
+
+    #chatofficon {
+        display: none;
+    }
+
+    @media (max-width: 1200px) {
+        #messagebody {
+            display: none;
+        }
+
+        #chatoffbtn {
+            display: block;
+            margin-left:330px;
+            margin-top:20px;
+        }
+
+        #chatonbtn {
+            display: block;
+            margin-left:240px;
+            margin-top:5px;
+        }
+
+        #messageicon {
+            margin-left: 200px;
+            margin-top: 70px;
+        }
+
+        #messageinfo {
+            margin-left: 10px;
+            text-align:center;
+        }
+
+        #createchatbtn {
+            margin-left: 0px;
+            width: 400px;
+        }
+
+        #chatonbtnchats {
+            display: block;
+            margin-left: 390px;
+            margin-top: 5px;
+            padding:10px;
+        }
+
+        #chatofficon {
+            display: block;
+            background-color: #1D62F0;
+            padding:15px;
+            border-radius:30%;
+        }
+    }
+}
