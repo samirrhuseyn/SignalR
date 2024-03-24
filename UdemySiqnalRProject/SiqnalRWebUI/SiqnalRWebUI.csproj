@@ -30,6 +30,11 @@
 
   <ItemGroup>
     <Folder Include="wwwroot\Image\AdminImages\" />
+    <Folder Include="wwwroot\Image\AboutImage\" />
+    <Folder Include="wwwroot\Image\DiscountImages\" />
+    <Folder Include="wwwroot\Image\LogoImage\" />
+    <Folder Include="wwwroot\Image\ProductImage\" />
+    <Folder Include="wwwroot\Image\TestimonialImage\" />
   </ItemGroup>
 
   <ItemGroup>

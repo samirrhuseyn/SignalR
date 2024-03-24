@@ -16,7 +16,7 @@
                             <div id="fileimage" class="form-group fileimage">
                                 <label for="squareInput">Image</label>
                                 <input asp-for="ImageURL" type="file" class="form-control input-square" oninput="pic.src=window.URL.createObjectURL(this.files[0])">
-                                <img id="pic" width="100" src="~/ready-bootstrap-dashboard-master/assets/img/4018596.png" />
+                                <img id="pic" width="100" src="@await Component.InvokeAsync("_ProjectTitleImageComponentPartial")" />
                             </div>
                         </div>
                         <div class="d-flex">

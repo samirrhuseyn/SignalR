@@ -1,6 +1,7 @@
-﻿@model SiqnalRWebUI.Dtos.TestimonialDtos.UpdateTestimonialDto
+﻿@model SiqnalRWebUI.Dtos.TestimonialDtos.UpdateTestimonial
 @{
     ViewData["Title"] = "Update Testimonial";
+    ViewData["ActiveTestimonial"] = "active";
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
 
@@ -8,25 +9,40 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     <input asp-for="TestimonialID" hidden/>
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">Testimonial Create Form</div>
+                            <div class="card-title">Testimonial Update Form</div>
+                        </div>
+                        <div class="col-12">
+                            <div id="fileimage" class="form-group fileimage">
+                                <label for="squareInput">Image</label>
+                                <input asp-for="ImageURL" type="file" class="form-control input-square" oninput="pic.src=window.URL.createObjectURL(this.files[0])">
+                                <img id="pic" width="100" src="@ViewBag.Image" />
+                            </div>
+                        </div>
+                        <div class="d-flex">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="name">Name and Surname</label>
+                                    <input type="text" asp-for="Name" class="form-control" id="name" required>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="title">Title</label>
+                                    <input type="text" asp-for="Title" class="form-control" id="title" required>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="Image">Image</label>
-                                <input type="text" asp-for="ImamgeURL" class="form-control" id="Image">
+                                <label for="description">Description</label>
+                                <textarea rows="5" type="text" asp-for="Comment" class="form-control" id="description" required></textarea>
                             </div>
-                            <div class="form-group">
-                                <label for="name">Name and Surname</label>
-                                <input type="text" asp-for="Name" class="form-control" id="name">
-                            </div>
-                            <div class="form-group">
-                                <label for="title">Title</label>
-                                <input type="text" asp-for="Title" class="form-control" id="title">
-                            </div>
+                        </div>
+                        <div class="card-body col-12">
                             <div class="form-check" hidden>
                                 <label class="form-check-label">
                                     <input class="form-check-input" asp-for="Status" type="checkbox" value="@Model.Status">
@@ -34,12 +50,7 @@
                             </div>
                         </div>
 
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <textarea rows="5" type="text" asp-for="Comment" class="form-control" id="description"></textarea>
-                            </div>
-                        </div>
+                        
                         <div class="card-action">
                             <button type="submit" class="btn btn-success">Save</button>
                         </div>

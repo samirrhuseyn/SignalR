@@ -39,7 +39,8 @@ namespace SiqnalRApi.Controllers
                 Mail = createContactDto.Mail,
                 Phone = createContactDto.Phone,
                 LocationIframe = createContactDto.LocationIframe,
-                ProjectTitle = createContactDto.ProjectTitle
+                ProjectTitle = createContactDto.ProjectTitle,
+                LogoImage = createContactDto.LogoImage
             });
             return Ok("Contact section added successfully!");
         }
@@ -63,7 +64,8 @@ namespace SiqnalRApi.Controllers
                 Mail = updateContactDto.Mail,
                 Phone = updateContactDto.Phone,
                 ProjectTitle= updateContactDto.ProjectTitle,
-                LocationIframe = updateContactDto.LocationIframe
+                LocationIframe = updateContactDto.LocationIframe,
+                LogoImage = updateContactDto.LogoImage
             });
             return Ok("Contact section has been successfully updated!");
         }

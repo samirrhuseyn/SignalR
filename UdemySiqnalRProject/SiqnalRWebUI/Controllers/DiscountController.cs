@@ -3,6 +3,7 @@ using Newtonsoft.Json;
 using SignalR.DataAccessLayer.Concrete;
 using SiqnalR.EntityLayer.Entities;
 using SiqnalRWebUI.Dtos.DiscountDto;
+using SiqnalRWebUI.Dtos.DiscountDtos;
 using System.Text;
 
 namespace SiqnalRWebUI.Controllers
@@ -10,7 +11,7 @@ namespace SiqnalRWebUI.Controllers
     public class DiscountController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
-
+        SignalRContext context = new SignalRContext();
         public DiscountController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
@@ -36,9 +37,16 @@ namespace SiqnalRWebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateDiscount(CreateDiscountDto createDiscountDto)
+        public async Task<IActionResult> CreateDiscount(CreateDiscount createDiscount)
         {
-            createDiscountDto.Status = true;
+            CreateDiscountDto createDiscountDto = new CreateDiscountDto()
+            {
+                Title = createDiscount.Title,
+                Amount = createDiscount.Amount,
+                Description = createDiscount.Description,
+                ImageURL = UploadFile(createDiscount.ImageURL),
+                Status = true
+            };
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createDiscountDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -64,6 +72,8 @@ namespace SiqnalRWebUI.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateDiscount(int id)
         {
+            var image = context.Discounts.Where(x => x.DiscountID == id).Select(x => x.ImageURL).FirstOrDefault();
+            ViewBag.Image = image;
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync($"http://localhost:5056/api/Discount/{id}");
             if (responseMessage.IsSuccessStatusCode)
@@ -76,8 +86,18 @@ namespace SiqnalRWebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateDiscount(UpdateDiscountDto updateDiscountDto)
+        public async Task<IActionResult> UpdateDiscount(UpdateDiscount updateDiscount)
         {
+            var image = context.Discounts.Where(x => x.DiscountID == updateDiscount.DiscountID).Select(x => x.ImageURL).FirstOrDefault();
+            UpdateDiscountDto updateDiscountDto = new UpdateDiscountDto()
+            {
+                DiscountID = updateDiscount.DiscountID,
+                Amount = updateDiscount.Amount,
+                Description = updateDiscount.Description,
+                ImageURL = updateDiscount.ImageURL != null ? UploadFile(updateDiscount.ImageURL) : image,
+                Status = updateDiscount.Status,
+                Title = updateDiscount.Title
+            };
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(updateDiscountDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -108,5 +128,22 @@ namespace SiqnalRWebUI.Controllers
 			context.SaveChanges();
 			return RedirectToAction("Index");
 		}
-	}
+
+        private string UploadFile(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return null;
+
+            var path = Path.Combine(
+                        Directory.GetCurrentDirectory(), "wwwroot/Image/DiscountImages/",
+                        file.FileName);
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+
+            return "/Image/DiscountImages/" + file.FileName;
+        }
+    }
 }

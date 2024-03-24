@@ -9,39 +9,45 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">Product Create Form</div>
                         </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="productname">Product Name</label>
-                                <input type="text" asp-for="ProductName" class="form-control" id="productname">
+                        <div class="col-12">
+                            <div id="fileimage" class="form-group fileimage">
+                                <label for="squareInput">Image</label>
+                                <input asp-for="ImageURL" type="file" class="form-control input-square" oninput="pic.src=window.URL.createObjectURL(this.files[0])">
+                                <img id="pic" width="100" src="~/ready-bootstrap-dashboard-master/assets/img/2424721.png" />
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="price">Price</label>
-                                <input type="text" asp-for="Price" class="form-control" id="price">
+                        <div class="d-flex">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="productname">Product Name</label>
+                                    <input type="text" asp-for="ProductName" class="form-control" id="productname" required>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="price">Category</label>
+                                        <select asp-for="CategoryID" asp-items="@ViewBag.Values" class="form-control" required></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="price">Price</label>
+                                        <input type="text" asp-for="Price" class="form-control" id="price" required>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="imageurl">Image</label>
-                                <input type="text" asp-for="ImageURL" class="form-control" id="imageurl">
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="price">Category</label>
-                                <select asp-for="CategoryID" asp-items="@ViewBag.Values" class="form-control"></select>
-                            </div>
-                        </div>
-                        <div class="card-body">
+                        
+                        <div class="card-body col-12">
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea type="text" asp-for="Description" class="form-control" id="description"></textarea>
+                                <textarea type="text" asp-for="Description" class="form-control" id="description" required></textarea>
                             </div>
                         </div>
                         <div class="card-action">

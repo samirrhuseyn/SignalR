@@ -15,6 +15,6 @@ namespace SignalR.DtoLayer.ContactDto
         public string FooterDescription { get; set; }
         public string LocationIframe { get; set; }
         public string ProjectTitle { get; set; }
-
+        public string LogoImage { get; set; }
     }
 }

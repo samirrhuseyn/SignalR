@@ -9,27 +9,32 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">Discount Create Form</div>
                         </div>
                         <div class="card-body">
-                            <div class="form-group">
-                                <label for="title">Title</label>
-                                <input type="text" asp-for="Title" class="form-control" id="title">
+                            <div class="col-12">
+                                <div id="fileimage" class="form-group fileimage">
+                                    <label for="squareInput">Image</label>
+                                    <input asp-for="ImageURL" type="file" class="form-control input-square" oninput="pic.src=window.URL.createObjectURL(this.files[0])">
+                                    <img id="pic" width="100" src="~/ready-bootstrap-dashboard-master/assets/img/discount.png" />
+                                </div>
                             </div>
-                            <div class="form-group">
-                                <label for="amount">Amount</label>
-                                <input type="text" asp-for="Amount" class="form-control" id="amount">
-                            </div>
-                            <div class="form-group">
-                                <label for="image">Image URL</label>
-                                <input type="text" asp-for="ImageURL" class="form-control" id="image">
+                            <div class="d-flex">
+                                <div class="form-group col-6">
+                                    <label for="title">Title</label>
+                                    <input type="text" asp-for="Title" class="form-control" id="title" required>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="amount">Amount</label>
+                                    <input type="text" asp-for="Amount" class="form-control" id="amount" required>
+                                </div>
                             </div>
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea asp-for="Description" class="form-control" id="description"></textarea>
+                                <textarea asp-for="Description" class="form-control" id="description" required></textarea>
                             </div>
                         </div>
                         <div class="card-action">

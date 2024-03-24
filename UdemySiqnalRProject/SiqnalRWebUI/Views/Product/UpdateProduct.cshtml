@@ -4,51 +4,58 @@
     ViewData["ActiveProduct"] = "active";
     Layout = "~/Views/AdminLayout/Index.cshtml";
 }
-
 <div class="content">
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">Product Update Form</div>
                         </div>
                         <input asp-for="ProductId" hidden/>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="productname">Product Name</label>
-                                <input type="text" asp-for="ProductName" class="form-control" id="productname">
+                        <div class="col-12">
+                            <div id="fileimage" class="form-group fileimage">
+                                <label for="squareInput">Image</label>
+                                <input asp-for="ImageURL" type="file" class="form-control input-square" oninput="pic.src=window.URL.createObjectURL(this.files[0])">
+                                <img id="pic" width="100" src="@ViewBag.Image" />
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="price">Price</label>
-                                <input type="text" asp-for="Price" class="form-control" id="price">
+                        <div class="d-flex">
+                            <div class="col-6">
+                                <div class="form-group">
+                                    <label for="productname">Product Name</label>
+                                    <input type="text" asp-for="ProductName" class="form-control" id="productname" required>
+                                </div>
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="price">Category</label>
+                                        <select asp-for="CategoryID" asp-items="@ViewBag.Values" class="form-control" required></select>
+                                    </div>
+                                </div>
+                            </div>
+                            <div class="col-6">
+                                <div class="card-body">
+                                    <div class="form-group">
+                                        <label for="price">Price</label>
+                                        <input type="text" asp-for="Price" class="form-control" id="price" required>
+                                    </div>
+                                </div>
                             </div>
                         </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="imageurl">Image</label>
-                                <input type="text" asp-for="ImageURL" class="form-control" id="imageurl">
-                            </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="price">Category</label>
-                                <select asp-for="CategoryID" asp-items="@ViewBag.Values" class="form-control"></select>
-                            </div>
-                        </div>
-                        <div class="card-body">
+
+                        <div class="card-body col-12">
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea type="text" asp-for="Description" class="form-control" id="description"></textarea>
+                                <textarea type="text" asp-for="Description" class="form-control" id="description" required></textarea>
                             </div>
-                        </div>
-                        <div class="form-check" hidden>
-                            <label class="form-check-label">
-                                <input class="form-check-input" asp-for="ProductStatus" type="checkbox" value="@Model.ProductStatus">
-                            </label>
+                            <div class="card-body col-12">
+                                <div class="form-check" hidden>
+                                    <label class="form-check-label">
+                                        <input class="form-check-input" asp-for="ProductStatus" type="checkbox" value="@Model.ProductStatus">
+                                    </label>
+                                </div>
+                            </div>
                         </div>
                         <div class="card-action">
                             <button type="submit" class="btn btn-success">Save</button>

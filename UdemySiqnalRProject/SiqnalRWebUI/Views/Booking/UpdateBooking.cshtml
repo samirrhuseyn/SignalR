@@ -18,27 +18,27 @@
                             <input asp-for="BookingID" />
                             <div class="form-group">
                                 <label for="name">Name and Surname</label>
-                                <input type="text" asp-for="Name" class="form-control" id="name">
+                                <input type="text" asp-for="Name" class="form-control" id="name" required>
                             </div>
                             <div class="form-group">
                                 <label for="phonenumber">Phone number</label>
-                                <input type="tel" asp-for="Phone" class="form-control" id="phonenumber">
+                                <input type="tel" asp-for="Phone" class="form-control" id="phonenumber" required>
                             </div>
                             <div class="form-group">
                                 <label for="mail">Mail</label>
-                                <input type="email" asp-for="Mail" class="form-control" id="mail">
+                                <input type="email" asp-for="Mail" class="form-control" id="mail" required>
                             </div>
                             <div class="form-group">
                                 <label for="personcount">Person Count</label>
-                                <input type="number" asp-for="PersonCount" class="form-control" id="personcount">
+                                <input type="number" asp-for="PersonCount" class="form-control" id="personcount" required>
                             </div>
                             <div class="form-group">
                                 <label for="date">Booking Date</label>
-                                <input type="datetime-local" asp-for="Date" class="form-control" id="date">
+                                <input type="datetime-local" asp-for="Date" class="form-control" id="date" required>
                             </div>
                             <div class="form-check" hidden>
                                 <label class="form-check-label">
-                                    <input class="form-check-input" asp-for="Status" type="checkbox" value="@Model.Status">
+                                    <input class="form-check-input" asp-for="Status" type="checkbox" value="@Model.Status" required>
                                 </label>
                             </div>
                         </div>

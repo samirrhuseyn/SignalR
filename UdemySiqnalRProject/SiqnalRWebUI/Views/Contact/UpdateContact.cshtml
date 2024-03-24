@@ -8,50 +8,53 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">Contact Create Form</div>
                         </div>
-                        <input asp-for="ContactID" hidden />
                         <div class="card-body">
-                            <div class="form-group">
-                                <label for="Location">Location</label>
-                                <input type="text" asp-for="Location" class="form-control" id="Location">
+                            <input asp-for="ContactID" hidden/>
+                            <div class="col-12">
+                                <div id="fileimage" class="form-group fileimage">
+                                    <label for="squareInput">Image</label>
+                                    <input asp-for="LogoImage" type="file" class="form-control input-square" oninput="pic.src=window.URL.createObjectURL(this.files[0])">
+                                    <img id="pic" width="100" src="@ViewBag.Image" />
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="Phone">Phone</label>
-                                <input type="text" asp-for="Phone" class="form-control" id="Phone">
+                            <div class="d-flex">
+                                <div class="form-group col-6">
+                                    <label for="Mail">Project Title</label>
+                                    <input type="text" asp-for="ProjectTitle" class="form-control" id="projecttitle" required>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="Location">Location</label>
+                                    <input type="text" asp-for="Location" class="form-control" id="Location" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="Mail">Mail</label>
-                                <input type="text" asp-for="Mail" class="form-control" id="Mail">
+                            <div class="d-flex">
+                                <div class="form-group col-6">
+                                    <label for="Phone">Phone</label>
+                                    <input type="text" asp-for="Phone" class="form-control" id="Phone" required>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="Mail">Mail</label>
+                                    <input type="text" asp-for="Mail" class="form-control" id="Mail" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="Mail">Iframe</label>
-                                <input type="text" asp-for="LocationIframe" class="form-control" id="Iframe">
+                            <div class="d-flex">
+                                <div class="form-group col-6">
+                                    <label for="description">Description</label>
+                                    <textarea rows="5" type="text" asp-for="FooterDescription" class="form-control" id="description" required></textarea>
+                                </div>
+                                <div class="form-group col-6">
+                                    <label for="Mail">Iframe</label>
+                                    <input type="text" asp-for="LocationIframe" class="form-control" id="Iframe" required>
+                                </div>
                             </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="Mail">Project Title</label>
-                                <input type="text" asp-for="ProjectTitle" class="form-control" id="Iframe">
+                            <div class="card-action">
+                                <button type="submit" class="btn btn-success">Save</button>
                             </div>
-                        </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="description">Description</label>
-                                <textarea rows="5" type="text" asp-for="FooterDescription" class="form-control" id="description"></textarea>
-                            </div>
-                        </div>
-                        <div class="card-action">
-                            <button type="submit" class="btn btn-success">Save</button>
                         </div>
                     </div>
                 </form>

@@ -1,6 +1,11 @@
-﻿using Microsoft.AspNetCore.SignalR;
+﻿using Microsoft.AspNetCore.Identity;
+using Microsoft.AspNetCore.SignalR;
+using Microsoft.EntityFrameworkCore;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DataAccessLayer.Concrete;
+using SignalR.DtoLayer.ProductDto;
+using SignalR.EntityLayer.Entities;
+using SiqnalRApi.Models;
 using System.Xml.Linq;
 
 namespace SiqnalRApi.Hubs
@@ -14,7 +19,6 @@ namespace SiqnalRApi.Hubs
         private readonly IMenuTableService _menuTableService;
         private readonly IBookingService _bookingService;
         private readonly INotificationService _notificationService;
-
         public SignalRHub(ICategoryService categoryService, IProductService productService, IOrderService orderService, IMoneyCaseService moneyCaseService, IMenuTableService menuTableService, IBookingService bookingService, INotificationService notificationService)
         {
             _categoryService = categoryService;

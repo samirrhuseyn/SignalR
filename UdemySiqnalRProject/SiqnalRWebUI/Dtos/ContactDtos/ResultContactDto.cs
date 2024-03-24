@@ -8,6 +8,6 @@
         public string Mail { get; set; }
         public string FooterDescription { get; set; }
         public string LocationIframe { get; set; }
-
+        public string LogoImage { get; set; }
     }
 }

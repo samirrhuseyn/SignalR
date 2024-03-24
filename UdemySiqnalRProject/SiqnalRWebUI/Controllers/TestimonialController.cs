@@ -11,7 +11,7 @@ namespace SiqnalRWebUI.Controllers
     public class TestimonialController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
-
+        SignalRContext context = new SignalRContext();
         public TestimonialController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
@@ -37,9 +37,16 @@ namespace SiqnalRWebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateTestimonial(CreateTestimonialDto createTestimonialDto)
+        public async Task<IActionResult> CreateTestimonial(CreateTestimonial createTestimonial)
         {
-            createTestimonialDto.Status = true;
+            CreateTestimonialDto createTestimonialDto = new CreateTestimonialDto()
+            {
+                Name = createTestimonial.Name,
+                Comment = createTestimonial.Comment,
+                Title = createTestimonial.Title,
+                ImamgeURL = UploadFile(createTestimonial.ImamgeURL),
+                Status = true
+            };
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createTestimonialDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -65,20 +72,32 @@ namespace SiqnalRWebUI.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateTestimonial(int id)
         {
+            var image = context.Testimonials.Where(x=>x.TestimonialID == id).Select(x=>x.ImamgeURL).FirstOrDefault();
+            ViewBag.Image = image;
             var client = _httpClientFactory.CreateClient();
             var responseMessage = await client.GetAsync($"http://localhost:5056/api/Testimonial/{id}");
             if (responseMessage.IsSuccessStatusCode)
             {
                 var jsonData = await responseMessage.Content.ReadAsStringAsync();
-                var values = JsonConvert.DeserializeObject<UpdateTestimonialDto>(jsonData);
+                var values = JsonConvert.DeserializeObject<UpdateTestimonial>(jsonData);
                 return View(values);
             }
             return View();
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateTestimonial(UpdateTestimonialDto updateTestimonialDto)
+        public async Task<IActionResult> UpdateTestimonial(UpdateTestimonial updateTestimonial)
         {
+            var image = context.Testimonials.Where(x => x.TestimonialID == updateTestimonial.TestimonialID).Select(x => x.ImamgeURL).FirstOrDefault();
+            UpdateTestimonialDto updateTestimonialDto = new UpdateTestimonialDto()
+            {
+                Name = updateTestimonial.Name,
+                Comment = updateTestimonial.Comment,
+                Title = updateTestimonial.Title,
+                TestimonialID = updateTestimonial.TestimonialID,
+                Status = updateTestimonial.Status,
+                ImamgeURL = updateTestimonial.ImageURL != null ? UploadFile(updateTestimonial.ImageURL) : image
+            };
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(updateTestimonialDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -108,6 +127,23 @@ namespace SiqnalRWebUI.Controllers
             context.Update(value);
             context.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        private string UploadFile(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return null;
+
+            var path = Path.Combine(
+                        Directory.GetCurrentDirectory(), "wwwroot/Image/TestimonialImage/",
+                        file.FileName);
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+
+            return "/Image/TestimonialImage/" + file.FileName;
         }
     }
 }

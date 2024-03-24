@@ -9,27 +9,28 @@
     <div class="container-fluid">
         <div class="row">
             <div class="col-md-12">
-                <form method="post">
+                <form method="post" enctype="multipart/form-data">
                     <div class="card">
                         <div class="card-header">
                             <div class="card-title">About Create Form</div>
                         </div>
-                        <div class="card-body">
-                            <div class="form-group">
-                                <label for="abouttitle">Title</label>
-                                <input type="text" asp-for="Title" class="form-control" id="abouttitle">
+                        <div class="col-12">
+                            <div id="fileimage" class="form-group fileimage">
+                                <label for="squareInput">Image</label>
+                                <input asp-for="ImageURL" type="file" class="form-control input-square" oninput="pic.src=window.URL.createObjectURL(this.files[0])">
+                                <img id="pic" width="100" src="~/ready-bootstrap-dashboard-master/assets/img/info.png" />
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="imageUrl">Image URL</label>
-                                <input type="text" asp-for="ImageURL" class="form-control" id="imageUrl">
+                                <label for="abouttitle">Title</label>
+                                <input type="text" asp-for="Title" class="form-control" id="abouttitle" required>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea rows="5" type="text" asp-for="Description" class="form-control" id="description"></textarea>
+                                <textarea rows="5" type="text" asp-for="Description" class="form-control" id="description" required></textarea>
                             </div>
                         </div>
                         <div class="card-action">

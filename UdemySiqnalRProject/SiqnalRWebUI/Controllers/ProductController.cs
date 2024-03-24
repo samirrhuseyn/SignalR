@@ -12,7 +12,7 @@ namespace SiqnalRWebUI.Controllers
     public class ProductController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
-
+        SignalRContext context = new SignalRContext();
         public ProductController(IHttpClientFactory httpClientFactory)
         {
             _httpClientFactory = httpClientFactory;
@@ -49,9 +49,17 @@ namespace SiqnalRWebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> CreateProduct(CreateProductDto createProductDto)
+        public async Task<IActionResult> CreateProduct(CreateProduct createProduct)
         {
-            createProductDto.ProductStatus = true;
+            CreateProductDto createProductDto = new CreateProductDto()
+            {
+                ImageURL = UploadFile(createProduct.ImageURL),
+                Description = createProduct.Description,
+                Price = createProduct.Price,
+                ProductName = createProduct.ProductName,
+                ProductStatus = true,
+                CategoryID = createProduct.CategoryID
+            };
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(createProductDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -77,6 +85,8 @@ namespace SiqnalRWebUI.Controllers
         [HttpGet]
         public async Task<IActionResult> UpdateProduct(int id)
         {
+            var image = context.Products.Where(x => x.ProductId == id).Select(x => x.ImageURL).FirstOrDefault();
+            ViewBag.Image = image;
             var client1 = _httpClientFactory.CreateClient();
             var responseMessage1 = await client1.GetAsync("http://localhost:5056/api/Category");
             var jsondata = await responseMessage1.Content.ReadAsStringAsync();
@@ -101,8 +111,19 @@ namespace SiqnalRWebUI.Controllers
         }
 
         [HttpPost]
-        public async Task<IActionResult> UpdateProduct(UpdateProductDto updateProductDto)
+        public async Task<IActionResult> UpdateProduct(UpdateProduct updateProduct)
         {
+            var image = context.Products.Where(x => x.ProductId == updateProduct.ProductId).Select(x => x.ImageURL).FirstOrDefault();
+            UpdateProductDto updateProductDto = new UpdateProductDto()
+            {
+                ProductId = updateProduct.ProductId,
+                ProductName = updateProduct.ProductName,
+                ProductStatus = updateProduct.ProductStatus,
+                CategoryID = updateProduct.CategoryID,
+                Description = updateProduct.Description,
+                Price = updateProduct.Price,
+                ImageURL = updateProduct.ImageURL != null ? UploadFile(updateProduct.ImageURL) : image
+            };
             var client = _httpClientFactory.CreateClient();
             var jsonData = JsonConvert.SerializeObject(updateProductDto);
             StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
@@ -132,6 +153,23 @@ namespace SiqnalRWebUI.Controllers
             context.Update(value);
             context.SaveChanges();
             return RedirectToAction("Index");
+        }
+
+        private string UploadFile(IFormFile file)
+        {
+            if (file == null || file.Length == 0)
+                return null;
+
+            var path = Path.Combine(
+                        Directory.GetCurrentDirectory(), "wwwroot/Image/ProductImage/",
+                        file.FileName);
+
+            using (var stream = new FileStream(path, FileMode.Create))
+            {
+                file.CopyTo(stream);
+            }
+
+            return "/Image/ProductImage/" + file.FileName;
         }
     }
 }
