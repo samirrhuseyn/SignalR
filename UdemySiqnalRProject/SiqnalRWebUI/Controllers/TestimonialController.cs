@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SignalR.DataAccessLayer.Concrete;
 using SignalR.EntityLayer.Entities;
 using SiqnalR.EntityLayer.Entities;
 using SiqnalRWebUI.Dtos.TestimonialDtos;
+using System.Data;
 using System.Text;
 
 namespace SiqnalRWebUI.Controllers
 {
+    [Authorize(Roles = "Admin,Manager,Editor")]
     public class TestimonialController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;

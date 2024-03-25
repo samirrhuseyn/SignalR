@@ -17,7 +17,8 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="categoryname">Category Name</label>
-                                <input type="text" asp-for="CategoryName" class="form-control" id="categoryname" required>
+                                <input type="text" asp-for="CategoryName" class="form-control" id="categoryname">
+                                <span asp-validation-for="CategoryName" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="card-action">

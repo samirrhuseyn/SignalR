@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using QRCoder;
+using System.Data;
 using System.Drawing;
 using System.Drawing.Imaging;
 
 namespace SiqnalRWebUI.Controllers
 {
+    [Authorize(Roles = "Admin,Manager,Moderator,")]
     public class QRCodeController : Controller
     {
         [HttpGet]

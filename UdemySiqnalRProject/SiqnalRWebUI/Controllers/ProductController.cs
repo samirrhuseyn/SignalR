@@ -1,14 +1,17 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using SignalR.DataAccessLayer.Concrete;
 using SiqnalR.EntityLayer.Entities;
 using SiqnalRWebUI.Dtos.CategoryDtos;
 using SiqnalRWebUI.Dtos.ProductDtos;
+using System.Data;
 using System.Text;
 
 namespace SiqnalRWebUI.Controllers
 {
+    [Authorize(Roles = "Admin,Manager,Moderator,")]
     public class ProductController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;

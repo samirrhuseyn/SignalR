@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SignalR.DataAccessLayer.Concrete;
 using SiqnalR.EntityLayer.Entities;
 using SiqnalRWebUI.Dtos.CategoryDtos;
 using SiqnalRWebUI.Dtos.NotificationDtos;
+using System.Data;
 using System.Text;
 
 namespace SiqnalRWebUI.Controllers
 {
+    [Authorize(Roles = "Admin,Manager")]
     public class CategoryController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -17,6 +20,7 @@ namespace SiqnalRWebUI.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
+        
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();

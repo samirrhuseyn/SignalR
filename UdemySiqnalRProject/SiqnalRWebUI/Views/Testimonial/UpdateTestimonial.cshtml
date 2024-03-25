@@ -19,6 +19,7 @@
                             <div id="fileimage" class="form-group fileimage">
                                 <label for="squareInput">Image</label>
                                 <input asp-for="ImageURL" type="file" class="form-control input-square" oninput="pic.src=window.URL.createObjectURL(this.files[0])">
+                                <span asp-validation-for="ImageURL" class="text-danger"></span>
                                 <img id="pic" width="100" src="@ViewBag.Image" />
                             </div>
                         </div>
@@ -26,20 +27,23 @@
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="name">Name and Surname</label>
-                                    <input type="text" asp-for="Name" class="form-control" id="name" required>
+                                    <input type="text" asp-for="Name" class="form-control" id="name">
+                                    <span asp-validation-for="Name" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="col-6">
                                 <div class="form-group">
                                     <label for="title">Title</label>
-                                    <input type="text" asp-for="Title" class="form-control" id="title" required>
+                                    <input type="text" asp-for="Title" class="form-control" id="title">
+                                    <span asp-validation-for="Title" class="text-danger"></span>
                                 </div>
                             </div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="description">Description</label>
-                                <textarea rows="5" type="text" asp-for="Comment" class="form-control" id="description" required></textarea>
+                                <textarea rows="5" type="text" asp-for="Comment" class="form-control" id="description"></textarea>
+                                <span asp-validation-for="Comment" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="card-body col-12">

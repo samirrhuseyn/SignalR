@@ -8,9 +8,8 @@
 }
 <!DOCTYPE html>
 <html>
-
 @await Component.InvokeAsync("_UILayoutHeadComponentPartial")
-<link href="~/feane-1.0.0/css/phonemedia.css" rel="stylesheet" />
+<link href="~/feane-1.0.0/css/basketupdatecss.css" rel="stylesheet" />
 <body class="sub_page">
 
     <div class="hero_area">
@@ -64,6 +63,7 @@
                 <nav class="breadcrumb bg-dark mb-30">
                     <a class="breadcrumb-item text-white" href="/Home/Index">Home</a>
                     <a class="breadcrumb-item text-white" href="/Menu/Index">Menu</a>
+                    <a class="breadcrumb-item text-white" href="/Baskets/MenuTableList">Tables</a>
                     <span class="breadcrumb-item active">Your Basket</span>
                 </nav>
             </div>
@@ -89,7 +89,6 @@
                         {
                             ViewData["MenuTableID"] = item.MenuTableID;
                             basketTotalPrice = Model.Sum(x => x.TotalPrice);
-                            vat = (basketTotalPrice * 18) / 100;
                             count++;
                             <tr>
                                 <td class="align-middle">@count</td>
@@ -97,14 +96,17 @@
                                 <td class="align-middle">@item.Count</td>
                                 <td class="align-middle">@item.ProductPrice₼</td>
                                 <td class="align-middle">@item.TotalPrice₼</td>
-                                <td class="align-middle btn-delete"><a href="/Baskets/DeleteBasket/@item.BasketID" class="btn btn-sm btn-danger"><i class="fa fa-times"></i></a></td>
+                                <td class="align-middle">
+                                    <a href="/Baskets/DeleteBasket/@item.BasketID" class="btn btn-sm btn-danger"><i class="fa-solid fa-times"></i></a>
+                                    <a href="/Baskets/UpdateBasket/@item.BasketID" class="btn btn-sm btn-success"><i class="fa-solid fa-pen"></i></a>
+                                </td>
                             </tr>
                         }
 
                     </tbody>
                 </table>
             </div>
-            <div class="col-log-4 rightgism">
+            <div class="rightgism">
                 <h5 class="section-tittle position-relative text-uppercase mb-3"><span class="bg-warning font-weight-bold pr-3" style="padding:5px;">Basket Summary</span></h5>
                 <div class="bg-light p-30 mb-5">
                     <div id="container" class="border-bottom pb-2">

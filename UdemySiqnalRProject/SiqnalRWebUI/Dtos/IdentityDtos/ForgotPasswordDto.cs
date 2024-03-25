@@ -8,7 +8,7 @@ namespace SiqnalRWebUI.Dtos.IdentityDtos
         public string? UserId { get; set; }
 
         [Display(Name = "New Password")]
-        [Required(ErrorMessage = "Yeni şifrənizi yazın")]
+        [Required(ErrorMessage = "Please Enter New Password")]
         public string? NewPassword { get; set; }
 
         [Display(Name = "New Password")]

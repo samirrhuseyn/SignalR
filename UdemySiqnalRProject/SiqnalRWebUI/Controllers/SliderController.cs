@@ -1,15 +1,18 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SignalR.DataAccessLayer.Concrete;
 using SignalR.EntityLayer.Entities;
 using SiqnalR.EntityLayer.Entities;
 using SiqnalRWebUI.Dtos.AboutDtos;
 using SiqnalRWebUI.Dtos.SlideDtos;
+using System.Data;
 using System.Net.Http;
 using System.Text;
 
 namespace SiqnalRWebUI.Controllers
 {
+    [Authorize(Roles = "Admin,Manager,Editor")]
     public class SliderController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;

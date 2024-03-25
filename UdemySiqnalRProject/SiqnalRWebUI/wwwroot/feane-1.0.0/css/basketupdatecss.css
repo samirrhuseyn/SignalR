@@ -1,0 +1,21 @@
+﻿@media (max-width: 3000px) {
+    
+    .basketcard .container-fluid {
+        margin-left: 300px;
+    }
+
+    .rightgism{
+        width:400px;
+    }
+
+    @media (max-width: 1200px) {
+        .basketcard .container-fluid {
+            margin-left: 0px;
+        }
+
+        .rightgism {
+            width: 400px;
+            margin-left:50px;
+        }
+    }
+}

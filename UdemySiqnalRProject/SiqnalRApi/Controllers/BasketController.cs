@@ -33,7 +33,7 @@ namespace SiqnalRApi.Controllers
         public IActionResult GetBasketByMenuTableGroupBy()
         {
             using var context = new SignalRContext();
-            var values = context.Baskets.Include(x=>x.MenuTables).Select(y=> new ResultBasketListByTable
+            var values = context.Baskets.Include(x => x.MenuTables).Select(y => new ResultBasketListByTable
             {
                 MenuTableID = y.MenuTableID,
                 BasketID = y.BasketID,
@@ -41,7 +41,7 @@ namespace SiqnalRApi.Controllers
                 MenuTableName = y.MenuTables.Name,
                 ProductID = y.ProductID,
                 TotalPrice = y.TotalPrice,
-            }).ToList().DistinctBy(x=>x.MenuTableName);
+            }).ToList().DistinctBy(x => x.MenuTableName);
             return Ok(values);
         }
 
@@ -82,6 +82,29 @@ namespace SiqnalRApi.Controllers
             var value = _basketService.TGetByID(id);
             _basketService.TDelete(value);
             return Ok("Basket section has been deleted successfully!");
+        }
+
+        [HttpGet("{id}")]
+        public IActionResult GetBasket(int id)
+        {
+            var value = _basketService.TGetByID(id);
+            return Ok(value);
+        }
+
+        [HttpPut]
+        public IActionResult UpdateBasket(UpdateBasketDto updateBasketDto)
+        {
+            using var context = new SignalRContext();
+            
+            _basketService.TUpdate(new Basket
+            {
+                BasketID = updateBasketDto.BasketID,
+                Count = updateBasketDto.Count,
+                MenuTableID = updateBasketDto.MenuTableID,
+                ProductID=updateBasketDto.ProductID,
+                TotalPrice = updateBasketDto.TotalPrice
+            });
+            return Ok("Update successfuly");
         }
     }
 }

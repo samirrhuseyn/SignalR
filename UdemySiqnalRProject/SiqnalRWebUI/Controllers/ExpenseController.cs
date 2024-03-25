@@ -1,10 +1,13 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SiqnalRWebUI.Dtos.ExpenseDtos;
+using System.Data;
 using System.Text;
 
 namespace SiqnalRWebUI.Controllers
 {
+    [Authorize(Roles = "Admin,Manager,Moderator,")]
     public class ExpenseController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;
@@ -27,6 +30,13 @@ namespace SiqnalRWebUI.Controllers
             return View();
         }
 
+        [HttpGet]
+        public IActionResult CreateExpense()
+        {
+            return View();
+        }
+
+        [HttpPost]
         public async Task<IActionResult> CreateExpense(CreateExpenseDto createExpenseDto)
         {
             var client = _httpClientFactory.CreateClient();

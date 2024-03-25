@@ -21,6 +21,7 @@ namespace SiqnalRWebUI.Controllers
             _signInManager = signInManager;
         }
 
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> AdminList()
         {
             var value = await _userManager.Users.ToListAsync();
@@ -28,31 +29,13 @@ namespace SiqnalRWebUI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Manager")]
         public IActionResult CreateAdmin()
         {
             return View();
         }
 
-        [AllowAnonymous]
-        public async Task<IActionResult> ConfirmEmail(string userId,string confirmdCode)
-        {
-            if(!string.IsNullOrEmpty(userId) && !string.IsNullOrEmpty(confirmdCode)) 
-            {
-                var user = await _userManager.FindByIdAsync(userId);
-                if (user != null)
-                {
-                    var result = await _userManager.ConfirmEmailAsync(user, confirmdCode);
-                    if (result.Succeeded)
-                        return RedirectToAction("ConfirmSuccess");
-                        
-                    else
-                        return RedirectToAction("ConfirmError");
-                }
-                else
-                    return RedirectToAction("NotUser");
-            }
-            return RedirectToAction("ErrorUrl");
-        }
+        
 
         [HttpPost]
         public async Task<IActionResult> CreateAdmin(CreateAdminDto createAdminDto)
@@ -81,6 +64,27 @@ namespace SiqnalRWebUI.Controllers
                 return View();
             }
             return View(createAdminDto);
+        }
+
+        [AllowAnonymous]
+        public async Task<IActionResult> ConfirmEmail(string userId, string confirmdCode)
+        {
+            if (!string.IsNullOrEmpty(userId) && !string.IsNullOrEmpty(confirmdCode))
+            {
+                var user = await _userManager.FindByIdAsync(userId);
+                if (user != null)
+                {
+                    var result = await _userManager.ConfirmEmailAsync(user, confirmdCode);
+                    if (result.Succeeded)
+                        return RedirectToAction("ConfirmSuccess");
+
+                    else
+                        return RedirectToAction("ConfirmError");
+                }
+                else
+                    return RedirectToAction("NotUser");
+            }
+            return RedirectToAction("ErrorUrl");
         }
 
         [HttpGet]
@@ -116,7 +120,7 @@ namespace SiqnalRWebUI.Controllers
             }
             return View(editAccount);
         }
-
+        [Authorize(Roles = "Admin,Manager")]
         public async Task<IActionResult> DeleteAdmin(string id)
         {
             var value = await _userManager.FindByIdAsync(id);

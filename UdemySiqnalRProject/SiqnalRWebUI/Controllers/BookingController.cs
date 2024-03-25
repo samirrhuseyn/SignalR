@@ -1,9 +1,11 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SignalR.BusinessLayer.Abstract;
 using SignalR.DataAccessLayer.Concrete;
 using SiqnalR.EntityLayer.Entities;
 using SiqnalRWebUI.Dtos.BookingDtos;
+using System.Data;
 using System.Text;
 
 namespace SiqnalRWebUI.Controllers
@@ -17,6 +19,7 @@ namespace SiqnalRWebUI.Controllers
             _httpClientFactory = httpClientFactory;
         }
 
+        [Authorize(Roles = "Admin,Editor,Manager")]
         public async Task<IActionResult> Index()
         {
             var client = _httpClientFactory.CreateClient();
@@ -31,12 +34,14 @@ namespace SiqnalRWebUI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Editor,Manager")]
         public IActionResult CreateBooking()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Editor,Manager")]
         public async Task<IActionResult> CreateBooking(CreateBookingDto createBookingDto)
         {
             var client = _httpClientFactory.CreateClient();
@@ -51,7 +56,7 @@ namespace SiqnalRWebUI.Controllers
             }
             return View();
         }
-
+        [Authorize(Roles = "Admin,Editor,Manager")]
         public async Task<IActionResult> DeleteBooking(int id)
         {
             var client = _httpClientFactory.CreateClient();
@@ -64,6 +69,7 @@ namespace SiqnalRWebUI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Editor,Manager")]
         public async Task<IActionResult> UpdateBooking(int id)
         {
             var client = _httpClientFactory.CreateClient();
@@ -78,6 +84,7 @@ namespace SiqnalRWebUI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Editor,Manager")]
         public async Task<IActionResult> UpdateBooking(UpdateBookingDto updateBookingDto)
         {
             var client = _httpClientFactory.CreateClient();
@@ -90,7 +97,7 @@ namespace SiqnalRWebUI.Controllers
             }
             return View();
         }
-
+        [Authorize(Roles = "Admin,Editor,Manager")]
         public IActionResult FalseStatus(int id)
         {
             var context = new SignalRContext();

@@ -12,12 +12,13 @@
                 <form method="post">
                     <div class="card">
                         <div class="card-header">
-                            <div class="card-title">Category Create Form</div>
+                            <div class="card-title">Table Create Form</div>
                         </div>
                         <div class="card-body">
                             <div class="form-group">
-                                <label for="categoryname">Table Name</label>
-                                <input type="text" asp-for="Name" class="form-control" id="tablename" required>
+                                <label for="tablename">Table Name</label>
+                                <input type="text" asp-for="Name" class="form-control" id="tablename">
+                                <span asp-validation-for="Name" class="text-danger"></span>
                             </div>
                         </div>
                         <div class="card-action">

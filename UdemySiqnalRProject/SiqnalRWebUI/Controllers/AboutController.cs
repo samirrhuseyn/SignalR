@@ -30,6 +30,7 @@ namespace SiqnalRWebUI.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult> Index()
         {
 			var client = _httpClientFactory.CreateClient();
@@ -44,12 +45,14 @@ namespace SiqnalRWebUI.Controllers
 		}
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Moderator")]
         public IActionResult CreateAbout()
         {
             return View();
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult> CreateAbout(CreateAbout createAbout)
         {
             CreateAboutDto createAboutDto = new CreateAboutDto()
@@ -69,6 +72,7 @@ namespace SiqnalRWebUI.Controllers
             return View();
         }
 
+        [Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult> DeleteAbout(int id)
         {
             var client = _httpClientFactory.CreateClient();
@@ -81,6 +85,7 @@ namespace SiqnalRWebUI.Controllers
         }
 
         [HttpGet]
+        [Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult> UpdateAbout(int id)
         {
             var image = context.Abouts.Where(x => x.AboutID == id).Select(x => x.ImageURL).FirstOrDefault();
@@ -97,6 +102,7 @@ namespace SiqnalRWebUI.Controllers
         }
 
         [HttpPost]
+        [Authorize(Roles = "Admin,Moderator")]
         public async Task<IActionResult> UpdateAbout(UpdateAbout updateAbout)
         {
             var image = context.Abouts.Where(x => x.AboutID == updateAbout.AboutID).Select(x => x.ImageURL).FirstOrDefault();

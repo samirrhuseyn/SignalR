@@ -20,6 +20,7 @@ builder.Services.AddIdentity<AppUser,AppRole>().AddEntityFrameworkStores<SignalR
 builder.Services.ConfigureApplicationCookie(x =>
 {
     x.LoginPath = "/Login/Index/";
+    x.AccessDeniedPath = "/Error/AccessDenied/";
 });
 var app = builder.Build();
 
@@ -29,6 +30,7 @@ if (!app.Environment.IsDevelopment())
     app.UseExceptionHandler("/Home/Error");
     app.UseHsts();
 }
+app.UseStatusCodePagesWithReExecute("/Error/Index", "?code={0}");
 app.UseStaticFiles();
 app.UseDefaultFiles();
 app.UseRouting();

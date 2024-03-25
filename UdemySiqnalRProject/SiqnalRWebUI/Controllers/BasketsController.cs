@@ -2,6 +2,7 @@
 using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SignalR.DataAccessLayer.Concrete;
+using SignalR.EntityLayer.Entities;
 using SiqnalRWebUI.Dtos.BasketDto;
 using System.Text;
 
@@ -55,6 +56,40 @@ namespace SiqnalRWebUI.Controllers
             }
             return NoContent();
         }
+
+        [HttpGet]
+        public async Task<IActionResult> UpdateBasket(int id)
+        {
+            var client = _httpClientFactory.CreateClient();
+            var responseMessage = await client.GetAsync($"http://localhost:5056/api/Basket/{id}");
+            if (responseMessage.IsSuccessStatusCode)
+            {
+                var jsonData = await responseMessage.Content.ReadAsStringAsync();
+                var values = JsonConvert.DeserializeObject<UpdateBasketDto>(jsonData);
+                return View(values);
+            }
+            return View();
+        }
+
+        [HttpPost]
+        public async Task<IActionResult> UpdateBasket(UpdateBasketDto updateBasketDto)
+        {
+            using var context = new SignalRContext();
+            var value = context.Baskets.Where(x => x.BasketID == updateBasketDto.BasketID).FirstOrDefault();
+            updateBasketDto.ProductID = value.ProductID;
+            updateBasketDto.MenuTableID = value.MenuTableID;
+            updateBasketDto.BasketID = value.BasketID;
+            var client = _httpClientFactory.CreateClient();
+            var jsonData = JsonConvert.SerializeObject(updateBasketDto);
+            StringContent stringContent = new StringContent(jsonData, Encoding.UTF8, "application/json");
+            var responsiveMessage = await client.PutAsync("http://localhost:5056/api/Basket", stringContent);
+            if (responsiveMessage.IsSuccessStatusCode)
+            {
+                return LocalRedirect("/Baskets/Index/" + value.MenuTableID);
+            }
+            return View();
+        }
+    
 
         public IActionResult DeleteBaskets(int id)
         {

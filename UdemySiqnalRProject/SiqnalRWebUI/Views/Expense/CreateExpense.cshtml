@@ -16,15 +16,15 @@
                         <div class="card-body">
                             <div class="form-group">
                                 <label for="title">Amount</label>
-                                <input type="text" asp-for="ExpenseAmount" class="form-control" id="title" required>
+                                <input type="text" asp-for="ExpenseAmount" class="form-control" id="title">
+                                <span asp-validation-for="ExpenseAmount" class="text-danger"></span>
                             </div>
-                        </div>
-                        <div class="card-body">
                             <div class="form-group">
                                 <label for="Url">Description</label>
-                                <input type="text" asp-for="ExpenseDescription" class="form-control" id="Url" required>
+                                <input type="text" asp-for="ExpenseDescription" class="form-control" id="description">
+                                <span asp-validation-for="ExpenseDescription" class="text-danger"></span>
                             </div>
-                        </div>
+                        </div>                        
                         <div class="card-action">
                             <button type="submit" class="btn btn-success">Save</button>
                         </div>

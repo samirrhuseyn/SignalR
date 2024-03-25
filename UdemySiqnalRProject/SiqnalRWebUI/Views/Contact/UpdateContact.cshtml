@@ -19,37 +19,44 @@
                                 <div id="fileimage" class="form-group fileimage">
                                     <label for="squareInput">Image</label>
                                     <input asp-for="LogoImage" type="file" class="form-control input-square" oninput="pic.src=window.URL.createObjectURL(this.files[0])">
-                                    <img id="pic" width="100" src="@ViewBag.Image" />
+                                    <span asp-validation-for="LogoImage" class="text-danger"></span>
+                                    <img id="pic" width="100" src="~/ready-bootstrap-dashboard-master/assets/img/info.png" />
                                 </div>
                             </div>
                             <div class="d-flex">
                                 <div class="form-group col-6">
                                     <label for="Mail">Project Title</label>
-                                    <input type="text" asp-for="ProjectTitle" class="form-control" id="projecttitle" required>
+                                    <input type="text" asp-for="ProjectTitle" class="form-control" id="projecttitle">
+                                    <span asp-validation-for="ProjectTitle" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col-6">
                                     <label for="Location">Location</label>
-                                    <input type="text" asp-for="Location" class="form-control" id="Location" required>
+                                    <input type="text" asp-for="Location" class="form-control" id="Location">
+                                    <span asp-validation-for="Location" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="d-flex">
                                 <div class="form-group col-6">
                                     <label for="Phone">Phone</label>
-                                    <input type="text" asp-for="Phone" class="form-control" id="Phone" required>
+                                    <input type="text" asp-for="Phone" class="form-control" id="Phone">
+                                    <span asp-validation-for="Phone" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col-6">
                                     <label for="Mail">Mail</label>
-                                    <input type="text" asp-for="Mail" class="form-control" id="Mail" required>
+                                    <input type="text" asp-for="Mail" class="form-control" id="Mail">
+                                    <span asp-validation-for="Mail" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="d-flex">
                                 <div class="form-group col-6">
                                     <label for="description">Description</label>
                                     <textarea rows="5" type="text" asp-for="FooterDescription" class="form-control" id="description" required></textarea>
+                                    <span asp-validation-for="FooterDescription" class="text-danger"></span>
                                 </div>
                                 <div class="form-group col-6">
                                     <label for="Mail">Iframe</label>
-                                    <input type="text" asp-for="LocationIframe" class="form-control" id="Iframe" required>
+                                    <input type="text" asp-for="LocationIframe" class="form-control" id="Iframe">
+                                    <span asp-validation-for="LocationIframe" class="text-danger"></span>
                                 </div>
                             </div>
                             <div class="card-action">

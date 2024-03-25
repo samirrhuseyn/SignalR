@@ -1,0 +1,101 @@
+﻿@model SiqnalRWebUI.Dtos.BasketDto.UpdateBasketDto
+@{
+    ViewData["Title"] = "Update Basket";
+}
+<!DOCTYPE html>
+<html>
+
+@await Component.InvokeAsync("_UILayoutHeadComponentPartial")
+<link href="~/feane-1.0.0/css/basketupdatecss.css" rel="stylesheet" />
+<body class="sub_page">
+
+    <div class="hero_area">
+        <div class="bg-box">
+            <img src="~/feane-1.0.0/images/hero-bg.jpg" alt="">
+        </div>
+        <!-- header section strats -->
+        <header class="header_section">
+            <div class="container">
+                <nav class="navbar navbar-expand-lg custom_nav-container ">
+                    <a class="navbar-brand" href="/Home/Index">
+                        <span>
+                            @await Component.InvokeAsync("_UILayoutProjectTitleComponentPartial")
+                        </span>
+                    </a>
+
+                    <button class="navbar-toggler" type="button" data-toggle="collapse" data-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+                        <span class=""> </span>
+                    </button>
+
+                    <div class="collapse navbar-collapse" id="navbarSupportedContent">
+                        <ul class="navbar-nav  mx-auto ">
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Home/Index">Home </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/Menu/Index">Menu <span class="sr-only">(current)</span> </a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/About/IndexUI">About</a>
+                            </li>
+                            <li class="nav-item">
+                                <a class="nav-link" href="/BookATable/Index">Book Table</a>
+                            </li>
+                        </ul>
+                        <div class="user_option">
+                            <a href="/Baskets/MenuTableList" class="order_online">
+                                <i style="color:white" class="fa-solid fa-cart-shopping"></i>
+                            </a>
+                        </div>
+                    </div>
+                </nav>
+            </div>
+        </header>
+        <!-- end header section -->
+    </div>
+    <br />
+    <div class="container-fluid">
+        <div class="row px-xl-5">
+            <div class="col-12">
+                <nav class="breadcrumb bg-dark mb-30">
+                    <a class="breadcrumb-item text-white" href="/Home/Index">Home</a>
+                    <a class="breadcrumb-item text-white" href="/Menu/Index">Menu</a>
+                    <a class="breadcrumb-item text-white" href="/Baskets/MenuTableList">Tables</a>
+                    <span class="breadcrumb-item active">Update Basket</span>
+                </nav>
+            </div>
+        </div>
+    </div>
+
+    <div class="basketcard">
+        <div class="container-fluid">
+            <div class="row px-xl-5">
+                <div class="col-lg-6 table-responsive mb-5">
+                    <div class="card">
+                        <form method="post" class="p-5">
+                            <input asp-for="BasketID" hidden/>
+                            <label class="form-label">Count</label>
+                            <input asp-for="Count" type="number" class="form-control" required />
+                            <br />
+                            <label class="form-label">Total Price</label>
+                            <input asp-for="TotalPrice" type="text" class="form-control" required />
+                            <button class="btn btn-warning mt-3">Save</button>
+                        </form>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+    
+
+    <!-- footer section -->
+    @await Component.InvokeAsync("_UILayoutFooterComponentPartial")
+    <!-- jQery -->
+    @await Component.InvokeAsync("_UILayoutScriptsComponentPartial")
+
+
+
+</body>
+
+</html>
+

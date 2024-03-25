@@ -1,13 +1,16 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Newtonsoft.Json;
 using SignalR.DataAccessLayer.Concrete;
 using SiqnalR.EntityLayer.Entities;
 using SiqnalRWebUI.Dtos.DiscountDto;
 using SiqnalRWebUI.Dtos.DiscountDtos;
+using System.Data;
 using System.Text;
 
 namespace SiqnalRWebUI.Controllers
 {
+    [Authorize(Roles = "Admin,Manager,Editor,")]
     public class DiscountController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;

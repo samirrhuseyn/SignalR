@@ -1,4 +1,5 @@
-﻿using Microsoft.AspNetCore.Mvc;
+﻿using Microsoft.AspNetCore.Authorization;
+using Microsoft.AspNetCore.Mvc;
 using Microsoft.AspNetCore.Mvc.Rendering;
 using Newtonsoft.Json;
 using SignalR.DataAccessLayer.Concrete;
@@ -7,10 +8,12 @@ using SiqnalRWebUI.Dtos.MenuTableDtos;
 using SiqnalRWebUI.Dtos.OrderDetailsDtos;
 using SiqnalRWebUI.Dtos.OrderDtos;
 using SiqnalRWebUI.Dtos.ProductDtos;
+using System.Data;
 using System.Text;
 
 namespace SiqnalRWebUI.Controllers
 {
+    [Authorize(Roles = "Admin,Manager,Moderator,")]
     public class OrderController : Controller
     {
         private readonly IHttpClientFactory _httpClientFactory;

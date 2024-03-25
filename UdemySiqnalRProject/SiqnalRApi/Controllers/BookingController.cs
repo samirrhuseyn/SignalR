@@ -74,7 +74,8 @@ namespace SiqnalRApi.Controllers
                 Date = updateBookingDto.Date,
                 Mail = updateBookingDto.Mail,
                 PersonCount = updateBookingDto.PersonCount,
-                Phone = updateBookingDto.Phone
+                Phone = updateBookingDto.Phone,
+                Status = updateBookingDto.Status
             });
             return Ok("Booking section has been successfully updated!");
         }

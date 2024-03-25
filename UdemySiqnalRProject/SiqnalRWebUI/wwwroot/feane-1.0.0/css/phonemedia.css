@@ -50,7 +50,12 @@
         margin-top: 20px;
         margin-left:350px;
     }
-    
+
+    .basketcard .container-fluid{
+        margin-left:200px;
+    }
+
+
     @media (max-width: 1200px) {
         .heading_container {
             margin-left: 120px;

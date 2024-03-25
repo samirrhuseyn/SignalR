@@ -26,18 +26,22 @@ namespace SiqnalRWebUI.Controllers
         [HttpPost]
         public async Task<IActionResult> Index(LoginDto loginDto)
         {
-            var user = await _userManager.FindByNameAsync(loginDto.Username);
-            var isConfirmMail = await _userManager.IsEmailConfirmedAsync(user);
-            if (isConfirmMail)
+            if (ModelState.IsValid)
             {
-                var result = await _signInManager.PasswordSignInAsync(loginDto.Username, loginDto.Password, false, true);
-                if (result.Succeeded)
+                var user = await _userManager.FindByNameAsync(loginDto.Username);
+                var isConfirmMail = await _userManager.IsEmailConfirmedAsync(user);
+                if (isConfirmMail)
                 {
-                    return RedirectToAction("Index", "Statistic");
+                    var result = await _signInManager.PasswordSignInAsync(loginDto.Username, loginDto.Password, false, true);
+                    if (result.Succeeded)
+                    {
+                        return RedirectToAction("Index", "Statistic");
+                    }
+                    ModelState.AddModelError("Password", "Wrong Password!");
                 }
-                return View();
+                else return RedirectToAction("NotConfirm");
             }
-            else return RedirectToAction("NotConfirm");
+            return View(loginDto);
         }
 
         public async Task<IActionResult> LogOut()
